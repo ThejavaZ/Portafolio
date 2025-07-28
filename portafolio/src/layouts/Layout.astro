@@ -1,14 +1,31 @@
+---
+import "../assets/style.css";
+const {Title} = Astro.props;
+import Header from "../partials/Header.astro";
+import Footer from "../partials/Footer.astro";
+---
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/logo.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="author" content="JavierSG" />
+		<meta name="keywords" content="Astro, Portfolio, Web Development" />
+		<meta name="theme-color" content="#ffffff" />
+		<meta name="description" content="A simple Astro project showcasing basic components and layout." />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+		<title>{Title} - JavierSG</title>
 	</head>
-	<body>
-		<slot />
+	<body class="flex flex-col min-h-screen bg-gray-100 text-gray-900 font-[Oswald]">
+		<Header/>
+		<main class="flex-1">
+			<slot />
+		</main>
+		<Footer/>
 	</body>
 </html>
 

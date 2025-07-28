@@ -1,0 +1,21 @@
+---
+import Card from "./Card.astro"
+import Banner from "./Banner.astro";
+---
+
+<Banner Title="Welcome to My Portfolio" Subtitle="Explore my projects and skills" />
+<section class="container mx-auto p-4">
+    <Card 
+        Title="Javier Armando Sarmiento Gil" 
+        Image="/images/me.jpg" 
+        Description="This is a description of my first project." 
+        Link="/projects/1" 
+    />
+    
+    <Card 
+        Title="My Second Project" 
+        Image="/images/project2.jpg" 
+        Description="This is a description of my second project." 
+        Link="/projects/2" 
+    />
+</section>

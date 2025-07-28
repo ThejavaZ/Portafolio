@@ -1,0 +1,10 @@
+---
+const {Title, Image, Description} = Astro.props;
+---
+
+<article class="bg-white shadow-md rounded-lg p-6">
+    <h2>{Title}</h2>
+    <img src={Image} alt={Title} class="w-50 "/>
+    <p>{Description}</p>
+    <a href={Astro.props.Link}>View Project</a>
+</article>
