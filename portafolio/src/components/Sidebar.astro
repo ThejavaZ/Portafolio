@@ -1,0 +1,54 @@
+---
+interface Props {
+  currentPath?: string;
+}
+const { currentPath = "/" } = Astro.props;
+---
+
+<div class="relative">
+  <button id="menuButton" class="hover:cursor-pointer" aria-label="Menu">
+    <svg
+      class="w-10 text-white hover:text-gray-400"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M4 15h16a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"></path>
+      <path
+        d="M12 4c3.783 0 6.953 2.133 7.786 5h-15.572c.833 -2.867 4.003 -5 7.786 -5z"
+      ></path>
+      <path d="M5 12h14"></path>
+    </svg>
+  </button>
+
+  <nav
+    id="mobileMenu"
+    class="fixed right-0 top-0 min-h-screen bg-blue-950 translate-x-full transition-transform duration-300 ease-in-out px-10"
+  >
+    <div class="flex flex-col items-center gap-4 pt-4">
+      <button>X</button>
+      {
+        [
+          { path: "/", label: "Inicio" },
+          { path: "/about", label: "Acerca" },
+          { path: "/contact", label: "Contacto" },
+          { path: "/projects", label: "Proyectos" },
+        ].map(({ path, label }) => (
+          <a
+            href={path}
+            class:list={[
+              "text-white hover:font-bold transition-all py-2",
+              { "font-bold": currentPath === path },
+            ]}
+          >
+            {label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</div>

@@ -1,7 +1,51 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Inicio">
+  <div class="text-white bg-blue-500 text-center font-bold py-2">
+    <h2 class="font-bold">Javier Armando Sarmiento Gil</h2>
+    <p>TSU. Desarrollador de Software Multiplataforma</p>
+  </div>
 
+  <div>
+    <article
+      class="m-4 bg-[#f1f1f1] p-5 rounded-2xl transition hover:bg-gray-300 hover:cursor-pointer"
+    >
+      <h2 class="text-center font-bold text-2xl">
+        Javier Armando Sarmiento Gil
+      </h2>
+      <div class="flex items-center *:m-1">
+        <img
+          class="w-50 rounded-2xl"
+          src="/9376 JAVIER ARMANDO SARMIENTO GIL_pp.jpg"
+          alt="yo"
+        />
+        <p class="text-justify my-[1lh]">
+          Hola, Soy Javier Armando Sarmiento Gil y Soy programador en
+          multiplataforma.
+        </p>
+      </div>
+    </article>
+  </div>
+  <div class="py-5">
+    <nav class="flex justify-around">
+      <a
+        class="bg-blue-500 text-white p-2 rounded transition-all hover:bg-blue-800 hover:font-bold"
+        href="/contact">Contactame</a
+      >
+      <a
+        class="bg-blue-500 text-white p-2 rounded transition-all hover:bg-blue-800 hover:font-bold"
+        href="/projects">Projectos</a
+      >
+    </nav>
+  </div>
+  <section></section>
+
+  <ul>
+    <li>
+      Un resumen breve de lo que haces (ejemplo: Soy Javier, un desarrollador
+      apasionado por la tecnología y la innovación).
+    </li>
+  </ul>
 </Layout>

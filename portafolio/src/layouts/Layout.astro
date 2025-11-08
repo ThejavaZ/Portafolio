@@ -1,29 +1,57 @@
 ---
-const { title } = Astro.props;
-
+import ClientRouter from "astro/components/ClientRouter.astro";
+import "../styles/global.css";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+interface Layout {
+  title: String;
+}
+
+const theme = Astro.cookies.get("theme")?.value || "light";
+
+const { title } = Astro.props as Layout;
+const logo = "/logo.ico";
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{ title } - JavierSG</title>
-	</head>
-	<body>
-		<Header/>
-		<slot />
-	</body>
+<html lang="es" data-theme={theme}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={logo} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title ?? "Sin titulo"} - JavierSG</title>
+    <meta name="author" content="JavierSG" />
+    <meta
+      name="description"
+      content="Portafolio de JavierSG, programador y desarrollador web."
+    />
+    <ClientRouter />
+  </head>
+  <body class="flex flex-col min-h-[100dvh]">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    /* Define más variables CSS para el tema claro */
+  }
+
+  :root[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    /* Define más variables CSS para el tema oscuro */
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
 </style>

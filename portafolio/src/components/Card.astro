@@ -1,0 +1,11 @@
+---
+interface Card {
+    title: string
+}
+
+const { title } = Astro.props as Card;
+---
+
+<article>
+    <h2>{ title }</h2>
+</article>

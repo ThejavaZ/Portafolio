@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+  {
+    title: "Proyecto 1",
+    image: "/logo.png",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, molestiae!",
+    technologies: ["Tecnologia 1", "Tecnologia 2"],
+    type: "web",
+  },
+  // Agrega más proyectos aquí
+];
+
+const categories = ["Web", "Mobile", "Escritorio", "Machine Learning"];
+---
+
+<Layout title="Proyectos">
+  <h2 class="font-bold text-4xl text-center py-2">Proyectos</h2>
+
+  <div>
+    <input
+      type="text"
+      placeholder="Buscar proyecto"
+      class="border-2 rounded py-2 px-4 mb-4 w-full"
+    />
+    <ul class="flex justify-around *:bg-blue-500 *:p-1 *:rounded">
+      <button>Web</button>
+      <button>Mobile</button>
+      <button>Escritorio</button>
+      <button>Machine Learning</button>
+    </ul>
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-5 px-40">
+      <a class="bg-gray-500 p-2 rounded transition">
+        <h3 class="text-center font-bold text-2xl">Titulo</h3>
+        <img src="/logo.png" class="w-40" alt="image" />
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam,
+          molestiae!
+        </p>
+
+        <ul>
+          <p>Tecnologias</p>
+          <ul>
+            <li>Tecnologia 1</li>
+            <li>Tecnologia 2</li>
+          </ul>
+        </ul>
+
+        <p>Tipo de proyecto: web</p>
+      </a>
+    </ul>
+  </div>
+
+  <ul>
+    <li>
+      Lista de proyectos con título, imagen, descripción y tecnologías usadas.
+    </li>
+    <li>Enlaces a GitHub o demo en vivo.</li>
+    <li>
+      Opcionalmente, un filtro para categorizar proyectos (Ejemplo: Web, Móvil,
+      Backend).
+    </li>
+  </ul>
+</Layout>
