@@ -10,21 +10,47 @@ import Layout from "../layouts/Layout.astro";
 
   <div>
     <article
-      class="m-4 bg-[#f1f1f1] p-5 rounded-2xl transition hover:bg-gray-300 hover:cursor-pointer"
+      class="m-4 bg-[#f1f1f1] p-5 rounded-2xl transition hover:bg-gray-300 hover:cursor-pointer *:m-5 flex flex-col justify-center items-center"
     >
-      <h2 class="text-center font-bold text-2xl">
-        Javier Armando Sarmiento Gil
-      </h2>
-      <div class="flex items-center *:m-1">
-        <img
-          class="w-50 rounded-2xl"
-          src="/9376 JAVIER ARMANDO SARMIENTO GIL_pp.jpg"
-          alt="yo"
-        />
-        <p class="text-justify my-[1lh]">
-          Hola, Soy Javier Armando Sarmiento Gil y Soy programador en
-          multiplataforma.
-        </p>
+      <div class="flex flex-col items-center">
+        <h2 class="text-center font-bold text-2xl">
+          Javier Armando Sarmiento Gil
+        </h2>
+        <div class="flex items-center *:m-1">
+          <img
+            class="w-50 rounded-2xl"
+            src="/9376 JAVIER ARMANDO SARMIENTO GIL_pp.jpg"
+            alt="yo"
+          />
+        </div>
+
+        <div>
+          <p class="text-justify mx-2 my-[1lh]">
+            Hola, Soy Javier Armando Sarmiento Gil y soy <strong
+              >Desarrollador de Software</strong
+            >. <br />
+            Me especializo en crear soluciones tecnológicas innovadoras que impulsan
+            la eficiencia y mejoran la experiencia del usuario. <br />
+            Con una sólida formación en desarrollo de software y una pasión por la
+            tecnología, me esfuerzo por mantenerme actualizado con las últimas tendencias
+            y mejores prácticas en la industria. <br />
+            Mi objetivo es contribuir al éxito de proyectos desafiantes y colaborar
+            con equipos dinámicos para crear aplicaciones y sistemas que marquen
+            la diferencia. <br />
+            Estoy emocionado por las oportunidades futuras y listo para enfrentar
+            nuevos desafíos en el mundo del desarrollo de software.
+          </p>
+
+          <ul class="text-justify mx-2 my-[1lh] list-disc">
+            <h4 class="font-bold py-2">Habilidades:</h4>
+            <li>Apasionado por la tecnologia</li>
+            <li>Autodidacta</li>
+            <li>Analista de informacion</li>
+            <li>Diseñador de software</li>
+            <li>Programador Full Stack</li>
+            <li>Desarrollador de PWA</li>
+          </ul>
+        </div>
       </div>
     </article>
   </div>
@@ -40,12 +66,4 @@ import Layout from "../layouts/Layout.astro";
       >
     </nav>
   </div>
-  <section></section>
-
-  <ul>
-    <li>
-      Un resumen breve de lo que haces (ejemplo: Soy Javier, un desarrollador
-      apasionado por la tecnología y la innovación).
-    </li>
-  </ul>
 </Layout>

@@ -2,8 +2,8 @@
 title: "Sisa"
 images: ["", ""]
 description: ""
-frameworks: ["", "", ""]
-type: ""
-url_production: ""
+frameworks: ["Laravel 12"]
+type: "Web"
+url_production: "sisa-automatation.net"
 urls: ["", "", ""]
 ---
