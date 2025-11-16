@@ -1,19 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const projects = [
-  {
-    title: "Proyecto 1",
-    image: "/logo.png",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, molestiae!",
-    technologies: ["Tecnologia 1", "Tecnologia 2"],
-    type: "web",
-  },
-  // Agrega más proyectos aquí
-];
+import { getCollection } from "astro:content";
 
-const categories = ["Web", "Mobile", "Escritorio", "Machine Learning"];
+const projects = await getCollection("projects");
+
+projects[0].
 ---
 
 <Layout title="Proyectos">
