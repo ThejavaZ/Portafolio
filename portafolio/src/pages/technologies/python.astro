@@ -1,0 +1,82 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import { Image } from "astro:assets"
+---
+
+<Layout title="Python">
+    <div class="bg-green-700 dark:bg-gray-900 py-4 mb-5 flex flex-row items-center justify-center *:mx-5 *:my-2">
+        <Image src="/technologies/python.png" alt="Python Logo" width={100} height={100} />
+        <h1 class="text-4xl font-bold text-center my-5">Python</h1>
+    </div>
+
+    <div class="flex flex-col justify-center py-2">
+        <h2 class="text-2xl font-semibold my-3 text-center">Stack</h2>
+        <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-5 *:transition *:flex *:flex-col *:items-center *:my-2 *:mx-2 *:dark:bg-gray-600 *:rounded *:hover:scale-105 *:hover:cursor-pointer">
+            <li>
+                <h3 class="font-bold text-2xl">DJango</h3>
+                <Image src="/technologies/django.png" alt="Django" width={60} height={60} />
+                <p>Tipo: <strong>Web</strong></p>
+            </li>
+            <li>
+                <h3 class="font-bold text-2xl">FastApi</h3>
+                <Image src="/technologies/fastapi.png" alt="Fastapi" width={60} height={60} />
+                <p>Tipo: <strong>Web</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">Reflex</h3>
+                <Image src="/technologies/reflex.png" alt="Django" width={60} height={60} />
+                <p>Tipo: <strong>Web</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">Jupyter Lab</h3>
+                <Image src="/technologies/jupyter.png" alt="Jupyter" width={60} height={60} />
+                <p>Tipo: <strong>Ciencia de datos</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">Numpy</h3>
+                <Image src="/technologies/numpy.png" alt="numpy Logo" width={60} height={60} />
+                <p>Tipo: <strong>Ciencia de datos</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">MatplotLib</h3>
+                <Image src="/technologies/matplotlib.png" alt="Matplotlib" width={60} height={60} />
+                <p>Tipo: <strong>Ciencias de datos</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">Pandas</h3>
+                <Image src="/technologies/pandas.png" alt="Ultralytics" width={60} height={60} />
+                <p>Tipo: <strong>Ciencia de datos</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">Open CV</h3>
+                <Image src="/technologies/opencv.png" alt="Opencv" width={60} height={60} />
+                <p>Tipo: <strong>IA</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">Ultralytics</h3>
+                <Image src="/technologies/yolo.png" alt="Ultralytics" width={60} height={60} />
+                <p>Tipo: <strong>IA</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">Roboflow</h3>
+                <Image src="/technologies/roboflow.png" alt="Roboflow" width={60} height={60} />
+                <p>Tipo: <strong>IA</strong></p>
+            </li>
+
+            <li>
+                <h3 class="font-bold text-2xl">Pygame</h3>
+                <Image src="/technologies/pygame.png" alt="Roboflow" width={60} height={60} />
+                <p>Tipo: <strong>VideoJuegos</strong></p>
+            </li>
+        </ul>
+        <a href="/" class="pr-5 text-green-500 text-end transition hover:underline">Atras</a>
+    </div>
+</Layout>

@@ -3,18 +3,18 @@ import ClientRouter from "astro/components/ClientRouter.astro";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import Sidebar from "../components/Sidebar.astro";
 interface Layout {
   title: String;
 }
-
-const theme = Astro.cookies.get("theme")?.value || "light";
 
 const { title } = Astro.props as Layout;
 const logo = "/logo.ico";
 ---
 
 <!doctype html>
-<html lang="es" data-theme={theme}>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -28,30 +28,26 @@ const logo = "/logo.ico";
     />
     <ClientRouter />
   </head>
-  <body class="flex flex-col min-h-[100dvh]">
+  <body class="flex flex-col min-h-screen bg-gray-100 md:grid md:grid-cols-layout md:grid-rows-layout dark:bg-gray-900 dark:text-white">
     <Header />
+    <Navbar />
+    <!-- <main class="flex-1 md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-3"> -->
     <main class="flex-1">
       <slot />
     </main>
+    <!-- <Sidebar /> -->
     <Footer />
   </body>
 </html>
 
 <style is:global>
-  :root[data-theme="light"] {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    /* Define más variables CSS para el tema claro */
+  html, body {
+    height: 100%;
   }
-
-  :root[data-theme="dark"] {
-    --bg-color: #1a1a1a;
-    --text-color: #ffffff;
-    /* Define más variables CSS para el tema oscuro */
-  }
-
   body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    min-height: 100dvh;
   }
+  
 </style>

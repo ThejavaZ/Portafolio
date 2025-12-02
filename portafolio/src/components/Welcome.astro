@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets"
+const imageSrc = "/9376 JAVIER ARMANDO SARMIENTO GIL_pp.jpg";
+---
+
+<div class="flex flex-col items-center dark:text-white bg-gray-800 py-4 rounded-lg shadow-md md:flex-row md:gap-10 md:py-10 md:px-10">
+    <div class="lg:m-4">
+        <h2 class="text-2xl font-bold text-center">Sobre mi</h2>
+        <Image class="rounded" src={imageSrc} alt="" width={250} height={10} />
+    </div>
+
+    <div class="flex flex-col">
+        <p class="text-justify my-[1lh]">Hola, Soy Javier Sarmiento y soy programador. <br/>
+        Me apasiona bastante la tecnologia tanto que aveces me pierdo por horas en la laptop programando.<br/>
+        </p>
+
+        <a href="/cv.pdf" target="_blank" class="bg-green-500 text-center py-2 px-1 rounded transition delay-75 hover:bg-green-800">Descargar CV</a>
+    </div>
+</div>

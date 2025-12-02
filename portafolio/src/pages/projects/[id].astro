@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = async () => {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { id: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { title, image, description, frameworks, type, url_production, urls } = data;
+const { Content } = await render(project);
+---
+
+
+<Layout title={`${Astro.params.id}`}>
+    <article class="bg-gray-100 py-5 rounded hover:bg-gray-200  hover:cursor-pointer transition-shadow shadow-md mx-5 my-5 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <h1 class="text-4xl font-bold text-center">{title}</h1>
+        
+        <div class="flex justify-center my-5">
+            
+            <img src={image} alt={title} class="rounded-lg w-2xl md:w-3xl"/>
+        </div>
+
+        <div class="*:my-[1lh]">
+            <Content />
+        </div>
+
+        <p class="mx-5 text-justify">{description}</p>
+        <ul class="mx-5 my-5 list-disc">
+            <h4 class="font-bold py-2">Frameworks:</h4>
+            {frameworks && frameworks.map((framework) => (
+                <li>{framework}</li>
+            ))}
+        </ul>
+        <p class="mx-5 my-2"><strong>Tipo:</strong> {type}</p>
+        {url_production && (
+            <p class="mx-5 my-2"><strong>URL de Producción:</strong> <a href={url_production} class="text-blue-400">{url_production}</a></p>
+        )}
+        {urls && urls.length > 0 && (
+            <div class="mx-5 my-2">
+                <strong>Otras URLs:</strong>
+                <ul class="list-disc">
+                    {urls.map((url) => (
+                        <li><a href={url} class="text-blue-400">{url}</a></li>
+                    ))}
+                </ul>
+            </div>
+        )}
+        <div class="flex items-center justify-around py-2">
+            <a href="" class="bg-blue-800 py-4 px-2 rounded text-white hover:bg-blue-900">GitHub</a>
+            <a href="/projects" class="text-blue-400 hover:text-blue-500 hover:text-shadow-current transition">Atras</a>
+        </div>
+    </article>
+</Layout>

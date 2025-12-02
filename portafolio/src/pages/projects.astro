@@ -4,56 +4,41 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const projects = await getCollection("projects");
-
-projects[0].
 ---
 
 <Layout title="Proyectos">
   <h2 class="font-bold text-4xl text-center py-2">Proyectos</h2>
 
-  <div>
     <input
       type="text"
-      placeholder="Buscar proyecto"
-      class="border-2 rounded py-2 px-4 mb-4 w-full"
+      placeholder="Buscar proyecto..."
+      class="border border-gray-300 rounded px-4 py-2 w-full mb-4"
     />
-    <ul class="flex justify-around *:bg-blue-500 *:p-1 *:rounded">
-      <button>Web</button>
-      <button>Mobile</button>
-      <button>Escritorio</button>
-      <button>Machine Learning</button>
-    </ul>
-    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-5 px-40">
-      <a class="bg-gray-500 p-2 rounded transition">
-        <h3 class="text-center font-bold text-2xl">Titulo</h3>
-        <img src="/logo.png" class="w-40" alt="image" />
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam,
-          molestiae!
-        </p>
-
-        <ul>
-          <p>Tecnologias</p>
-          <ul>
-            <li>Tecnologia 1</li>
-            <li>Tecnologia 2</li>
-          </ul>
-        </ul>
-
-        <p>Tipo de proyecto: web</p>
-      </a>
-    </ul>
-  </div>
-
-  <ul>
-    <li>
-      Lista de proyectos con título, imagen, descripción y tecnologías usadas.
-    </li>
-    <li>Enlaces a GitHub o demo en vivo.</li>
-    <li>
-      Opcionalmente, un filtro para categorizar proyectos (Ejemplo: Web, Móvil,
-      Backend).
-    </li>
-  </ul>
+    
+    
+    <nav class="grid grid-cols-1 py-5 gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {projects.map((project) =>{
+      const {slug, data} = project;
+      const {title, image, description, frameworks, type, url_production, urls} = data;
+      return(
+        <article
+          class="bg-gray-100 py-2 mx-2 rounded hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        >
+          <a href={`/projects/${slug}`}>
+          <div class="flex flex-col items-center dark:text-white p-2">
+            <h2 class="text-center font-bold text-2xl">{title}</h2>
+            <div class="flex items-center flex-col *:m-1">
+              <img
+                class="w-50 rounded-2xl"
+                src={image ? image : "https://http.cat/400"}
+                alt={title}
+              />
+              <p>{description}</p>
+            </div>
+            </a>
+          </div>
+        </article>
+      )}
+      )}
+    </nav>
 </Layout>

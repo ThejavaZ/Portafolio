@@ -1,7 +1,5 @@
 ---
 title: "Almacen"
-image: "img"
-description: ""
-technologies: ["", ""]
-type: ""
+image: ""
+description: "Aplicacion de escritorio para integradora"
 ---

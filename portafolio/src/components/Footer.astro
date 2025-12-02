@@ -5,22 +5,52 @@ const date = new Date();
 <footer class="bg-gray-800 py-5 text-white text-center flex flex-col *:py-5">
   <p>JavierSG {date.getFullYear()}</p>
 
-  <ul class="flex justify-around">
+  <ul class="flex justify-baseline pl-5 pt-5 w-full items-start">
     <li>
       Contactame
-      <ol>
+      <ol class="flex flex-col items-start">
         <li class="py-3">
-          <a href="mailto:jsdash10000@gmail.com">Correo electronico</a>
+          <a href="mailto:jsdash10000@gmail.com" class="transition delay-75 hover:text-blue-500">Correo electronico</a>
         </li>
 
         <li class="py-3">
-          <a href="tel:+526622037327">Celular</a>
+          <a href="tel:+526622037327" class="transition delay-75 hover:text-blue-500">Celular</a>
+        </li>
+        <li class="py-3">
+          <a href="https://www.linkedin.com/in/javier-armando-sarmiento-gil-aa10b0249/" class="transition delay-75 hover:text-blue-500">Linkedlin</a>
+        </li>
+        <li class="py-3">
+          <a href="https://x.com/TheJavaZs" class="transition delay-75 hover:text-blue-500">Twitter/X</a>
+        </li>
+        <li class="py-3">
+          <a href="https://github.com/ThejavaZ" class="transition delay-75 hover:text-blue-500">GitHub</a>
         </li>
       </ol>
     </li>
-
-    <li>Proyectos</li>
   </ul>
 
-  <p class="flex justify-end text-gray-600">version: 2.0</p>
+  <p class="flex justify-end text-gray-600 pr-4">version: 2.0</p>
 </footer>
+
+<style>
+  footer a {
+    position: relative;
+  }
+
+  footer a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #3b82f6; /* blue-500 */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in;
+  }
+
+  footer a:hover::after {
+    transform: scaleX(1);
+  }
+</style>

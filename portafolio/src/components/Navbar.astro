@@ -1,12 +1,38 @@
----
-import Sidebar from "./Sidebar.astro";
----
+
+
 
 <nav
-  class="flex *:px-1 *:text-white transition ease-in transiti *:hover:font-bold"
+  class="bg-green-600 text-white py-3 flex justify-around
+  transition ease-in delay-100
+  *:transition *:ease-in *:delay-100 hover:cursor-pointer border-2 border-green-800 *:hover:font-bold  *:border-amber-900 *:p-2"
 >
   <a href="/">Inicio</a>
   <a href="/about">Acerda de</a>
   <a href="/projects">Proyectos</a>
   <a href="/contact">Contactame</a>
 </nav>
+
+<style>
+  /* Animación de borde de izquierda a derecha desde arriba */
+  nav a {
+    position: relative;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 3px;
+    width: 100%;
+    background-color: #78350f; /* amber-900 */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in;
+  }
+
+  nav a:hover::after {
+    transform: scaleX(1);
+  }
+</style>
+

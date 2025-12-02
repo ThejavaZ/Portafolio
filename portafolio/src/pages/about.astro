@@ -3,11 +3,63 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Acerca de">
-  <div>Historia mia en la carrera laboral</div>
 
-  <div>Stack</div>
+  <div class="bg-gray-50 py-2 m-2 rounded">
+    <h2 class="font-bold text-center text-2xl">Historia mia en la carrera laboral</h2>
+    
+    <p class="text-justify mx-2 my-[1lh]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi harum odio accusamus rem velit, autem cupiditate dicta ea dolorem, iste eius hic quam itaque. Earum fuga molestias aliquam neque sunt?</p>
+  </div>
 
-  <div>Experiencia laboral</div>
+  <div>Stack
+
+    <ul>
+      <li>Lenguajes de programación
+
+        <ul>
+          <li>Python</li>
+          <li>Javascript</li>
+          <li>PHP</li>
+          <li>Dart</li>
+        </ul>
+      </li>
+      <li>Frameworks y librerías
+        <ul>
+          <li>FastApi</li>
+          <li>Django</li>
+          <li>Laravel</li>
+          <li>React</li>
+          <li>Vue.js</li>
+          <li>Flutter</li>
+        </ul>
+      </li>
+      <li>Bases de datos
+        <ul>
+          <li>MySQL</li>
+          <li>PostgreSQL</li>
+          <li>SQLite</li>
+          <li>MongoDB</li>
+        </ul>
+      </li>
+      <li>Herramientas y plataformas
+        <ul>
+          <li>Git y GitHub</li>
+          <li>Docker</li>
+          <li>Heroku</li>
+          <li>Netlify</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div>Experiencia laboral
+
+    <ul class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <li>Python</li>
+      <li>Frontend</li>
+      <li>Backend</li>
+      <li>Mobile</li>
+    </ul>
+  </div>
 
   <ul>
     <li>Historia sobre tu trayectoria en la UTH y proyectos importantes.</li>
