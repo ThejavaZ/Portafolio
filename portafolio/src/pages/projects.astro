@@ -29,6 +29,7 @@ const projects = await getCollection("projects");
             <h2 class="text-center font-bold text-2xl">{title}</h2>
             <div class="flex items-center flex-col *:m-1">
               <img
+                transition:name=`img-${slug}`
                 class="w-50 rounded-2xl"
                 src={image ? image : "https://http.cat/400"}
                 alt={title}

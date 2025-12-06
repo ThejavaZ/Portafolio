@@ -11,7 +11,7 @@ export const getStaticPaths = async () => {
 }
 
 const { project } = Astro.props;
-const { data } = project;
+const { data, slug } = project;
 const { title, image, description, frameworks, type, url_production, urls } = data;
 const { Content } = await render(project);
 ---
@@ -23,7 +23,7 @@ const { Content } = await render(project);
         
         <div class="flex justify-center my-5">
             
-            <img src={image} alt={title} class="rounded-lg w-2xl md:w-3xl"/>
+            <img transition:name={`img-${slug}`} src={image} alt={title} class="rounded-lg w-2xl md:w-3xl"/>
         </div>
 
         <div class="*:my-[1lh]">
