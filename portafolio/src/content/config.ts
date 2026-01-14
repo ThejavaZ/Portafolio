@@ -12,4 +12,10 @@ const projects = defineCollection({
   }),
 });
 
+const certificates = defineCollection({
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
 export const collections = { projects };
