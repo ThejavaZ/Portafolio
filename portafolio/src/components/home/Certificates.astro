@@ -1,11 +1,25 @@
 ---
 import CertificateItem from "./CertificateItem.astro"
+
+import { getCollection } from "astro:content"
+
+const certificates = await getCollection("certificates")
 ---
 
 <div class="flex flex-col items-center justify-center bg-gray-800 rounded py-5 mb-5">
     <h2 class="font-bold text-2xl">Certificados</h2>
     <div class="flex">
-        <CertificateItem image="/technologies/html.png" url="/certificate/" name="html" firstColor="orange" secondColor="orange" />
+        {
+            certificates.map(certificate => {
+                const {slug, data} = certificate;
+                const {title,firstColor, secondColor} = data
+                return(
+                    <CertificateItem url={`/certificate/${slug}`} image={`/technologies/${title}.png`} name={`${title}`} firstColor={firstColor} secondColor={secondColor}/>
+                );
+
+            })
+        }
+        <!-- <CertificateItem image="/technologies/html.png" url="/certificate/" name="html" firstColor="orange" secondColor="orange" />
 
         <CertificateItem image="/technologies/css.png" url="/certificate/" name="css" firstColor="violet" secondColor="violet" />
 
@@ -13,6 +27,6 @@ import CertificateItem from "./CertificateItem.astro"
 
         <CertificateItem image="/technologies/typescript.png" url="/certificate/" name="typescript" firstColor="blue" secondColor="blue" />
 
-        <CertificateItem image="/technologies/python.png" url="/certificate/" name="python" firstColor="yellow" secondColor="blue" />
+        <CertificateItem image="/technologies/python.png" url="/certificate/" name="python" firstColor="yellow" secondColor="blue" /> -->
     </div>
 </div>

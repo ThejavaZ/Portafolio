@@ -15,7 +15,10 @@ const projects = defineCollection({
 const certificates = defineCollection({
   schema: z.object({
     title: z.string(),
+    image: z.string(),
+    firstColor: z.string(),
+    secondColor: z.string(),
   }),
 });
 
-export const collections = { projects };
+export const collections = { projects, certificates };

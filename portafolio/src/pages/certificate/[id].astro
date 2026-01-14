@@ -1,8 +1,53 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+
+export const getStaticPaths = async () => {
+    const certificates = await getCollection("certificates");
+
+    return certificates.map((certificate) => ({
+        params: { id: certificate.slug },
+        props: {certificate}
+    }));
+}
+const { certificate } = Astro.props;
+const { data, slug } = certificate;
+const {title, image, firstColor, secondColor} = data;
+const { Content } = await render(certificate);
 ---
 
 <Layout title={Astro.params.id}>
+    <div class="flex items-center justify-around bg-gray-800 py-5">
+        <Image
+        transition:name={`${title}`}
+        src={`/technologies/${title}.png`} 
+        alt={title} 
+        width={30} 
+        height={20}
+        loading="lazy"
+        format="webp"
+        class={`w-25 border rounded px-2 py-2 border-${firstColor}-500 shadow-2xl animate-border-pulse shadow-${secondColor}-500`}
+        />
+
+        <h2 class="font">{title.toUpperCase()}</h2>
+    </div>
+
+    <div class="flex flex-row justify-between my-5 mx-4 bg-gray-700 p-4">
+        <Image
+        src={image}
+        alt={title}
+        width={30} 
+        height={20}
+        class="w-100"
+        loading={"lazy"}
+        format="webp"
+        />
+        <div class="flex flex-col text-justify items-end justify-between">
+            <Content/>
+            <a href={`/`} class="text-blue-400 transition hover:underline hover:text-blue-500">Volver al inicio</a>
+        </div>
+    </div>
 
 </Layout>
