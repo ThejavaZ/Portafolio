@@ -1,55 +1,241 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Acerca de">
 
-  <div class="bg-gray-50 py-2 m-2 rounded">
-    <h2 class="font-bold text-center text-2xl">Historia mia en la carrera laboral</h2>
+  <!-- <div class="bg-gray-800 py-2 m-2 rounded"> -->
+    <!-- <h2 class="font-bold text-center text-2xl">Historia mia en la carrera laboral</h2>
     
     <p class="text-justify mx-2 my-[1lh]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi harum odio accusamus rem velit, autem cupiditate dicta ea dolorem, iste eius hic quam itaque. Earum fuga molestias aliquam neque sunt?</p>
-  </div>
+  </div> -->
 
-  <div>Stack
+  <div class="bg-gray-800 rounded py-2 m-2">
+    <h2 class="text-center font-bold text-2xl">Main Stack</h2>
+    <ul class="flex justify-around">
+      <li class="flex flex-col items-center">
+        <Image 
+        src="/technologies/linux.webp"
+        alt="Linux"
+        width={50}
+        height={50}
+        class="w-25 rounded border border-black p-2 m-2 shadow-2xl shadow-black"
+        format="webp"
+        loading="lazy"
+        />
+        <h3>Linux</h3>
+      </li>
 
-    <ul>
-      <li>Lenguajes de programación
+       <li class="flex flex-col items-center">
+        <Image 
+        src="/technologies/apache.webp"
+        alt="Linux"
+        width={50}
+        height={50}
+        class="w-25 rounded border border-violet-500 p-2 m-2 shadow-2xl shadow-red-500"
+        format="webp"
+        loading="lazy"
+        />
+        <h3>Apache</h3>
+      </li>
 
-        <ul>
-          <li>Python</li>
-          <li>Javascript</li>
-          <li>PHP</li>
-          <li>Dart</li>
-        </ul>
+      <li class="flex flex-col items-center">
+        <Image 
+        src="/technologies/psql.webp"
+        alt="Linux"
+        width={50}
+        height={50}
+        class="w-25 rounded border border-blue-500 p-2 m-2 shadow-2xl shadow-blue-500"
+        format="webp"
+        loading="lazy"
+        />
+        <h3>PostgreSQL</h3>
       </li>
-      <li>Frameworks y librerías
-        <ul>
-          <li>FastApi</li>
-          <li>Django</li>
-          <li>Laravel</li>
-          <li>React</li>
-          <li>Vue.js</li>
-          <li>Flutter</li>
-        </ul>
+
+      <li class="flex flex-col items-center">
+        <Image 
+        src="/technologies/laravel.webp"
+        alt="Laravel"
+        width={50}
+        height={50}
+        class="w-25 rounded border border-red-500 p-2 m-2 shadow-2xl shadow-red-500"
+        format="webp"
+        loading="lazy"
+        />
+        <h3>Laravel 12</h3>
       </li>
-      <li>Bases de datos
-        <ul>
-          <li>MySQL</li>
-          <li>PostgreSQL</li>
-          <li>SQLite</li>
-          <li>MongoDB</li>
-        </ul>
-      </li>
-      <li>Herramientas y plataformas
-        <ul>
-          <li>Git y GitHub</li>
-          <li>Docker</li>
-          <li>Heroku</li>
-          <li>Netlify</li>
-        </ul>
+
+      <li class="flex flex-col items-center">
+        <Image 
+        src="/technologies/vue.webp"
+        alt="Laravel"
+        width={50}
+        height={50}
+        class="w-25 rounded border border-green-500 p-2 m-2 shadow-2xl shadow-green-500"
+        />
+        <h3>Vue3 JS</h3>
       </li>
     </ul>
   </div>
+
+  <div class="bg-gray-800 rounded py-2 m-2">
+    <h2 class="text-center font-bold text-2xl">Tecnologias</h2>
+    
+    <ul class="grid grid-cols-2">
+      <li>
+        <a href="/technologies/python" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-yellow-500">
+          <Image 
+          transition:name="python-tech"
+          src="/technologies/python.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>Python</h3>
+        </a>
+      </li>
+
+      <li>
+        <a href="/technologies/" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-yellow-500">
+          <Image 
+          src="/technologies/desktop.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>Desktop</h3>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/technologies/" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-yellow-500">
+          <Image 
+          src="/technologies/sql.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>Bases de datos</h3>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/technologies/" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-blue-500">
+          <Image 
+          src="/technologies/client.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>Frontend</h3>
+        </a>
+      </li>
+
+      <li>
+        <a href="/technologies/" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-gray-500 hover:shadow-orange-500">
+          <Image 
+          src="/technologies/server.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>Backend</h3>
+        </a>
+      </li>
+
+      <li>
+        <a href="/technologies/mobile" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-violet-500 hover:shadow-blue-500">
+          <Image 
+          src="/technologies/mobile.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>Mobile</h3>
+        </a>
+      </li>
+
+      <li>
+        <a href="/technologies/" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-blue-500">
+          <Image 
+          src="/technologies/iot.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>IoT</h3>
+        </a>
+      </li>
+
+      <li>
+        <a href="/technologies/" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-orange-500 hover:shadow-orange-500">
+          <Image 
+          src="/technologies/git.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>Control de Versiones</h3>
+        </a>
+      </li>
+
+      <li>
+        <a href="/technologies/" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-blue-500">
+          <Image 
+          src="/technologies/docker.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>DevOps</h3>
+        </a>
+      </li>
+
+      <li>
+        <a href="/technologies/" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-blue-500">
+          <Image 
+          src="/technologies/vscode.png"
+          alt="Laravel"
+          width={50}
+          height={50}
+          class="w-25 rounded p-2 m-2 "
+          format="webp"
+          loading="lazy"
+          />
+          <h3>Herramientas</h3>
+        </a>
+      </li>
+    </ul>
+  </div>
+
 
   <div>Experiencia laboral
 
