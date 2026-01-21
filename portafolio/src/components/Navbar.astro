@@ -12,36 +12,15 @@
 <nav
   class="bg-gray-600 text-white py-3 flex justify-around
   transition
-  *:transition *:ease-in *:delay-500 hover:cursor-pointer border-2 border-gray-800 *:hover:text-blue-500  *:hover:font-bold  *:border-amber-900 *:p-2"
->
+  *:transition *:ease-in *:delay-75 hover:cursor-pointer border-2 border-gray-800 *:hover:text-blue-500  *:hover:font-bold  *:border-blue-900 *:p-2
+  *:md:w-3/4 *:md:m-auto *:lg:w-2/3 *:text-center
+  relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-amber-900 *:after:transition-all *:after:duration-300 *:after:scale-x-0 *:hover:after:scale-x-100 *:hover:after:origin-left 
+  "
+
+  >
   <a href="/">Inicio</a>
   <a href="/about">Acerda de</a>
   <a href="/projects">Proyectos</a>
   <a href="/contact">Contactame</a>
   <a href="/blog">Blog</a>
 </nav>
-
-<style>
-  /* Animación de borde de izquierda a derecha desde arriba */
-  nav a {
-    position: relative;
-  }
-
-  nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 3px;
-    width: 100%;
-    background-color: #0044ff; /* amber-900 */
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease-in;
-  }
-
-  nav a:hover::after {
-    transform: scaleX(1);
-  }
-</style>
-
