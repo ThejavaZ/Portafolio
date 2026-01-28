@@ -10,23 +10,14 @@ const certificates = await getCollection("certificates")
     <h2 class="font-bold text-2xl">Certificados</h2>
     <div class="flex items-center justify-between">
         {
-            certificates.map(certificate => {
+            certificates.map((certificate, index) => {
                 const {slug, data} = certificate;
                 const {title,firstColor, secondColor} = data
                 return(
-                    <CertificateItem url={`/certificate/${slug}`} image={`/technologies/${title}.png`} name={`${title}`} firstColor={firstColor} secondColor={secondColor}/>
+                    <CertificateItem key={index} url={`/certificate/${slug}`} image={`/technologies/${title}.png`} name={`${title}`} firstColor={firstColor} secondColor={secondColor}/>
                 );
 
             })
         }
-        <!-- <CertificateItem image="/technologies/html.png" url="/certificate/" name="html" firstColor="orange" secondColor="orange" />
-
-        <CertificateItem image="/technologies/css.png" url="/certificate/" name="css" firstColor="violet" secondColor="violet" />
-
-        <CertificateItem image="/technologies/javascript.png" url="/certificate/" name="javascript" firstColor="yellow" secondColor="yellow" />
-
-        <CertificateItem image="/technologies/typescript.png" url="/certificate/" name="typescript" firstColor="blue" secondColor="blue" />
-
-        <CertificateItem image="/technologies/python.png" url="/certificate/" name="python" firstColor="yellow" secondColor="blue" /> -->
     </div>
 </div>
