@@ -16,7 +16,6 @@ const certificates = await getCollection("certificates")
                 return(
                     <CertificateItem key={index} url={`/certificate/${slug}`} image={`/technologies/${title}.png`} name={`${title}`} firstColor={firstColor} secondColor={secondColor}/>
                 );
-
             })
         }
     </div>
