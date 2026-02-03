@@ -6,7 +6,7 @@ import { Image } from "astro:assets"
 <div class="bg-gray-800 rounded text-center px-5 h-screen flex flex-col items-center justify-around font-bold">
     <h2 class="font-bold text-5xl">Bienvenido a mi portafolio!</h2>
     
-    <Image src="/logo.png" alt="Logo" width={250} height={50} loading="lazy" format="webp" class="w-100 rounded p-2" />
+    <Image src="/logo.png" alt="Logo" width={250} height={250} quality={95} loading="lazy" format="webp" class="w-100 rounded p-2" />
 
     <div class="flex justify-around items-center *:mx-2">
         <a href="/projects" class="bg-blue-500 py-2 rounded transition hover:bg-blue-800 px-2">
