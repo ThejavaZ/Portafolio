@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets"
+
+const logo = "/experience/sisa.png"
+---
+
+<section>
+    <h2 class="text-center text-2xl font-bold">Experiencia</h2>
+    <article class="dark:bg-gray-800 p-4 rounded">
+        <div class="flex items-center justify-start">
+            <Image src={logo} alt={logo} width={150} height={300}/>    
+            <h3 class="ml-5 font-bold flex mx-1 justify-around">Sisa Sistemas Automatizados <p class="ml-5 opacity-30 text-white">Ayudante de sistemas</p></h3> 
+            
+        </div>
+        <p class="opacity-30"><time datetime="2025-06-02">02 Junio 2025</time> - <time datetime="2025-10-28">28 Octubre 2025</time></p>
+        
+        <div>
+            <h4 class="font-bold">Actividades</h4>
+            <ul class="list-disc mx-5">
+                <li>Soporte de IT para el staff y resolver problemas tecnicos</li>
+                <li>Asistencia con bases de datos SQL para reportes y consultas</li>
+                <li>Automatizaciones con Python para la bases de datos y operaciones</li>
+                <li>Desarrollar aplicaciones con FastAPi y React</li>
+            </ul>
+        </div>
+    </article>
+</section>

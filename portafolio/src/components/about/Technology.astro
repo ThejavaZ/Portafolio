@@ -5,56 +5,101 @@ import { Image } from "astro:assets"
 
 <div class="bg-green-700 dark:bg-gray-900">
     <h2 class="text-center font-bold text-xl">Tecnologias</h2>
+<<<<<<< HEAD:portafolio/src/components/about/Technology.astro
     <nav class="grid grid-cols-2 lg:grid-cols-5 gap-4 p-4">
+=======
+    <nav class="grid grid-cols-3 gap-4 p-4">
+>>>>>>> 01c5aa4 (Se añade la nueva version del portafolio):portafolio/src/components/Technology.astro
         <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/python">
             <h3>Python</h3>
             <Image transition:name="python" src="/technologies/python.png" alt="Python" width={40} height={40} loading="lazy" format="webp" />
         </a>
 
-        <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/desktop">
+        <!-- <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/desktop">
             <h3>Escritorio</h3>
+<<<<<<< HEAD:portafolio/src/components/about/Technology.astro
             <Image src="/technologies/desktop.png" alt="Python" width={40} height={40} loading="lazy" format="webp" />
         </a>
 
         <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/frontend">
             <h3>Frontend</h3>
             <Image src="/technologies/client.png" alt="Frontend" width={40} height={40} loading="lazy" format="webp" />
+=======
+            <Image transition:name="desktop" src="/technologies/desktop.png" alt="Python" width={40} height={40} />
+        </a> -->
+
+        <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/frontend">
+            <h3>Frontend</h3>
+            <Image transition:name="frontend" src="/technologies/client.png" alt="Frontend" width={40} height={40} />
+>>>>>>> 01c5aa4 (Se añade la nueva version del portafolio):portafolio/src/components/Technology.astro
         </a>
 
         <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/backend">
             <h3>Backend</h3>
+<<<<<<< HEAD:portafolio/src/components/about/Technology.astro
             <Image src="/technologies/server.png" alt="Backend" width={40} height={40} loading="lazy" format="webp" />
+=======
+            <Image transition:name="backend" src="/technologies/server.png" alt="Backend" width={40} height={40} />
+>>>>>>> 01c5aa4 (Se añade la nueva version del portafolio):portafolio/src/components/Technology.astro
         </a>
 
         <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/sql">
             <h3>SQL</h3>
+<<<<<<< HEAD:portafolio/src/components/about/Technology.astro
             <Image src="/technologies/sql.png" alt="SQL" width={40} height={40} loading="lazy" format="webp" />
+=======
+            <Image transition:name="sql" src="/technologies/sql.png" alt="SQL" width={40} height={40} />
+>>>>>>> 01c5aa4 (Se añade la nueva version del portafolio):portafolio/src/components/Technology.astro
         </a>
 
-        <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/mobile">
+        <!-- <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/mobile">
             <h3>Mobile</h3>
+<<<<<<< HEAD:portafolio/src/components/about/Technology.astro
             <Image src="/technologies/mobile.png" alt="Mobile" width={40} height={40} loading="lazy" format="webp" />
         </a>
+=======
+            <Image src="/technologies/mobile.png" alt="Mobile" width={40} height={40} />
+        </a> -->
+>>>>>>> 01c5aa4 (Se añade la nueva version del portafolio):portafolio/src/components/Technology.astro
 
-        <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/iot">
+        <!-- <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/iot">
             <h3>IoT</h3>
+<<<<<<< HEAD:portafolio/src/components/about/Technology.astro
             <Image src="/technologies/iot.png" alt="iot" width={40} height={40} loading="lazy" format="webp" />
         </a>
 
         <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/git">
             <h3 class="text-center">Control de versiones</h3>
             <Image src="/technologies/git.png" alt="Git" width={40} height={40} loading="lazy" format="webp" />
+=======
+            <Image src="/technologies/iot.png" alt="iot" width={40} height={40} />
+        </a> -->
+
+        <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/git">
+            <h3 class="text-center">Control de versiones</h3>
+            <Image transition:name="git" src="/technologies/git.png" alt="Git" width={40} height={40} />
+>>>>>>> 01c5aa4 (Se añade la nueva version del portafolio):portafolio/src/components/Technology.astro
         </a>
 
-        <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/devops">
+        <!-- <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/devops">
             <h3>DevOps</h3>
+<<<<<<< HEAD:portafolio/src/components/about/Technology.astro
             <Image src="/technologies/docker.png" alt="SQL" width={40} height={40} loading="lazy" format="webp" />
         </a>
+=======
+            <Image src="/technologies/docker.png" alt="SQL" width={40} height={40} />
+        </a> -->
+>>>>>>> 01c5aa4 (Se añade la nueva version del portafolio):portafolio/src/components/Technology.astro
 
 
-        <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/tools">
+        <!-- <a class="bg-gray-200 flex flex-col items-center py-2 px-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:hover:bg-gray-600 hover:scale-105" href="/technologies/tools">
             <h3>Herramientas</h3>
+<<<<<<< HEAD:portafolio/src/components/about/Technology.astro
             <Image src="/technologies/vscode.png" alt="SQL" width={40} height={40} loading="lazy" format="webp" />
         </a>
+=======
+            <Image transition:name="tools" src="/technologies/vscode.png" alt="SQL" width={40} height={40} />
+        </a> -->
+>>>>>>> 01c5aa4 (Se añade la nueva version del portafolio):portafolio/src/components/Technology.astro
     </nav>
 </div>
