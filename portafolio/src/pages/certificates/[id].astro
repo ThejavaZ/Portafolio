@@ -6,13 +6,14 @@ import { Image } from "astro:assets";
 export const getStaticPaths = async () => {
     const certificates = await getCollection("certificates");
     return certificates.map((certificate) => ({
-        params: { id: certificate.slug },
+        // En Astro 5 con loaders, usamos .id
+        params: { id: certificate.id },
         props: { certificate }
     }));
 }
 
 const { certificate } = Astro.props;
-const { data, slug } = certificate;
+const { data, id } = certificate; // Extraemos 'id' en lugar de 'slug'
 const { title, image, firstColor, secondColor } = data;
 const { Content } = await render(certificate);
 
@@ -28,11 +29,11 @@ const glowColor = firstColor || 'blue';
       
       <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 relative z-10">
         <div class="relative group">
-          <div class="absolute -inset-1 bg-linear-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+          <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
           
-          <Image
-            transition:name={title}
-            src={`/technologies/${title}.png`} 
+          <img
+            transition:name={`img-${id}`} 
+            src={`/technologies/${title.toLowerCase()}.png`} 
             alt={title}
             class="relative w-32 h-32 md:w-40 md:h-40 object-contain bg-gray-800 p-4 rounded-2xl border border-white/10 shadow-2xl"
           />
@@ -40,10 +41,10 @@ const glowColor = firstColor || 'blue';
 
         <div class="text-center md:text-left">
           <span class="text-blue-500 font-mono text-sm tracking-widest uppercase">Certificación Oficial</span>
-          <h2 class="text-4xl md:text-6xl font-black mt-2 tracking-tight">
-            {slug.replace(/-/g, ' ').toUpperCase()}
+          <h2 class="text-4xl md:text-6xl font-black mt-2 tracking-tight uppercase italic">
+            {title}
           </h2>
-          <p class="text-gray-400 mt-4 max-w-xl text-lg">
+          <p class="text-gray-400 mt-4 max-w-xl text-lg italic leading-relaxed">
             Validación de aptitudes técnicas y conocimientos avanzados en <span class="text-white font-semibold">{title}</span>.
           </p>
         </div>
@@ -54,36 +55,38 @@ const glowColor = firstColor || 'blue';
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
         
         <div class="lg:col-span-7 group">
-          <div class="bg-gray-900 p-2 rounded-3xl border border-white/10 shadow-2xl transition-transform hover:-rotate-1">
-            <Image
+          <div class="bg-gray-900 p-2 rounded-3xl border border-white/10 shadow-2xl transition-transform hover:-rotate-1 duration-500">
+            <img
               src={image}
               alt={`Imagen del certificado ${title}`}
-              quality={100}
               class="rounded-2xl w-full h-auto shadow-inner"
             />
           </div>
         </div>
 
         <div class="lg:col-span-5 flex flex-col">
-          <div class="bg-gray-900/50 backdrop-blur-xl border border-white/5 p-8 rounded-3xl flex-1">
-            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-              <span class="w-2 h-8 bg-blue-500 rounded-full"></span>
-              Descripción del Logro
+          <div class="bg-gray-900/50 backdrop-blur-xl border border-white/5 p-8 rounded-3xl flex-1 shadow-xl">
+            <h3 class="text-xl font-black uppercase italic mb-6 flex items-center gap-3">
+              <span class="w-2 h-8 bg-blue-600 rounded-full"></span>
+              Detalles del Logro
             </h3>
             
-            <div class="prose prose-invert prose-blue max-w-none text-gray-300 leading-relaxed italic">
+            <div class="prose prose-invert prose-blue max-w-none text-gray-400 leading-relaxed italic mb-8">
               <Content />
             </div>
 
-            <div class="mt-10 pt-8 border-t border-white/5 flex items-center justify-between">
-              <a href="/" class="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            <div class="mt-auto pt-8 border-t border-white/5 flex items-center justify-between">
+              <a href="/" class="group flex items-center gap-2 text-gray-500 hover:text-blue-500 font-bold uppercase text-xs tracking-widest transition-all">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+                  <path d="M19 12H5m7-7l-7 7 7 7" />
                 </svg>
-                Volver al inicio
+                Volver
               </a>
               
-              <button onclick="window.print()" class="text-sm bg-white/5 hover:bg-white/10 px-4 py-2 rounded-lg transition-colors">
+              <button 
+                onclick="window.print()" 
+                class="text-[10px] font-black uppercase tracking-widest bg-white/5 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-lg transition-all border border-white/10"
+              >
                 Imprimir Ref.
               </button>
             </div>
