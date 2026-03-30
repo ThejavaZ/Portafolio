@@ -1,47 +1,109 @@
 ---
 import Layout from "../layouts/Layout.astro"
-<<<<<<< HEAD
-import Welcome from "../components/home/Welcome.astro"
-import AboutMe from "../components/home/AboutMe.astro"
-import Certificates from "../components/home/Certificates.astro"
-import ComingSoon from "../components/home/ComingSoon.astro"
-import Experience from "../components/home/Experience.astro"
-import Projects from "../components/home/Projects.astro"
-=======
-import Experience from "../components/Experience.astro"
-import Welcome from "../components/Welcome.astro"
-import Technology from "../components/Technology.astro"
-import Proyects from "../components/Proyects.astro"
-import Certifies from "../components/Certifies.astro"
->>>>>>> 01c5aa4 (Se añade la nueva version del portafolio)
+import { Image } from "astro:assets"
+
+const logoWelcome = "/logo.webp"
 ---
 
-<Layout title="Inicio">
-  <div class="flex flex-col gap-10 md:justify-center md:w-3/4 md:m-auto lg:w-2/3">
-    <Welcome />
-<<<<<<< HEAD
-    <AboutMe />
-    <Experience />
-    <Projects />
-    <Certificates />
-    <ComingSoon /> 
-  </div>
+<Layout title="Inicio | JavierSG">
+  <div class="flex flex-col gap-24 py-16 px-6 max-w-6xl mx-auto overflow-x-hidden">
+    
+    <section class="min-h-[70vh] flex flex-col items-center justify-center">
+      <div class="text-center mb-16">
+        <h2 class="font-black text-5xl md:text-8xl tracking-tighter uppercase italic text-white animate-fade-in">
+          Bienvenido a mi 
+          <span class="block text-transparent bg-clip-text bg-gradient-to-b from-blue-400 to-blue-700 drop-shadow-sm">
+            portafolio!
+          </span>
+        </h2>
+      </div>
 
-  <!-- * To Do: 
-  TODO: Welcome
-  TODO: AboutMe:
-  TODO: Experience: 
-  TODO: Proyects(3min)
-  TODO: Tecnologies
-  TODO: Certificates
-  TODO: ComingSoon
-  * -->
+      <div class="flex flex-col lg:flex-row items-center gap-12 w-full bg-gray-800/20 p-8 md:p-12 rounded-[3rem] border border-white/5 backdrop-blur-xl shadow-2xl">
+        <div class="w-full lg:w-1/2 group">
+          <Image 
+            src={logoWelcome} 
+            alt="JavierSG Logo"
+            width={600}
+            height={600}
+            class="w-full h-auto rounded-[2rem] shadow-2xl transition-all duration-500 group-hover:scale-[1.03] group-hover:rotate-1 border border-blue-500/10"
+          />
+        </div>
 
-=======
-    <Experience />
-    <Proyects />
-    <Technology />
-    <Certifies />
+        <div class="w-full lg:w-1/2 space-y-8">
+          <p class="text-2xl md:text-3xl text-gray-300 leading-tight font-light">
+            ¡Hola! Soy un <span class="text-blue-500 font-bold">programador backend</span>. Especialista en <span class="text-blue-400 italic">Python</span> y <span class="text-blue-400 italic">ASP.NET</span>.
+          </p>
+          
+          <div class="flex flex-wrap gap-6 pt-4">
+            <a href="https://github.com/" class="flex items-center gap-3 text-lg font-bold text-gray-500 hover:text-blue-400 transition-all">
+              <span class="p-2 bg-gray-800 rounded-lg">GH</span> GitHub
+            </a>
+            <a href="https://linkedin.com/" class="flex items-center gap-3 text-lg font-bold text-gray-500 hover:text-blue-400 transition-all">
+              <span class="p-2 bg-gray-800 rounded-lg">IN</span> LinkedIn
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="/projects" class="text-center bg-blue-600 hover:bg-blue-500 text-white font-black uppercase italic py-5 rounded-2xl transition-all shadow-lg shadow-blue-600/20 active:scale-95">
+              Proyectos
+            </a>
+            <a href="/contact" class="text-center border-2 border-blue-600/40 hover:bg-blue-600/10 text-white font-black uppercase italic py-5 rounded-2xl transition-all">
+              Contacto
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto w-full">
+      <div class="flex items-center gap-6 mb-16">
+        <h2 class="text-4xl font-black italic uppercase text-white shrink-0">Experiencia</h2>
+        <div class="h-[2px] w-full bg-gradient-to-r from-blue-500/50 to-transparent"></div>
+      </div>
+
+      <div class="space-y-12">
+        <div class="relative pl-10 border-l-2 border-blue-600/30">
+          <div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-gray-900 shadow-[0_0_15px_rgba(37,99,235,0.5)]"></div>
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 bg-gray-800/10 p-6 rounded-2xl border border-white/5 hover:bg-gray-800/30 transition-all">
+            <div>
+              <h3 class="text-2xl font-bold text-white">Software Developer</h3>
+              <p class="text-blue-400 text-lg">Grupo Cubits</p>
+            </div>
+            <span class="text-xs font-mono text-gray-500 uppercase tracking-widest bg-gray-900 px-4 py-2 rounded-full border border-white/5">Feb 2026 - Present</span>
+          </div>
+        </div>
+
+        <div class="relative pl-10 border-l-2 border-gray-700">
+          <div class="absolute -left-[9px] top-0 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-gray-900"></div>
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 p-6">
+            <div>
+              <h3 class="text-2xl font-bold text-gray-400">IT Assistant</h3>
+              <p class="text-gray-500 text-lg">Sisa Sistemas Automatizados</p>
+            </div>
+            <span class="text-xs font-mono text-gray-600">Jun 2025 - Oct 2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-b from-gray-800/20 to-transparent rounded-[4rem] p-12 border border-white/5">
+      <h2 class="text-center font-black text-3xl italic uppercase tracking-widest text-white mb-16">Certificados</h2>
+      
+      <div class="flex flex-wrap justify-center gap-10">
+        {['html', 'css', 'javascript', 'typescript', 'python'].map((tech) => (
+          <div class="group relative">
+            <a href={`/certificates/${tech}`} rel="noopener noreferrer">
+              <img 
+                src={`/technologies/${tech}.png`} 
+                alt={tech}
+                class="w-20 h-20 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 drop-shadow-2xl"
+              />
+            </a>
+            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-[0_0_10px_#3b82f6]"></div>
+          </div>
+        ))}
+      </div>
+    </section>
+
   </div>
->>>>>>> 01c5aa4 (Se añade la nueva version del portafolio)
 </Layout>

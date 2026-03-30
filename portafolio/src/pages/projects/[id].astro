@@ -4,56 +4,115 @@ import Layout from "../../layouts/Layout.astro";
 
 export const getStaticPaths = async () => {
   const projects = await getCollection("projects");
+  
   return projects.map((project) => ({
-    params: { id: project.slug },
+    // IMPORTANTE: Si tu archivo se llama [id].astro, aquí debe decir "id"
+    // Con el nuevo loader de Astro 5, el identificador está en project.id
+    params: { id: project.id }, 
     props: { project },
   }));
 }
 
 const { project } = Astro.props;
-const { data, slug } = project;
+// En Astro 5, 'slug' ahora se llama 'id' por defecto en el objeto
+const { data, id } = project; 
 const { title, image, description, frameworks, type, url_production, urls } = data;
 const { Content } = await render(project);
 ---
 
+<Layout title={`${title} | Proyecto`}>
+  <article class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+    
+    <header class="space-y-6">
+      <div class="flex items-center gap-4">
+        <a href="/projects" class="text-blue-500 hover:text-blue-400 flex items-center gap-2 font-bold uppercase text-xs tracking-widest transition-all group">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+            <path d="M19 12H5m7-7l-7 7 7 7" />
+          </svg>
+          Volver
+        </a>
+        <div class="h-px flex-1 bg-white/10"></div>
+        <span class="text-xs font-mono text-gray-500 uppercase tracking-[0.3em]">{type || "Software"}</span>
+      </div>
 
-<Layout title={`${Astro.params.id}`}>
-    <article class="bg-gray-100 py-5 rounded hover:bg-gray-200  hover:cursor-pointer transition-shadow shadow-md mx-5 my-5 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <h1 class="text-4xl font-bold text-center">{title}</h1>
+      <h1 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white">
+        {title}<span class="text-blue-600">.</span>
+      </h1>
+    </header>
+
+    <div class="relative group rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl">
+      <img 
+        transition:name={`img-${id}`} 
+        src={image || "https://http.cat/400"} 
+        alt={title} 
+        class="w-full h-auto object-cover min-h-[300px] md:min-h-[500px]"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-12">
+      
+      <div class="lg:col-span-2 space-y-8 text-gray-300 leading-relaxed">
+        <div class="bg-gray-800/20 p-8 rounded-[2rem] border border-white/5 prose prose-invert max-w-none prose-headings:italic prose-headings:uppercase prose-headings:tracking-tighter prose-blue">
+          <Content />
+        </div>
         
-        <div class="flex justify-center my-5">
-            
-            <img transition:name={`img-${slug}`} src={image} alt={title} class="rounded-lg w-2xl md:w-3xl"/>
-        </div>
+        <p class="text-xl italic text-gray-400 border-l-4 border-blue-600 pl-6 py-2">
+          {description}
+        </p>
+      </div>
 
-        <div class="*:my-[1lh]">
-            <Content />
-        </div>
-
-        <p class="mx-5 text-justify">{description}</p>
-        <ul class="mx-5 my-5 list-disc">
-            <h4 class="font-bold py-2">Frameworks:</h4>
+      <aside class="space-y-8">
+        <div class="bg-gray-800/20 p-8 rounded-[2.5rem] border border-white/5 sticky top-8">
+          <h3 class="text-white font-black uppercase italic tracking-widest text-sm mb-6 border-b border-white/5 pb-4">Stack Tecnológico</h3>
+          
+          <div class="flex flex-wrap gap-2 mb-8">
             {frameworks && frameworks.map((framework) => (
-                <li>{framework}</li>
+              <span class="bg-blue-600/10 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-lg text-xs font-bold uppercase">
+                {framework}
+              </span>
             ))}
-        </ul>
-        <p class="mx-5 my-2"><strong>Tipo:</strong> {type}</p>
-        {url_production && (
-            <p class="mx-5 my-2"><strong>URL de Producción:</strong> <a href={url_production} class="text-blue-400">{url_production}</a></p>
-        )}
-        {urls && urls.length > 0 && (
-            <div class="mx-5 my-2">
-                <strong>Otras URLs:</strong>
-                <ul class="list-disc">
-                    {urls.map((url) => (
-                        <li><a href={url} class="text-blue-400">{url}</a></li>
-                    ))}
+          </div>
+
+          <div class="space-y-6">
+            {url_production && (
+              <div>
+                <span class="block text-[10px] text-gray-500 uppercase font-black tracking-widest mb-1">Live Demo</span>
+                <a href={url_production} target="_blank" class="text-blue-500 hover:text-blue-400 font-bold break-all transition-colors underline decoration-blue-500/20">
+                  {url_production}
+                </a>
+              </div>
+            )}
+
+            {urls && urls.length > 0 && (
+              <div class="space-y-3">
+                <span class="block text-[10px] text-gray-400 uppercase font-black tracking-widest">Documentación / Links</span>
+                <ul class="space-y-2">
+                  {urls.map((url) => (
+                    <li>
+                      <a href={url} target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3 h-3 text-blue-500"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+                        {new URL(url).hostname}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
+              </div>
+            )}
+
+            <div class="pt-6">
+              <a 
+                href="https://github.com/ThejavaZ" 
+                target="_blank"
+                class="w-full flex justify-center items-center gap-3 bg-white text-black font-black uppercase italic py-4 rounded-2xl hover:bg-blue-500 hover:text-white transition-all active:scale-95 shadow-xl shadow-white/5"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                Ver Repositorio
+              </a>
             </div>
-        )}
-        <div class="flex items-center justify-around py-2">
-            <a href="" class="bg-blue-800 py-4 px-2 rounded text-white hover:bg-blue-900">GitHub</a>
-            <a href="/projects" class="text-blue-400 hover:text-blue-500 hover:text-shadow-current transition">Atras</a>
+          </div>
         </div>
-    </article>
+      </aside>
+    </div>
+  </article>
 </Layout>

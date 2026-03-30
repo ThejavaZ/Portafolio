@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { allPosts } from "../../data/blog-data";
+
+export function getStaticPaths() {
+  return allPosts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<Layout title={post.title}>
+  <article class="max-w-3xl mx-auto px-6 py-20">
+    <header class="mb-10">
+      <span class="text-blue-500 font-bold uppercase tracking-tighter">{post.category}</span>
+      <h1 class="text-4xl md:text-6xl font-black my-4 leading-tight">{post.title}</h1>
+      <p class="text-gray-500 italic">Publicado el {post.date} por {post.author}</p>
+    </header>
+
+    <div class="prose prose-invert prose-blue max-w-none">
+      <p class="text-xl leading-relaxed text-gray-300 whitespace-pre-line">
+        {post.content}
+      </p>
+    </div>
+
+    <div class="mt-20 border-t border-white/10 pt-10 text-center">
+      <a href="/blog" class="text-blue-400 font-bold uppercase text-sm tracking-widest">← Volver a la bitácora</a>
+    </div>
+  </article>
+</Layout>

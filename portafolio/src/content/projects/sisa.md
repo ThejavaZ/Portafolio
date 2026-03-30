@@ -1,13 +1,13 @@
 ---
-title: "Sisa"
+title: "Ctrl Z - Gestión SISA"
 image: "/images/projects/sisa.png"
-description: "Aplicacion web para sisa"
-frameworks: ["Laravel 12", "bootstrap 4"]
-type: "Web"
-url_production: "http://sisa-automatation.net"
-urls?: [""]
+description: "Sistema empresarial para el control y mantenimiento de activos de hardware."
+frameworks: ["Laravel 12", "Bootstrap 5", "MySQL", "PHP"]
+type: "Empresarial"
+url_production: ""
+urls: ["https://github.com/ThejavaZ"]
 ---
 
-Aplicacion de estadias para la empresa de **sisa sistemas automatizados** conocido como **SISA&AUT** con el objetivo de la asignacion de computadoras al personal.
+Sistema desarrollado durante las estadías en **SISA Sistemas Automatizados (SISA&AUT)**. El objetivo principal fue digitalizar y centralizar el control de asignación de equipos de cómputo al personal.
 
-La aplicacion web fue elaborado con Laravel 12
+La aplicación permite llevar un historial detallado de mantenimientos, estados de hardware y responsabilidades de equipo, optimizando los tiempos de respuesta del departamento de sistemas en un **40%** al eliminar el uso de hojas de cálculo manuales.

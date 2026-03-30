@@ -1,0 +1,96 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+export const getStaticPaths = async () => {
+    const certificates = await getCollection("certificates");
+    return certificates.map((certificate) => ({
+        params: { id: certificate.slug },
+        props: { certificate }
+    }));
+}
+
+const { certificate } = Astro.props;
+const { data, slug } = certificate;
+const { title, image, firstColor, secondColor } = data;
+const { Content } = await render(certificate);
+
+// Fallback por si los colores no vienen correctos
+const glowColor = firstColor || 'blue';
+---
+
+<Layout title={`Certificado | ${title}`}>
+  <main class="min-h-screen bg-gray-950 text-white pb-20">
+    
+    <section class="relative overflow-hidden bg-gray-900 border-b border-white/5 py-16 px-6">
+      <div class={`absolute -top-24 -left-24 w-96 h-96 blur-[120px] opacity-20 rounded-full bg-${glowColor}-500`}></div>
+      
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 relative z-10">
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-linear-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+          
+          <Image
+            transition:name={title}
+            src={`/technologies/${title}.png`} 
+            alt={title}
+            class="relative w-32 h-32 md:w-40 md:h-40 object-contain bg-gray-800 p-4 rounded-2xl border border-white/10 shadow-2xl"
+          />
+        </div>
+
+        <div class="text-center md:text-left">
+          <span class="text-blue-500 font-mono text-sm tracking-widest uppercase">Certificación Oficial</span>
+          <h2 class="text-4xl md:text-6xl font-black mt-2 tracking-tight">
+            {slug.replace(/-/g, ' ').toUpperCase()}
+          </h2>
+          <p class="text-gray-400 mt-4 max-w-xl text-lg">
+            Validación de aptitudes técnicas y conocimientos avanzados en <span class="text-white font-semibold">{title}</span>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 -mt-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <div class="lg:col-span-7 group">
+          <div class="bg-gray-900 p-2 rounded-3xl border border-white/10 shadow-2xl transition-transform hover:-rotate-1">
+            <Image
+              src={image}
+              alt={`Imagen del certificado ${title}`}
+              quality={100}
+              class="rounded-2xl w-full h-auto shadow-inner"
+            />
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col">
+          <div class="bg-gray-900/50 backdrop-blur-xl border border-white/5 p-8 rounded-3xl flex-1">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+              <span class="w-2 h-8 bg-blue-500 rounded-full"></span>
+              Descripción del Logro
+            </h3>
+            
+            <div class="prose prose-invert prose-blue max-w-none text-gray-300 leading-relaxed italic">
+              <Content />
+            </div>
+
+            <div class="mt-10 pt-8 border-t border-white/5 flex items-center justify-between">
+              <a href="/" class="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Volver al inicio
+              </a>
+              
+              <button onclick="window.print()" class="text-sm bg-white/5 hover:bg-white/10 px-4 py-2 rounded-lg transition-colors">
+                Imprimir Ref.
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</Layout>

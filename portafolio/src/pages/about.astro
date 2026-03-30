@@ -3,270 +3,80 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 ---
 
-<Layout title="Acerca de">
-
-  <!-- <div class="bg-gray-800 py-2 m-2 rounded"> -->
-    <!-- <h2 class="font-bold text-center text-2xl">Historia mia en la carrera laboral</h2>
+<Layout title="Acerca de | JavierSG">
+  <main class="max-w-5xl mx-auto px-4 py-10 space-y-12 text-white">
     
-    <p class="text-justify mx-2 my-[1lh]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi harum odio accusamus rem velit, autem cupiditate dicta ea dolorem, iste eius hic quam itaque. Earum fuga molestias aliquam neque sunt?</p>
-  </div> -->
+    <section class="bg-gray-800/50 border border-white/5 p-8 rounded-3xl backdrop-blur-sm">
+      <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Mi Trayectoria</h2>
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <p class="text-gray-300 leading-relaxed text-justify">
+          Soy egresado de la <span class="text-white font-semibold">UTH</span>, apasionado por el desarrollo backend. Mi camino me ha llevado a especializarme en la arquitectura de servidores y bases de datos, siempre buscando la eficiencia y escalabilidad en cada proyecto que toco.
+        </p>
+        <div class="bg-gray-900 h-48 rounded-2xl border border-white/10 flex items-center justify-center text-gray-500 italic">
+          [Tu Imagen o Ilustración aquí]
+        </div>
+      </div>
+    </section>
 
-  <div class="bg-gray-800 rounded py-2 m-2">
-    <h2 class="text-center font-bold text-2xl">Main Stack</h2>
-    <ul class="flex justify-around">
-      <li class="flex flex-col items-center">
-        <Image 
-        src="/technologies/linux.webp"
-        alt="Linux"
-        width={50}
-        height={50}
-        class="w-25 rounded border border-black p-2 m-2 shadow-2xl shadow-black"
-        format="webp"
-        loading="lazy"
-        />
-        <h3>Linux</h3>
-      </li>
+    <section class="bg-gray-800 p-8 rounded-3xl border border-white/5">
+      <h2 class="text-center font-bold text-2xl mb-8 uppercase tracking-widest text-blue-500">Main Stack</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+        {[
+          { name: 'Linux', src: '/technologies/linux.webp', color: 'border-white/20' },
+          { name: 'Apache', src: '/technologies/apache.webp', color: 'border-red-500/50' },
+          { name: 'PostgreSQL', src: '/technologies/psql.webp', color: 'border-blue-500/50' },
+          { name: 'ASP.NET', src: '/technologies/asp.png', color: 'border-purple-500/50' },
+          { name: 'Vue3 JS', src: '/technologies/next.png', color: 'border-white/50' }
+        ].map((tech) => (
+          <div class="flex flex-col items-center group">
+            <div class={`p-4 bg-gray-900 rounded-2xl border-2 ${tech.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]`}>
+              <Image src={tech.src} alt={tech.name} class="w-12 h-12 object-contain" />
+            </div>
+            <h3 class="mt-3 text-sm font-medium text-gray-400 group-hover:text-white transition-colors">{tech.name}</h3>
+          </div>
+        ))}
+      </div>
+    </section>
 
-       <li class="flex flex-col items-center">
-        <Image 
-        src="/technologies/apache.webp"
-        alt="Linux"
-        width={50}
-        height={50}
-        class="w-25 rounded border border-violet-500 p-2 m-2 shadow-2xl shadow-red-500"
-        format="webp"
-        loading="lazy"
-        />
-        <h3>Apache</h3>
-      </li>
+    <section>
+      <h2 class="text-center font-bold text-2xl mb-8 text-white uppercase tracking-widest">Especialidades</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { name: 'Python', href: '/python', icon: 'python.png', shadow: 'hover:shadow-yellow-500/20' },
+          { name: 'Bases de Datos', href: '/sql', icon: 'sql.png', shadow: 'hover:shadow-blue-500/20' },
+          { name: 'Frontend', href: '/client', icon: 'client.png', shadow: 'hover:shadow-green-500/20' },
+          { name: 'Backend', href: '/server', icon: 'server.png', shadow: 'hover:shadow-orange-500/20' },
+          { name: 'DevOps', href: '/devops', icon: 'docker.png', shadow: 'hover:shadow-blue-400/20' },
+          { name: 'Escritorio', href: '/desktop', icon: 'desktop.png', shadow: 'hover:shadow-blue-400/20' },
+          { name: 'Movil', href: '/mobile', icon: 'mobile.png', shadow: 'hover:shadow-blue-400/20' },
+          { name: 'IoT', href: '/iot', icon: 'iot.png', shadow: 'hover:shadow-purple-500/20' },
+          { name: 'Git', href: '/git', icon: 'git.png', shadow: 'hover:shadow-red-500/20' },
+          { name: 'Herramientas', href: '/tools', icon: 'vscode.png', shadow: 'hover:shadow-blue-500/20' }
+        ].map((item) => (
+          <a href={`/technologies${item.href}`} class={`bg-gray-800/40 p-6 rounded-2xl border border-white/5 flex flex-col items-center transition-all hover:-translate-y-1 hover:bg-gray-800 ${item.shadow} shadow-lg`}>
+            <Image src={`/technologies/${item.icon}`} alt={item.name} class="w-12 mb-4" />
+            <h3 class="text-sm font-bold text-center">{item.name}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
 
-      <li class="flex flex-col items-center">
-        <Image 
-        src="/technologies/psql.webp"
-        alt="Linux"
-        width={50}
-        height={50}
-        class="w-25 rounded border border-blue-500 p-2 m-2 shadow-2xl shadow-blue-500"
-        format="webp"
-        loading="lazy"
-        />
-        <h3>PostgreSQL</h3>
-      </li>
+    <section class="bg-blue-600/10 border border-blue-500/20 p-8 rounded-3xl">
+      <h2 class="font-bold text-2xl mb-6 flex items-center gap-2">
+        <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+        Experiencia Laboral
+      </h2>
+      <ul class="space-y-4">
+        <li class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl border border-white/5">
+          <span class="font-bold">Desarrollador Backend Junior</span>
+          <span class="text-blue-400 text-sm">2023 - Actualidad</span>
+        </li>
+        <li class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl border border-white/5 opacity-70">
+          <span class="font-bold">Prácticas Profesionales - UTH</span>
+          <span class="text-gray-400 text-sm">2022</span>
+        </li>
+      </ul>
+    </section>
 
-      <li class="flex flex-col items-center">
-        <Image 
-        src="/technologies/laravel.webp"
-        alt="Laravel"
-        width={50}
-        height={50}
-        class="w-25 rounded border border-red-500 p-2 m-2 shadow-2xl shadow-red-500"
-        format="webp"
-        loading="lazy"
-        />
-        <h3>Laravel 12</h3>
-      </li>
-
-      <li class="flex flex-col items-center">
-        <Image 
-        src="/technologies/vue.webp"
-        alt="Laravel"
-        width={50}
-        height={50}
-        class="w-25 rounded border border-green-500 p-2 m-2 shadow-2xl shadow-green-500"
-        />
-        <h3>Vue3 JS</h3>
-      </li>
-    </ul>
-  </div>
-
-  <div class="bg-gray-800 rounded py-2 m-2">
-    <h2 class="text-center font-bold text-2xl">Tecnologias</h2>
-    
-    <ul class="grid grid-cols-2">
-      <li>
-        <a href="/technologies/python" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-yellow-500">
-          <Image 
-          transition:name="python-tech"
-          src="/technologies/python.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>Python</h3>
-        </a>
-      </li>
-
-      <li>
-        <a href="/technologies/desktop" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-yellow-500">
-          <Image 
-          src="/technologies/desktop.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>Desktop</h3>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/technologies/sql" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-yellow-500">
-          <Image 
-          src="/technologies/sql.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>Bases de datos</h3>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/technologies/client" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-blue-500">
-          <Image 
-          src="/technologies/client.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>Frontend</h3>
-        </a>
-      </li>
-
-      <li>
-        <a href="/technologies/server" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-gray-500 hover:shadow-orange-500">
-          <Image 
-          src="/technologies/server.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>Backend</h3>
-        </a>
-      </li>
-
-      <li>
-        <a href="/technologies/mobile" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-violet-500 hover:shadow-blue-500">
-          <Image 
-          src="/technologies/mobile.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>Mobile</h3>
-        </a>
-      </li>
-
-      <li>
-        <a href="/technologies/iot" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-blue-500">
-          <Image 
-          src="/technologies/iot.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>IoT</h3>
-        </a>
-      </li>
-
-      <li>
-        <a href="/technologies/git" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-orange-500 hover:shadow-orange-500">
-          <Image 
-          src="/technologies/git.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>Control de Versiones</h3>
-        </a>
-      </li>
-
-      <li>
-        <a href="/technologies/devops" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-blue-500">
-          <Image 
-          src="/technologies/docker.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>DevOps</h3>
-        </a>
-      </li>
-
-      <li>
-        <a href="/technologies/tools" class="bg-gray-900 rounded flex flex-col items-center py-2 px-1 m-4 transition hover:border shadow-2xl hover:border-blue-500 hover:shadow-blue-500">
-          <Image 
-          src="/technologies/vscode.png"
-          alt="Laravel"
-          width={50}
-          height={50}
-          class="w-25 rounded p-2 m-2 "
-          format="webp"
-          loading="lazy"
-          />
-          <h3>Herramientas</h3>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-
-  <div>Experiencia laboral
-
-    <ul class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <li>Python</li>
-      <li>Frontend</li>
-      <li>Backend</li>
-      <li>Mobile</li>
-    </ul>
-  </div>
-
-  <ul>
-    <li>Historia sobre tu trayectoria en la UTH y proyectos importantes.</li>
-    <li>Habilidades técnicas (lenguajes, frameworks, bases de datos, etc.).</li>
-    <li>Experiencia laboral o proyectos personales destacados.</li>
-    <li>Una imagen tuya o ilustrativa.</li>
-  </ul>
-
-  <h4 class="font-bold text-md">Habilidades:</h4>
-  <div>
-    <ul>
-      <h3>Python</h3>
-    </ul>
-    <ul>
-      <h3>Frontend</h3>
-    </ul>
-    <ul>
-      <h3>Backend</h3>
-    </ul>
-    <ul>
-      <h3>Python</h3>
-    </ul>
-  </div>
+  </main>
 </Layout>

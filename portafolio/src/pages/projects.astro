@@ -1,45 +1,88 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
 import { getCollection } from "astro:content";
 
 const projects = await getCollection("projects");
 ---
 
-<Layout title="Proyectos">
-  <h2 class="font-bold text-4xl text-center py-2">Proyectos</h2>
+<Layout title="Proyectos | JavierSG">
+  <section class="max-w-7xl mx-auto px-6 py-12">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div class="space-y-2">
+        <h2 class="text-6xl font-black italic uppercase tracking-tighter text-white">
+          Proyectos<span class="text-blue-500">_</span>
+        </h2>
+        <p class="text-gray-500 font-mono text-sm tracking-widest">
+          {projects.length} REPOSITORIOS ENCONTRADOS
+        </p>
+      </div>
 
-    <input
-      type="text"
-      placeholder="Buscar proyecto..."
-      class="border border-gray-300 rounded px-4 py-2 w-full mb-4"
-    />
-    
-    
-    <nav class="grid grid-cols-1 py-5 gap-5 md:grid-cols-2 lg:grid-cols-4">
-      {projects.map((project) =>{
-      const {slug, data} = project;
-      const {title, image, description, frameworks, type, url_production, urls} = data;
-      return(
-        <article
-          class="bg-gray-100 py-2 mx-2 rounded hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
-        >
-          <a href={`/projects/${slug}`}>
-          <div class="flex flex-col items-center dark:text-white p-2">
-            <h2 class="text-center font-bold text-2xl">{title}</h2>
-            <div class="flex items-center flex-col *:m-1">
-              <img
-                transition:name=`img-${slug}`
-                class="w-50 rounded-2xl"
-                src={image ? image : "https://http.cat/400"}
-                alt={title}
-              />
-              <p>{description}</p>
-            </div>
+      <div class="relative w-full md:w-96 group">
+        <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+        <input
+          type="text"
+          placeholder="Buscar por tecnología o nombre..."
+          class="w-full bg-gray-900/50 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all backdrop-blur-md"
+        />
+      </div>
+    </div>
+
+    <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+      {projects.map((project) => {
+        const { id, data } = project;
+        const { title, image, description, frameworks, type } = data;
+        
+        return (
+          <article class="group relative bg-gray-800/20 border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-blue-500/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(37,99,235,0.1)]">
+            <a href={`/projects/${id}`} class="block h-full">
+              
+              <div class="relative h-60 overflow-hidden">
+                <img
+                  transition:name={`img-${id}`}
+                  src={image ? image : "https://http.cat/400"}
+                  alt={title}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
+                
+                <div class="absolute top-4 right-4 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                  {type || "System"}
+                </div>
+              </div>
+
+              <div class="p-8 space-y-4">
+                <h3 class="text-3xl font-black italic uppercase tracking-tighter text-white group-hover:text-blue-400 transition-colors">
+                  {title}
+                </h3>
+                
+                <p class="text-gray-400 text-sm leading-relaxed line-clamp-2 italic">
+                  {description}
+                </p>
+
+                <div class="flex flex-wrap gap-2 pt-2">
+                  {frameworks && frameworks.map((tech) => (
+                    <span class="text-[10px] font-bold text-blue-300 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-lg uppercase tracking-wider">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div class="pt-4 flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.2em] group-hover:gap-4 transition-all">
+                  Ver Detalles
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="w-4 h-4 text-blue-500">
+                    <path d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
             </a>
-          </div>
-        </article>
-      )}
-      )}
+          </article>
+        );
+      })}
     </nav>
+  </section>
 </Layout>
