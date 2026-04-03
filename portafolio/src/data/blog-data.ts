@@ -11,24 +11,14 @@ export interface BlogPost {
 
 export const allPosts: BlogPost[] = [
   {
-    id: "mi-primer-post-backend",
-    title: "Por qué elegí Python para mi arquitectura de Microservicios",
-    excerpt:
-      "Una reflexión sobre la escalabilidad y la rapidez de desarrollo con FastAPI.",
-    date: "2024-05-20",
+    id: "Curso de Go",
+    title: "Aprendiendo Go: Mis primeros pasos con el lenguaje",
+    excerpt: "Mi recorrido para dominar Go y su enfoque en la simplicidad.",
+    date: "2026-04-02",
     author: "Javier",
     category: "Backend",
-    image: "/blog/python-backend.jpg",
-    content: "Aquí va todo el desarrollo de tu artículo...",
-  },
-  {
-    id: "adios-maui-hola-flutter",
-    title: "De .NET MAUI a Flutter: Mi experiencia",
-    excerpt: "Las razones técnicas por las que decidí cambiar mi stack móvil.",
-    date: "2024-05-18",
-    author: "Javier",
-    category: "Opinión",
     image: "/blog/flutter-vs-maui.jpg",
-    content: "Contenido detallado...",
+    content:
+      "Goolang es uno de los lenguajes de programacion que mas me ha llamado la atencion en los ultimos años, y por eso decidi aprenderlo. En este post quiero compartir mi experiencia aprendiendo Go, desde los conceptos basicos hasta mis primeros proyectos con el lenguaje. Go es conocido por su simplicidad, rendimiento y facilidad de uso, lo que lo hace ideal para el desarrollo de backend y microservicios. En este post, te contare como fue mi proceso de aprendizaje, los recursos que utilice y algunos consejos para quienes quieran empezar a aprender Go.",
   },
 ];

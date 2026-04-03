@@ -83,6 +83,12 @@ export const backendData = {
       description: "Framework minimalista para APIs rápidas.",
     },
     {
+      name: "Strapi",
+      img: "strapi.png",
+      type: "CMS Headless",
+      description: "Gestión de contenido flexible y API-first.",
+    },
+    {
       name: "Prisma",
       img: "prisma.png",
       type: "ORM",
