@@ -25,6 +25,19 @@ export const devopsData = {
       description: "Automatización de flujos de trabajo y despliegue.",
     },
     {
+      name: "Python",
+      img: "python.png",
+      type: "Lenguaje de Programación",
+      description: "Mi lenguaje principal para lógica compleja y scripts.",
+    },
+    {
+      name: "Go",
+      img: "go.webp",
+      type: "Lenguaje de Programación",
+      description:
+        "Desarrollo de herramientas y microservicios eficientes para DevOps.",
+    },
+    {
       name: "Jenkins",
       img: "jenkins.png",
       type: "CI/CD",
@@ -32,19 +45,19 @@ export const devopsData = {
     },
     {
       name: "Google Cloud",
-      img: "gcp.png",
+      img: "google-cloud.png",
       type: "Cloud Computing",
       description: "Servicios de infraestructura en la nube de Google.",
     },
     {
       name: "Redis",
-      img: "redis.png",
+      img: "redis.webp",
       type: "Cache & Message Broker",
       description: "Optimización de velocidad y comunicación entre servicios.",
     },
     {
       name: "Nginx",
-      img: "nginx.png",
+      img: "nginx.webp",
       type: "Web Server / Proxy",
       description: "Servidor web y balanceador de carga de alto rendimiento.",
     },

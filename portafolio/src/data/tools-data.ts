@@ -22,7 +22,7 @@ export const toolsData = {
     },
     {
       name: "IntelliJ IDEA",
-      img: "intellij.png",
+      img: "intellij.webp",
       type: "IDE Pro",
       description: "Entorno potente para desarrollo Java y lenguajes JVM.",
     },
@@ -56,6 +56,13 @@ export const toolsData = {
       img: "office.png",
       type: "Productividad",
       description: "Documentación técnica y gestión de requerimientos.",
+    },
+    {
+      name: "Power Platform",
+      img: "power-platform.png",
+      type: "Low-Code / No-Code",
+      description:
+        "Automatización de procesos y creación de aplicaciones empresariales sin código tradicional.",
     },
   ],
 };

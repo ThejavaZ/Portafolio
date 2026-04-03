@@ -7,7 +7,7 @@ import { Image } from "astro:assets";
   <main class="max-w-5xl mx-auto px-4 py-10 space-y-12 text-white">
     
     <section class="bg-gray-800/50 border border-white/5 p-8 rounded-3xl backdrop-blur-sm">
-      <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Mi Trayectoria</h2>
+      <h2 class="text-3xl font-bold mb-4 bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Mi Trayectoria</h2>
       <div class="grid md:grid-cols-2 gap-8 items-center">
         <p class="text-gray-300 leading-relaxed text-justify">
           Soy egresado de la <span class="text-white font-semibold">UTH</span>, apasionado por el desarrollo backend. Mi camino me ha llevado a especializarme en la arquitectura de servidores y bases de datos, siempre buscando la eficiencia y escalabilidad en cada proyecto que toco.
@@ -23,10 +23,10 @@ import { Image } from "astro:assets";
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
         {[
           { name: 'Linux', src: '/technologies/linux.webp', color: 'border-white/20' },
-          { name: 'Apache', src: '/technologies/apache.webp', color: 'border-red-500/50' },
+          { name: 'Nginx', src: '/technologies/nginx.webp', color: 'border-green-500/50' },
           { name: 'PostgreSQL', src: '/technologies/psql.webp', color: 'border-blue-500/50' },
           { name: 'ASP.NET', src: '/technologies/asp.png', color: 'border-purple-500/50' },
-          { name: 'Vue3 JS', src: '/technologies/next.png', color: 'border-white/50' }
+          { name: 'NextJS', src: '/technologies/next.png', color: 'border-white/50' }
         ].map((tech) => (
           <div class="flex flex-col items-center group">
             <div class={`p-4 bg-gray-900 rounded-2xl border-2 ${tech.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]`}>

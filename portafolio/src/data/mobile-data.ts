@@ -14,6 +14,13 @@ export const mobileData = {
         "El lenguaje moderno y preferido para el desarrollo robusto en Android.",
     },
     {
+      name: "Jetpack Compose",
+      img: "jetpack-compose.png",
+      type: "UI Toolkit",
+      description:
+        "Framework de UI declarativa para construir interfaces Android modernas y reactivas.",
+    },
+    {
       name: "Java",
       img: "java.png",
       type: "Nativo (Android)",
@@ -35,10 +42,11 @@ export const mobileData = {
         "Framework de Google para crear apps nativas con una sola base de código.",
     },
     {
-      name: "Retrofit / Dio",
-      img: "network.png",
-      type: "Networking",
-      description: "Consumo de APIs REST de forma eficiente y segura.",
+      name: "Power Apps",
+      img: "power-apps.webp",
+      type: "Low-Code / No-Code",
+      description:
+        "Plataforma de Microsoft para desarrollo rápido de aplicaciones empresariales sin necesidad de código tradicional.",
     },
     {
       name: "Firebase",
@@ -49,7 +57,7 @@ export const mobileData = {
     },
     {
       name: "Android Studio",
-      img: "android-studio.png",
+      img: "android-studio.webp",
       type: "IDE",
       description: "Entorno de desarrollo oficial para el ecosistema Android.",
     },

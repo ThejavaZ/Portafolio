@@ -61,10 +61,16 @@ export const frontendData = {
       description: "Componentes UI listos para usar.",
     },
     {
-      name: "Next.js",
+      name: "NextJS",
       img: "next.png",
       type: "Framework Fullstack",
       description: "SSR y optimización avanzada para React.",
+    },
+    {
+      name: "Svelte",
+      img: "svelte.png",
+      type: "Framework Frontend",
+      description: "Reactividad sin virtual DOM para rendimiento máximo.",
     },
   ],
 };

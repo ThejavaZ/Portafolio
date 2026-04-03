@@ -26,7 +26,7 @@ export const gitData = {
     },
     {
       name: "Bitbucket",
-      img: "bitbucket.png",
+      img: "bitbucket.webp",
       type: "Plataforma Enterprise",
       description: "Integración profunda con Jira y herramientas Atlassian.",
     },
@@ -43,8 +43,8 @@ export const gitData = {
       description: "Automatización de tareas directamente desde el repo.",
     },
     {
-      name: "GitKraken / Husky",
-      img: "gitkraken.png",
+      name: "GitKraken",
+      img: "gitkraken.webp",
       type: "Herramientas UI/Hooks",
       description: "Interfaces visuales y scripts de pre-commit para calidad.",
     },

@@ -38,15 +38,9 @@ export const sqlData = {
     },
     {
       name: "SQLite",
-      img: "sqlite.png",
+      img: "sqlite.webp",
       type: "SQL (Ligero)",
       description: "Ideal para aplicaciones móviles y testing rápido.",
-    },
-    {
-      name: "Redis",
-      img: "redis.png",
-      type: "NoSQL (Cache)",
-      description: "Almacenamiento en memoria para alta velocidad.",
     },
   ],
 };

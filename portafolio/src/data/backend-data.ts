@@ -13,6 +13,32 @@ export const backendData = {
       description: "Mi lenguaje principal para lógica compleja y scripts.",
     },
     {
+      name: "Django",
+      img: "django.png",
+      type: "Framework Python",
+      description: "Desarrollo backend robusto y seguro.",
+    },
+    {
+      name: "FastAPI",
+      img: "fastapi.png",
+      type: "Framework Python",
+      description: "Creación de APIs de alto rendimiento.",
+    },
+    {
+      name: "C#",
+      img: "csharp.png",
+      type: "Lenguaje de Programación",
+      description:
+        "Desarrollo de aplicaciones empresariales de alto rendimiento.",
+    },
+    {
+      name: ".NET Core",
+      img: "net.png",
+      type: "Framework Enterprise",
+      description:
+        "Desarrollo de aplicaciones empresariales de alto rendimiento.",
+    },
+    {
       name: "ASP.NET Core",
       img: "asp.png",
       type: "Framework Enterprise",
@@ -20,10 +46,11 @@ export const backendData = {
         "Desarrollo de aplicaciones empresariales de alto rendimiento.",
     },
     {
-      name: "Node.js",
-      img: "node.png",
-      type: "Entorno de Ejecución",
-      description: "Escalabilidad con JavaScript en el lado del servidor.",
+      name: "Go",
+      img: "go.webp",
+      type: "Lenguaje de Programación",
+      description:
+        "Desarrollo de herramientas y microservicios eficientes para DevOps.",
     },
     {
       name: "PHP",
@@ -38,10 +65,10 @@ export const backendData = {
       description: "Elegancia y herramientas completas para el desarrollo web.",
     },
     {
-      name: "Docker",
-      img: "docker.png",
-      type: "Contenerización",
-      description: "Despliegue consistente en cualquier entorno.",
+      name: "Node.js",
+      img: "node.png",
+      type: "Entorno de Ejecución",
+      description: "Escalabilidad con JavaScript en el lado del servidor.",
     },
     {
       name: "Express.js",
@@ -50,10 +77,34 @@ export const backendData = {
       description: "Framework minimalista para APIs rápidas.",
     },
     {
+      name: "NestJS",
+      img: "nestjs.png",
+      type: "Framework Node",
+      description: "Framework minimalista para APIs rápidas.",
+    },
+    {
+      name: "Prisma",
+      img: "prisma.png",
+      type: "ORM",
+      description: "ORM moderno para bases de datos SQL y NoSQL.",
+    },
+    {
       name: "JSON Web Tokens",
-      img: "jwt.png",
+      img: "jwt.webp",
       type: "Seguridad / Auth",
       description: "Autenticación segura basada en tokens.",
+    },
+    {
+      name: "Java",
+      img: "java.png",
+      type: "Lenguaje de Programación",
+      description: "Lenguaje de programación orientado a objetos.",
+    },
+    {
+      name: "Spring Boot",
+      img: "spring.png",
+      type: "Framework Java",
+      description: "Framework para aplicaciones Java empresariales.",
     },
   ],
 };

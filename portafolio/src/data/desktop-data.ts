@@ -20,13 +20,13 @@ export const desktopData = {
     },
     {
       name: "WPF (XAML)",
-      img: "wpf.png",
+      img: "microsoft.png",
       type: "UI Framework",
       description: "Interfaces gráficas modernas mediante el uso de XAML.",
     },
     {
       name: "Windows Forms",
-      img: "winforms.png",
+      img: "microsoft.png",
       type: "UI Library",
       description:
         "Desarrollo rápido de interfaces clásicas basadas en eventos.",
@@ -39,15 +39,48 @@ export const desktopData = {
         "Creación de interfaces gráficas sencillas y ligeras con Python.",
     },
     {
-      name: "Electron",
-      img: "electron.png",
-      type: "Cross-platform",
+      name: "Custom Tkinter",
+      img: "customtkinter.png",
+      type: "UI Library (Python)",
       description:
-        "Aplicaciones de escritorio utilizando tecnologías web (JS/HTML/CSS).",
+        "Creación de interfaces gráficas sencillas y ligeras con Python.",
+    },
+    {
+      name: "Tkinter",
+      img: "python.png",
+      type: "UI Library (Python)",
+      description:
+        "Creación de interfaces gráficas sencillas y ligeras con Python.",
+    },
+    {
+      name: "Java",
+      img: "java.png",
+      type: "Lenguaje de Programación",
+      description: "Lenguaje de programación orientado a objetos.",
+    },
+    {
+      name: "JavaFX",
+      img: "javafx.png",
+      type: "UI Framework",
+      description: "Framework para crear interfaces gráficas modernas.",
+    },
+    {
+      name: "Dart",
+      img: "dart.png",
+      type: "Lenguaje de Programación",
+      description:
+        "Lenguaje de programación moderno para desarrollo de aplicaciones.",
+    },
+    {
+      name: "Flutter",
+      img: "flutter.png",
+      type: "Framework UI",
+      description:
+        "Framework de UI para crear aplicaciones nativas multiplataforma.",
     },
     {
       name: "SQLite",
-      img: "sqlite.png",
+      img: "sqlite.webp",
       type: "Almacenamiento Local",
       description:
         "Bases de datos embebidas para persistencia de datos offline.",
