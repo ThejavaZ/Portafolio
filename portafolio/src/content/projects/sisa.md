@@ -4,8 +4,8 @@ image: "/images/projects/sisa.png"
 description: "Sistema empresarial para el control y mantenimiento de activos de hardware."
 frameworks: ["Laravel 12", "Bootstrap 5", "MySQL", "PHP"]
 type: "Empresarial"
-url_production: ""
-urls: ["https://github.com/ThejavaZ"]
+url_production: "https://sisa-automatation.net"
+urls: ["https://github.com/ThejavaZ/Sisa.git"]
 ---
 
 Sistema desarrollado durante las estadías en **SISA Sistemas Automatizados (SISA&AUT)**. El objetivo principal fue digitalizar y centralizar el control de asignación de equipos de cómputo al personal.

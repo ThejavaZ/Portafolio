@@ -23,10 +23,10 @@ import { Image } from "astro:assets";
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
         {[
           { name: 'Linux', src: '/technologies/linux.webp', color: 'border-white/20' },
-          { name: 'Nginx', src: '/technologies/nginx.webp', color: 'border-green-500/50' },
+          { name: 'Firebase', src: '/technologies/firebase.png', color: 'border-red-500/50' },
           { name: 'PostgreSQL', src: '/technologies/psql.webp', color: 'border-blue-500/50' },
-          { name: 'ASP.NET', src: '/technologies/asp.png', color: 'border-purple-500/50' },
-          { name: 'NextJS', src: '/technologies/next.png', color: 'border-white/50' }
+          { name: 'ASP.NET', src: '/technologies/laravel.png', color: 'border-red-500/50' },
+          { name: 'Flutter', src: '/technologies/flutter.png', color: 'border-blue-500/50' }
         ].map((tech) => (
           <div class="flex flex-col items-center group">
             <div class={`p-4 bg-gray-900 rounded-2xl border-2 ${tech.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]`}>
@@ -49,7 +49,7 @@ import { Image } from "astro:assets";
           { name: 'DevOps', href: '/devops', icon: 'docker.png', shadow: 'hover:shadow-blue-400/20' },
           { name: 'Escritorio', href: '/desktop', icon: 'desktop.png', shadow: 'hover:shadow-blue-400/20' },
           { name: 'Movil', href: '/mobile', icon: 'mobile.png', shadow: 'hover:shadow-blue-400/20' },
-          { name: 'IoT', href: '/iot', icon: 'iot.png', shadow: 'hover:shadow-purple-500/20' },
+          // { name: 'IoT', href: '/iot', icon: 'iot.png', shadow: 'hover:shadow-purple-500/20' },
           { name: 'Git', href: '/git', icon: 'git.png', shadow: 'hover:shadow-red-500/20' },
           { name: 'Herramientas', href: '/tools', icon: 'vscode.png', shadow: 'hover:shadow-blue-500/20' }
         ].map((item) => (

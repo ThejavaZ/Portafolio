@@ -20,13 +20,13 @@ export const mobileData = {
       description:
         "Framework de UI declarativa para construir interfaces Android modernas y reactivas.",
     },
-    {
-      name: "Java",
-      img: "java.png",
-      type: "Nativo (Android)",
-      description:
-        "Desarrollo de aplicaciones tradicionales y mantenimiento de sistemas legacy.",
-    },
+    // {
+    //   name: "Java",
+    //   img: "java.png",
+    //   type: "Nativo (Android)",
+    //   description:
+    //     "Desarrollo de aplicaciones tradicionales y mantenimiento de sistemas legacy.",
+    // },
     {
       name: "Dart",
       img: "dart.png",
@@ -41,13 +41,13 @@ export const mobileData = {
       description:
         "Framework de Google para crear apps nativas con una sola base de código.",
     },
-    {
-      name: "Power Apps",
-      img: "power-apps.webp",
-      type: "Low-Code / No-Code",
-      description:
-        "Plataforma de Microsoft para desarrollo rápido de aplicaciones empresariales sin necesidad de código tradicional.",
-    },
+    // {
+    //   name: "Power Apps",
+    //   img: "power-apps.webp",
+    //   type: "Low-Code / No-Code",
+    //   description:
+    //     "Plataforma de Microsoft para desarrollo rápido de aplicaciones empresariales sin necesidad de código tradicional.",
+    // },
     {
       name: "Firebase",
       img: "firebase.png",

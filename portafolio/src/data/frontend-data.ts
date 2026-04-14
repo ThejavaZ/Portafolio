@@ -32,7 +32,7 @@ export const frontendData = {
     },
     {
       name: "Tailwind CSS",
-      img: "tailwindcss.webp",
+      img: "tailwind.png",
       type: "Framework de Estilos",
       description: "Desarrollo rápido con clases utilitarias.",
     },
@@ -66,11 +66,12 @@ export const frontendData = {
       type: "Framework Fullstack",
       description: "SSR y optimización avanzada para React.",
     },
-    {
-      name: "Svelte",
-      img: "svelte.png",
-      type: "Framework Frontend",
-      description: "Reactividad sin virtual DOM para rendimiento máximo.",
-    },
+
+    // {
+    //   name: "Svelte",
+    //   img: "svelte.png",
+    //   type: "Framework Frontend",
+    //   description: "Reactividad sin virtual DOM para rendimiento máximo.",
+    // },
   ],
 };

@@ -100,17 +100,17 @@ export const backendData = {
       type: "Seguridad / Auth",
       description: "Autenticación segura basada en tokens.",
     },
-    {
-      name: "Java",
-      img: "java.png",
-      type: "Lenguaje de Programación",
-      description: "Lenguaje de programación orientado a objetos.",
-    },
-    {
-      name: "Spring Boot",
-      img: "spring.png",
-      type: "Framework Java",
-      description: "Framework para aplicaciones Java empresariales.",
-    },
+    // {
+    //   name: "Java",
+    //   img: "java.png",
+    //   type: "Lenguaje de Programación",
+    //   description: "Lenguaje de programación orientado a objetos.",
+    // },
+    // {
+    //   name: "Spring Boot",
+    //   img: "spring.png",
+    //   type: "Framework Java",
+    //   description: "Framework para aplicaciones Java empresariales.",
+    // },
   ],
 };

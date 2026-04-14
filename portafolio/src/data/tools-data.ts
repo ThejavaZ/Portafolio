@@ -20,12 +20,12 @@ export const toolsData = {
       description:
         "Herramienta universal para administrar múltiples tipos de bases de datos.",
     },
-    {
-      name: "IntelliJ IDEA",
-      img: "intellij.webp",
-      type: "IDE Pro",
-      description: "Entorno potente para desarrollo Java y lenguajes JVM.",
-    },
+    // {
+    //   name: "IntelliJ IDEA",
+    //   img: "intellij.webp",
+    //   type: "IDE Pro",
+    //   description: "Entorno potente para desarrollo Java y lenguajes JVM.",
+    // },
     {
       name: "Postman",
       img: "postman.png",
@@ -33,36 +33,36 @@ export const toolsData = {
       description:
         "Pruebas de endpoints, documentación y automatización de requests.",
     },
-    {
-      name: "VirtualBox",
-      img: "virtualbox.png",
-      type: "Virtualización",
-      description: "Creación de entornos aislados y pruebas en diferentes SO.",
-    },
-    {
-      name: "Arduino IDE",
-      img: "arduino.png",
-      type: "Entorno IoT",
-      description: "Carga de firmware y prototipado rápido de hardware.",
-    },
+    // {
+    //   name: "VirtualBox",
+    //   img: "virtualbox.png",
+    //   type: "Virtualización",
+    //   description: "Creación de entornos aislados y pruebas en diferentes SO.",
+    // },
+    // {
+    //   name: "Arduino IDE",
+    //   img: "arduino.png",
+    //   type: "Entorno IoT",
+    //   description: "Carga de firmware y prototipado rápido de hardware.",
+    // },
     {
       name: "Linux Terminal",
       img: "bash.png",
       type: "Shell / CLI",
       description: "Gestión de servidores y automatización mediante scripts.",
     },
-    {
-      name: "Office 365",
-      img: "office.png",
-      type: "Productividad",
-      description: "Documentación técnica y gestión de requerimientos.",
-    },
-    {
-      name: "Power Platform",
-      img: "power-platform.png",
-      type: "Low-Code / No-Code",
-      description:
-        "Automatización de procesos y creación de aplicaciones empresariales sin código tradicional.",
-    },
+    // {
+    //   name: "Office 365",
+    //   img: "office.png",
+    //   type: "Productividad",
+    //   description: "Documentación técnica y gestión de requerimientos.",
+    // },
+    // {
+    //   name: "Power Platform",
+    //   img: "power-platform.png",
+    //   type: "Low-Code / No-Code",
+    //   description:
+    //     "Automatización de procesos y creación de aplicaciones empresariales sin código tradicional.",
+    // },
   ],
 };

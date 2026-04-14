@@ -37,6 +37,12 @@ export const sqlData = {
       description: "Escalabilidad horizontal para datos no estructurados.",
     },
     {
+      "name": "Redis",
+      "img": "redis.webp",
+      "type": "NoSQL (Clave-Valor)",
+      "description": "Almacenamiento en memoria de alta velocidad para caché y gestión de sesiones.",
+    },
+    {
       name: "SQLite",
       img: "sqlite.webp",
       type: "SQL (Ligero)",

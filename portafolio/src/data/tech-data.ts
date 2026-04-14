@@ -32,7 +32,7 @@ export const allTechs: Technology[] = [
   desktopData,
   devopsData,
   mobileData,
-  iotData,
+  // iotData,
   gitData,
   toolsData,
 ];

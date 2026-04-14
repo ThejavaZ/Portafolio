@@ -61,6 +61,18 @@ export const pythonData = {
       description: "Detección de objetos de alta velocidad.",
     },
     {
+      "name": "PyTorch",
+      "img": "pytorch.png",
+      "type": "IA (Deep Learning)",
+      "description": "Framework para redes neuronales y entrenamiento de modelos de lenguaje (LLMs).",
+    },
+    {
+      "name": "MediaPipe",
+      "img": "mediapipe.png",
+      "type": "IA (Visión)",
+      "description": "Detección de poses, rostros y seguimiento de manos en tiempo real.",
+    },
+    {
       name: "Roboflow",
       img: "roboflow.png",
       type: "IA (Dataset)",
