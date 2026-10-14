@@ -7,6 +7,9 @@ import { projectStatus } from "../data/projectStatus";
 const projects = (await getCollection("projects")).sort(
   (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
 );
+const cubits = (await getCollection("cubits")).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
 ---
 
 <Layout title="Proyectos | JavierSG" description="Proyectos desarrollados por JavierSG: ERP, apps móviles, asistentes de IA y sistemas empresariales.">
@@ -37,6 +40,73 @@ const projects = (await getCollection("projects")).sort(
         />
       </div>
     </div>
+
+    {/* --- EXPERIENCIA PROFESIONAL --- */}
+    <section class="mb-16">
+      <h2 class="text-3xl md:text-4xl font-black italic uppercase tracking-tighter text-white">
+        Experiencia profesional<span class="text-indigo-500">.</span>
+      </h2>
+      <p class="text-gray-500 text-sm mt-2 mb-8 max-w-3xl leading-relaxed">
+        Proyectos desarrollados en el marco de mi trabajo en
+        <span class="text-white font-semibold">Grupo Cubits</span>. Descripción profesional
+        general: sin código, capturas ni información interna.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {cubits.map((project) => {
+          const { name, subtitle, description, participation, technologies, learnings } = project.data;
+          return (
+            <article class="group relative bg-gray-800/20 border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-indigo-500/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(99,102,241,0.08)]">
+              <div class="relative h-32 flex items-center justify-center bg-gradient-to-br from-indigo-600/25 via-gray-900/40 to-gray-900/5">
+                <span class="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-indigo-400/70 group-hover:text-indigo-300 transition-colors px-6 text-center">
+                  {name}
+                </span>
+                <span class="absolute top-4 left-4 bg-indigo-500/90 text-indigo-950 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                  Profesional
+                </span>
+              </div>
+
+              <div class="p-8 space-y-4">
+                <div>
+                  <p class="text-[10px] font-mono uppercase tracking-[0.25em] text-indigo-400">{subtitle}</p>
+                  <h3 class="text-3xl font-black italic uppercase tracking-tighter text-white mt-1 group-hover:text-indigo-300 transition-colors">
+                    {name}
+                  </h3>
+                </div>
+
+                <p class="text-gray-400 text-sm leading-relaxed">{description}</p>
+
+                <div>
+                  <span class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Mi participación</span>
+                  <p class="text-gray-300 text-sm leading-relaxed">{participation}</p>
+                </div>
+
+                {technologies.length > 0 && (
+                  <div class="flex flex-wrap gap-2 pt-1">
+                    {technologies.map((tech) => (
+                      <span class="text-[10px] font-bold text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-lg uppercase tracking-wider">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {learnings && (
+                  <div class="border-l-4 border-indigo-600 pl-4 py-1">
+                    <span class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Qué me dejó</span>
+                    <p class="text-gray-400 text-sm italic leading-relaxed">{learnings}</p>
+                  </div>
+                )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <h2 class="text-3xl md:text-4xl font-black italic uppercase tracking-tighter text-white mb-8">
+      Proyectos personales<span class="text-blue-500">.</span>
+    </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
       {projects.map((project) => {

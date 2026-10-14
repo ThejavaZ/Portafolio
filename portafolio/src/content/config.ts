@@ -68,4 +68,22 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { projects, certificates, works, blog };
+// Proyectos desarrollados en el entorno profesional (Grupo Cubits).
+// Sin código, capturas ni información interna: solo descripción profesional.
+const cubits = defineCollection({
+  loader: glob({
+    pattern: "**/[^_]*.{md,mdx}",
+    base: "./src/content/cubits",
+  }),
+  schema: z.object({
+    name: z.string(),
+    subtitle: z.string(),
+    description: z.string(),
+    participation: z.string(),
+    technologies: z.array(z.string()),
+    learnings: z.string().optional(),
+    order: z.number().optional(),
+  }),
+});
+
+export const collections = { projects, certificates, works, blog, cubits };
