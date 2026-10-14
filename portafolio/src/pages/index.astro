@@ -14,7 +14,7 @@ const logoWelcome = "/logo.webp"
   title="Inicio | JavierSG"
   description="Portafolio de JavierSG: programador backend especializado en Python y ASP.NET. Proyectos, experiencia y certificados."
 >
-  <div class="flex flex-col gap-24 py-16 px-6 max-w-6xl mx-auto overflow-x-hidden">
+  <div class="flex flex-col gap-24 py-16 px-6 max-w-6xl mx-auto overflow-x-clip">
     
     <section class="min-h-[70vh] flex flex-col items-center justify-center">
       <div class="text-center mb-16">
@@ -31,9 +31,11 @@ const logoWelcome = "/logo.webp"
           <Image 
             src={logoWelcome} 
             alt="JavierSG Logo"
-            width={600}
-            height={600}
-            class="w-full h-auto rounded-[2rem] shadow-2xl transition-all duration-500 group-hover:scale-[1.03] group-hover:rotate-1 border border-blue-500/10"
+            width={256}
+            height={156}
+            loading="eager"
+            fetchpriority="high"
+            class="w-full max-w-sm h-auto mx-auto rounded-[2rem] shadow-2xl transition-all duration-500 group-hover:scale-[1.03] group-hover:rotate-1 border border-blue-500/10"
           />
         </div>
 
@@ -116,7 +118,10 @@ const logoWelcome = "/logo.webp"
               <img 
                 src={`/technologies/${tech}.png`} 
                 alt={tech}
-                class="w-20 h-20 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 drop-shadow-2xl"
+                width="80"
+                height="80"
+                loading="lazy"
+                class="w-20 h-20 object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 drop-shadow-2xl"
               />
             </a>
             <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-[0_0_10px_#3b82f6]"></div>

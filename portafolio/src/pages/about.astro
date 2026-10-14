@@ -25,7 +25,7 @@ const works = (await getCollection("works")).sort(
           src={photo}
           alt="Foto de Javier Armando Sarmiento Gil"
           loading="lazy"
-          class="bg-gray-900 h-48 w-full rounded-2xl object-cover object-top border border-white/10 shadow-xl"
+          class="bg-gray-900 w-full max-w-xs aspect-square mx-auto object-cover object-[50%_25%] rounded-2xl border border-white/10 shadow-xl"
         />
       </div>
     </section>
@@ -77,7 +77,7 @@ const works = (await getCollection("works")).sort(
           { name: 'Herramientas', href: '/tools', icon: 'vscode.png', shadow: 'hover:shadow-blue-500/20' }
         ].map((item) => (
           <a href={`/technologies${item.href}`} class={`bg-gray-800/40 p-6 rounded-2xl border border-white/5 flex flex-col items-center transition-all hover:-translate-y-1 hover:bg-gray-800 ${item.shadow} shadow-lg`}>
-            <Image src={`/technologies/${item.icon}`} alt={item.name} width={48} height={48} class="w-12 mb-4" />
+            <Image src={`/technologies/${item.icon}`} alt={item.name} width={48} height={48} class="w-12 h-12 object-contain mb-4" />
             <h3 class="text-sm font-bold text-center">{item.name}</h3>
           </a>
         ))}

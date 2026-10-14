@@ -27,3 +27,6 @@ pnpm-debug.log*
 .vscode/
 # Local Netlify folder
 .netlify
+
+# backup local de compresión de iconos (no desplegar)
+public/technologies.bak/

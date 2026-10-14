@@ -21,7 +21,8 @@ const { tech } = Astro.props;
       alt={tech.name} 
       width={120} 
       height={120} 
-      class="drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+      fit="contain"
+      class="w-[120px] h-[120px] object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
     />
     <h1 class="text-5xl md:text-6xl font-black text-white tracking-tighter italic uppercase">{tech.name}</h1>
   </header>

@@ -114,6 +114,7 @@ const cubits = (await getCollection("cubits")).sort(
       {projects.map((project) => {
         const { id, data } = project;
         const { title, image, description, frameworks, type, status } = data;
+        const isPortrait = image.width < image.height;
         const statusInfo = status ? projectStatus[status] : undefined;
         
         return (
@@ -123,12 +124,15 @@ const cubits = (await getCollection("cubits")).sort(
           >
             <a href={`/projects/${id}`} class="block h-full">
               
-              <div class="relative h-60 overflow-hidden">
+              <div class="relative aspect-video overflow-hidden">
                 <Image
                   transition:name={`img-${id}`}
                   src={image}
                   alt={title ?? "Imagen del proyecto"}
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  class:list={[
+                    "w-full h-full object-cover group-hover:scale-105 transition-transform duration-700",
+                    isPortrait && "object-top",
+                  ]}
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
                 

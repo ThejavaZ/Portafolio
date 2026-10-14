@@ -45,6 +45,9 @@ const glowTo = gradientColors[secondColor]?.to ?? gradientColors.blue.to;
             transition:name={`img-${id}`} 
             src={`/technologies/${title.toLowerCase()}.png`} 
             alt={title}
+            width={160}
+            height={160}
+            loading="lazy"
             class="relative w-32 h-32 md:w-40 md:h-40 object-contain bg-gray-800 p-4 rounded-2xl border border-white/10 shadow-2xl"
           />
         </div>
@@ -82,7 +85,7 @@ const glowTo = gradientColors[secondColor]?.to ?? gradientColors.blue.to;
               Detalles del Logro
             </h3>
             
-            <div class="prose prose-invert prose-blue max-w-none text-gray-400 leading-relaxed italic mb-8">
+            <div class="prose prose-invert prose-blue max-w-none text-gray-400 leading-relaxed italic mb-8 prose-img:rounded-2xl prose-img:max-w-full prose-img:h-auto">
               <Content />
             </div>
 
