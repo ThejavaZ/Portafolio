@@ -1,6 +1,6 @@
 # Portafolio — JavierSG
 
-Sitio personal construido con **Astro 5** + **React 19** + **Tailwind CSS 4**, desplegado en **Netlify**.
+Sitio personal construido con **Astro 5** + **Tailwind CSS 4**, desplegado en **Netlify**.
 En vivo: [https://javiersg.netlify.app](https://javiersg.netlify.app)
 
 ## 🚀 Comandos
@@ -16,37 +16,42 @@ En vivo: [https://javiersg.netlify.app](https://javiersg.netlify.app)
 ## 🧱 Stack
 
 - [Astro 5](https://astro.build) con content collections (loaders glob)
-- [React 19](https://react.dev) — solo el Header como isla hidratada
 - [Tailwind CSS 4](https://tailwindcss.com) (CSS-first, sin `tailwind.config.js`)
+- Imágenes con `astro:assets` → servidas por [Netlify Image CDN](https://docs.netlify.com/build/image-cdn/overview/) (avif/webp a demanda)
 - Adapter `@astrojs/netlify` + `@astrojs/sitemap`
 - Deploy en Netlify (incluye formulario de contacto con `data-netlify`)
+- CI en GitHub Actions (`.github/workflows/ci.yml`): `astro check` + `build` en cada push/PR
 
 ## 📁 Estructura
 
 ```text
-src/
-├── components/
-│   ├── layout/        # Header.tsx (isla React) y Footer.astro
-│   └── sections/      # Secciones reutilizables
-├── content/           # ⭐ Contenido del sitio (Markdown)
-│   ├── blog/          # Artículos de la bitácora
-│   ├── certificates/  # Certificados (title, image, firstColor, secondColor)
-│   ├── projects/      # Proyectos (title, image, description, frameworks, urls...)
-│   └── works/         # Experiencia laboral (role, company, period, startDate, logo)
-├── data/              # Datos de tecnologías por categoría (python, backend, ...)
-├── layouts/           # Layout.astro (head con SEO: OG, Twitter, canonical)
-├── pages/             # Rutas: /, /about, /projects, /blog, /contact, /certificates/[id]
-└── styles/            # global.css (@import tailwindcss)
-public/                # Assets estáticos (imágenes, cv.pdf, robots.txt)
+portafolio/
+├── src/
+│   ├── assets/        # Imágenes optimizadas (proyectos, certificados, foto)
+│   ├── components/
+│   │   ├── layout/    # Header.astro (menú vanilla JS) y Footer.astro
+│   │   └── sections/  # Secciones reutilizables
+│   ├── content/       # ⭐ Contenido del sitio (Markdown)
+│   │   ├── blog/      # Artículos de la bitácora
+│   │   ├── certificates/  # Certificados (title, image, firstColor, secondColor)
+│   │   ├── projects/  # Proyectos (title, image, description, frameworks, urls...)
+│   │   └── works/     # Experiencia laboral (role, company, period, startDate, logo)
+│   ├── data/          # Datos de tecnologías por categoría (python, backend, ...)
+│   ├── layouts/       # Layout.astro (head con SEO: OG, Twitter, canonical)
+│   ├── pages/         # Rutas: /, /about, /projects, /blog, /contact, /certificates/[id]
+│   └── styles/        # global.css (@import tailwindcss)
+├── public/            # Assets estáticos (tecnologías, cv.pdf, robots.txt)
+└── netlify.toml       # Deploy (pnpm build → dist, Node 20)
 ```
 
 ## ✍️ Agregar contenido
 
 Todo el contenido se edita en `src/content/*.md` — no toques las páginas:
 
-- **Proyecto nuevo:** crea `src/content/projects/mi-proyecto.md` con frontmatter
+- **Proyecto nuevo:** crea `portafolio/src/content/projects/mi-proyecto.md` con frontmatter
   (`title`, `image`, `description`, `frameworks`, `type`, `url_production`, `url_repo`, `urls`).
-  La imagen va en `public/images/projects/`.
+  La imagen va en `portafolio/src/assets/projects/` y se referencia con
+  `image: "../../assets/projects/mi-foto.png"` (se optimiza a avif/webp automáticamente).
 - **Experiencia:** edita `src/content/works/` (se ordena automáticamente por `startDate`,
   el más reciente aparece primero en la landing y en *Sobre mí*).
 - **Certificado:** crea `src/content/certificates/` con `firstColor`/`secondColor`
@@ -65,6 +70,5 @@ pasar `description` al `Layout` para Open Graph y meta description:
 
 ## 🌐 Deploy
 
-Configurado en `netlify.toml` (`pnpm build` → `dist`). El sitemap se genera en build
+Configurado en `netlify.toml` (`pnpm build` → `dist`, Node 20). El sitemap se genera en build
 como `sitemap-index.xml` y `public/robots.txt` apunta a él.
-# Portafolio

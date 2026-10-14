@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import photo from "../assets/javier-sarmiento.jpg";
 
 const works = (await getCollection("works")).sort(
   (a, b) => b.data.startDate.localeCompare(a.data.startDate)
@@ -20,11 +21,9 @@ const works = (await getCollection("works")).sort(
         <p class="text-gray-300 leading-relaxed text-justify">
           Soy egresado de la <span class="text-white font-semibold">UTH</span>, apasionado por el desarrollo backend. Mi camino me ha llevado a especializarme en la arquitectura de servidores y bases de datos, siempre buscando la eficiencia y escalabilidad en cada proyecto que toco.
         </p>
-        <img
-          src="/images/javier-sarmiento.jpg"
+        <Image
+          src={photo}
           alt="Foto de Javier Armando Sarmiento Gil"
-          width="600"
-          height="750"
           loading="lazy"
           class="bg-gray-900 h-48 w-full rounded-2xl object-cover object-top border border-white/10 shadow-xl"
         />
@@ -35,11 +34,11 @@ const works = (await getCollection("works")).sort(
       <h2 class="text-center font-bold text-2xl mb-8 uppercase tracking-widest text-blue-500">Main Stack</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
         {[
-          { name: 'Linux', src: '/technologies/linux.webp', color: 'border-white/20' },
-          { name: 'NextJs', src: '/technologies/next.png', color: 'border-gray-500/50' },
-          { name: 'PostgreSQL', src: '/technologies/psql.webp', color: 'border-blue-500/50' },
           { name: '.NET', src: '/technologies/net.png', color: 'border-violet-500/50' },
-          { name: 'Flutter', src: '/technologies/flutter.png', color: 'border-blue-500/50' }
+          { name: 'PostgreSQL',  src: '/technologies/psql.webp', color: 'border-blue-500/50' },
+          { name: 'SQL Server', src: '/technologies/sql-server.png', color: 'border-red-500/20' },
+          { name: 'Python', src: '/technologies/python.png', color: 'border-blue-500/50' },
+          { name: 'Docker', src: '/technologies/docker.png', color: 'border-blue-500/50' }
         ].map((tech) => (
           <div class="flex flex-col items-center group">
             <div class={`p-4 bg-gray-900 rounded-2xl border-2 ${tech.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]`}>
@@ -62,7 +61,7 @@ const works = (await getCollection("works")).sort(
           { name: 'DevOps', href: '/devops', icon: 'docker.png', shadow: 'hover:shadow-blue-400/20' },
           { name: 'Escritorio', href: '/desktop', icon: 'desktop.png', shadow: 'hover:shadow-blue-400/20' },
           { name: 'Movil', href: '/mobile', icon: 'mobile.png', shadow: 'hover:shadow-blue-400/20' },
-          // { name: 'IoT', href: '/iot', icon: 'iot.png', shadow: 'hover:shadow-purple-500/20' },
+          { name: 'IoT', href: '/iot', icon: 'iot.png', shadow: 'hover:shadow-purple-500/20' },
           { name: 'Git', href: '/git', icon: 'git.png', shadow: 'hover:shadow-red-500/20' },
           { name: 'Herramientas', href: '/tools', icon: 'vscode.png', shadow: 'hover:shadow-blue-500/20' }
         ].map((item) => (

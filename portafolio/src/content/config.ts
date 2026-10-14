@@ -7,10 +7,12 @@ const projects = defineCollection({
     pattern: "**/[^_]*.{md,mdx}",
     base: "./src/content/projects",
   }),
-  schema: z.object({
-    title: z.string().optional(),
-    image: z.string().optional(),
-    description: z.string().optional(),
+  // ({ image }) da acceso al helper de astro:assets para optimizar imágenes
+  schema: ({ image }) =>
+    z.object({
+      title: z.string().optional(),
+      image: image(),
+      description: z.string().optional(),
     frameworks: z.array(z.string()).optional(), // Corregido el orden de array
     type: z.string().optional(),
     // Permitimos que sea una URL, un string vacío o nulo para que no explote
@@ -26,12 +28,13 @@ const certificates = defineCollection({
     pattern: "**/[^_]*.{md,mdx}",
     base: "./src/content/certificates",
   }),
-  schema: z.object({
-    title: z.string(),
-    image: z.string(),
-    firstColor: z.string(),
-    secondColor: z.string(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      firstColor: z.string(),
+      secondColor: z.string(),
+    }),
 });
 
 const works = defineCollection({

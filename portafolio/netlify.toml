@@ -1,6 +1,6 @@
 [build]
     command = "pnpm build"
-    publish = "dist" # or dist
+    publish = "dist"
 
-[images]
-    optimize = false
+[build.environment]
+    NODE_VERSION = "20"

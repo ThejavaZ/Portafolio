@@ -1,6 +1,6 @@
 ---
 title: "css"
-image: "/certificates/css.png"
+image: "../../assets/certificates/css.png"
 firstColor: "violet"
 secondColor: "violet"
 ---

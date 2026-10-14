@@ -1,6 +1,6 @@
 ---
 title: "html"
-image: "/certificates/html.png"
+image: "../../assets/certificates/html.png"
 firstColor: "orange"
 secondColor: "orange"
 ---

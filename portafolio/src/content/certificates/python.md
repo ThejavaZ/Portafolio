@@ -1,6 +1,6 @@
 ---
 title: "python"
-image: "/certificates/python.png"
+image: "../../assets/certificates/python.png"
 firstColor: "blue"
 secondColor: "yellow"
 ---

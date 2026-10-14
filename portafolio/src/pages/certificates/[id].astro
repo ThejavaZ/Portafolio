@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 
 export const getStaticPaths = async () => {
@@ -65,8 +66,9 @@ const glowTo = gradientColors[secondColor]?.to ?? gradientColors.blue.to;
         
         <div class="lg:col-span-7 group">
           <div class="bg-gray-900 p-2 rounded-3xl border border-white/10 shadow-2xl transition-transform hover:-rotate-1 duration-500">
-            <img
+            <Image
               src={image}
+              width={1080}
               alt={`Imagen del certificado ${title}`}
               class="rounded-2xl w-full h-auto shadow-inner"
             />

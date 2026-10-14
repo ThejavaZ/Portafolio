@@ -1,6 +1,6 @@
 ---
 title: "Komi - Red Social Comunitaria y Multiplataforma"
-image: "/images/projects/komi.png"
+image: "../../assets/projects/komi.png"
 description: "Plataforma social completa con API REST en Laravel 13, panel de administración SPA en Vue 3 y cliente móvil multiplataforma en Flutter."
 frameworks:
   ["Laravel 13", "PHP 8.3", "Vue 3", "Flutter", "Dart", "SQLite", "Sanctum"]

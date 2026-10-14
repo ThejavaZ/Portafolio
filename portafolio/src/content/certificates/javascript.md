@@ -1,6 +1,6 @@
 ---
 title: "javascript"
-image: "/certificates/javascript.png"
+image: "../../assets/certificates/javascript.png"
 firstColor: "yellow"
 secondColor: "yellow"
 ---

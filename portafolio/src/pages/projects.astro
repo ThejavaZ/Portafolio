@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 const projects = await getCollection("projects");
@@ -47,10 +48,10 @@ const projects = await getCollection("projects");
             <a href={`/projects/${id}`} class="block h-full">
               
               <div class="relative h-60 overflow-hidden">
-                <img
+                <Image
                   transition:name={`img-${id}`}
-                  src={image ? image : "https://http.cat/400"}
-                  alt={title}
+                  src={image}
+                  alt={title ?? "Imagen del proyecto"}
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>

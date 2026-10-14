@@ -1,6 +1,6 @@
 ---
 title: "react"
-image: "/certificates/react.png"
+image: "../../assets/certificates/react.png"
 firstColor: "blue"
 secondColor: "blue"
 ---

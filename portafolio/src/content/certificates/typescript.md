@@ -1,6 +1,6 @@
 ---
 title: "typescript"
-image: "/certificates/typescript.png"
+image: "../../assets/certificates/typescript.png"
 firstColor: "blue"
 secondColor: "blue"
 ---

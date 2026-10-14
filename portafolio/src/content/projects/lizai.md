@@ -1,6 +1,6 @@
 ---
 title: "Liz-AI - Asistente de IA Personal para Linux"
-image: "/images/projects/liz-ai.png"
+image: "../../assets/projects/liz-ai.png"
 description: "Asistente de IA modular para la terminal con soporte multi-proveedor, ejecución segura de herramientas y una sólida suite de pruebas."
 frameworks:
   [

@@ -1,6 +1,6 @@
 ---
 title: "Ctrl Z - Gestión SISA"
-image: "/images/projects/sisa.png"
+image: "../../assets/projects/sisa.png"
 description: "Sistema empresarial para el control y mantenimiento de activos de hardware."
 frameworks: ["Laravel 12", "Bootstrap 5", "MySQL", "PHP"]
 type: "Empresarial"

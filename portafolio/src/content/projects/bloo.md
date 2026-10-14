@@ -1,6 +1,6 @@
 ---
 title: "Bloo ERP - Plataforma SaaS Multi-tenant"
-image: "/images/projects/bloo.png"
+image: "../../assets/projects/bloo.png"
 description: "Sistema ERP empresarial desacoplado con arquitectura multi-tenant en Laravel 13 (PHP 8.4), panel Landlord en Vue 3 y cliente web en Next.js 16."
 frameworks:
   [

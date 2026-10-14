@@ -1,6 +1,6 @@
 ---
 title: "RFID Platform - Sistema de Inventario IoT"
-image: "/images/projects/rfiddemo.png"
+image: "../../assets/projects/rfiddemo.png"
 description: "Plataforma industrial con app móvil Android (Kotlin/Jetpack Compose) y backend .NET 8 con arquitectura hexagonal."
 frameworks:
   ["Kotlin", "Jetpack Compose", ".NET 8", "PostgreSQL", "Docker", "Room"]
