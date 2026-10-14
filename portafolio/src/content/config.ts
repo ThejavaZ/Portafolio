@@ -44,6 +44,7 @@ const works = defineCollection({
     company: z.string(),
     period: z.string(),
     startDate: z.string(), // "YYYY-MM" para ordenar (más reciente primero)
+    logo: z.string().optional(),
   }),
 });
 

@@ -20,9 +20,14 @@ const works = (await getCollection("works")).sort(
         <p class="text-gray-300 leading-relaxed text-justify">
           Soy egresado de la <span class="text-white font-semibold">UTH</span>, apasionado por el desarrollo backend. Mi camino me ha llevado a especializarme en la arquitectura de servidores y bases de datos, siempre buscando la eficiencia y escalabilidad en cada proyecto que toco.
         </p>
-        <div class="bg-gray-900 h-48 rounded-2xl border border-white/10 flex items-center justify-center text-gray-500 italic">
-          [Tu Imagen o Ilustración aquí]
-        </div>
+        <img
+          src="/images/javier-sarmiento.jpg"
+          alt="Foto de Javier Armando Sarmiento Gil"
+          width="600"
+          height="750"
+          loading="lazy"
+          class="bg-gray-900 h-48 w-full rounded-2xl object-cover object-top border border-white/10 shadow-xl"
+        />
       </div>
     </section>
 
@@ -31,9 +36,9 @@ const works = (await getCollection("works")).sort(
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
         {[
           { name: 'Linux', src: '/technologies/linux.webp', color: 'border-white/20' },
-          { name: 'Firebase', src: '/technologies/firebase.png', color: 'border-red-500/50' },
+          { name: 'NextJs', src: '/technologies/next.png', color: 'border-gray-500/50' },
           { name: 'PostgreSQL', src: '/technologies/psql.webp', color: 'border-blue-500/50' },
-          { name: 'ASP.NET', src: '/technologies/laravel.png', color: 'border-red-500/50' },
+          { name: '.NET', src: '/technologies/net.png', color: 'border-violet-500/50' },
           { name: 'Flutter', src: '/technologies/flutter.png', color: 'border-blue-500/50' }
         ].map((tech) => (
           <div class="flex flex-col items-center group">
@@ -77,9 +82,14 @@ const works = (await getCollection("works")).sort(
       <ul class="space-y-4">
         {works.map((work, index) => (
           <li class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl border border-white/5">
-            <div>
-              <span class="font-bold">{work.data.role}</span>
-              <span class="block text-gray-400 text-sm">{work.data.company}</span>
+            <div class="flex items-center gap-4">
+              {work.data.logo && (
+                <img src={work.data.logo} alt={`Logo de ${work.data.company}`} width="40" height="40" loading="lazy" class="w-10 h-10 object-contain shrink-0" />
+              )}
+              <div>
+                <span class="font-bold">{work.data.role}</span>
+                <span class="block text-gray-400 text-sm">{work.data.company}</span>
+              </div>
             </div>
             <span class:list={["text-sm", index === 0 ? "text-blue-400" : "text-gray-400"]}>
               {work.data.period}

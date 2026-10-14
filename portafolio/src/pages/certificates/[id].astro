@@ -13,18 +13,28 @@ export const getStaticPaths = async () => {
 
 const { certificate } = Astro.props;
 const { data, id } = certificate; // Extraemos 'id' en lugar de 'slug'
-const { title, image, firstColor } = data;
+const { title, image, firstColor, secondColor } = data;
 const { Content } = await render(certificate);
 
-// Fallback por si los colores no vienen correctos
-const glowColor = firstColor || 'blue';
+// Mapa estático: Tailwind 4 no genera clases construidas dinámicamente (bg-${color}-500)
+const gradientColors: Record<string, { from: string; to: string }> = {
+  blue: { from: "from-blue-500", to: "to-blue-700" },
+  yellow: { from: "from-yellow-400", to: "to-yellow-600" },
+  orange: { from: "from-orange-400", to: "to-orange-600" },
+  violet: { from: "from-violet-500", to: "to-violet-700" },
+  red: { from: "from-red-500", to: "to-red-700" },
+  green: { from: "from-green-500", to: "to-green-700" },
+};
+
+const glowFrom = gradientColors[firstColor]?.from ?? gradientColors.blue.from;
+const glowTo = gradientColors[secondColor]?.to ?? gradientColors.blue.to;
 ---
 
 <Layout title={`Certificado ${title} | JavierSG`} description={`Certificado oficial de ${title} expedido por Mimo.org.`}>
   <div class="min-h-screen bg-gray-950 text-white pb-20">
     
     <section class="relative overflow-hidden bg-gray-900 border-b border-white/5 py-16 px-6">
-      <div class={`absolute -top-24 -left-24 w-96 h-96 blur-[120px] opacity-20 rounded-full bg-${glowColor}-500`}></div>
+      <div class={`absolute -top-24 -left-24 w-96 h-96 blur-[120px] opacity-20 rounded-full bg-gradient-to-br ${glowFrom} ${glowTo}`}></div>
       
       <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 relative z-10">
         <div class="relative group">
