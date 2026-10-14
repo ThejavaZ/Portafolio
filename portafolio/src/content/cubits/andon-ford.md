@@ -1,6 +1,7 @@
 ---
-name: "Andon Ford"
-subtitle: "Sistema Andon industrial · WPF"
+name: "Andon Industrial"
+company: "Grupo Cubits"
+subtitle: "Sistema de alarmas industriales · WPF"
 description: "Aplicación asociada a un sistema Andon industrial: exhibición de alarmas y estado del proceso, con persistencia de los datos del sistema."
 participation: "Trabajo en la aplicación WPF del sistema: configuración, lógica de alarmas, persistencia de datos y comunicación con el PLC."
 technologies: ["C#", ".NET", "WPF"]

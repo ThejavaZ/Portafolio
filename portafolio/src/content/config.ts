@@ -77,6 +77,7 @@ const cubits = defineCollection({
   }),
   schema: z.object({
     name: z.string(),
+    company: z.string(),
     subtitle: z.string(),
     description: z.string(),
     participation: z.string(),

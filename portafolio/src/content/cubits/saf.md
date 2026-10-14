@@ -1,5 +1,6 @@
 ---
 name: "SAF"
+company: "Grupo Cubits"
 subtitle: "Gestión de materiales · Escritorio"
 description: "Sistema empresarial de escritorio para el control y seguimiento de materiales, con integración de dispositivos de identificación (RFID) dentro de los procesos operativos."
 participation: "Desarrollo de funcionalidades de la aplicación en C#/.NET bajo el patrón MVVM, con acceso a datos en SQL Server mediante Dapper y reutilización de componentes compartidos del equipo."

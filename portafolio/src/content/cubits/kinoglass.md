@@ -1,5 +1,6 @@
 ---
 name: "KinoGlass"
+company: "Grupo Cubits"
 subtitle: "Aplicaciones empresariales · WPF / MAUI"
 description: "Proyecto empresarial que reúne aplicaciones del ecosistema .NET dirigidas a distintos tipos de interfaz: escritorio y multiplataforma."
 participation: "Participación en el desarrollo de partes de las aplicaciones del proyecto con tecnologías .NET, integrando componentes de distintos entornos dentro del mismo producto."
