@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
 
 export const getStaticPaths = async () => {
     const certificates = await getCollection("certificates");
@@ -14,15 +13,15 @@ export const getStaticPaths = async () => {
 
 const { certificate } = Astro.props;
 const { data, id } = certificate; // Extraemos 'id' en lugar de 'slug'
-const { title, image, firstColor, secondColor } = data;
+const { title, image, firstColor } = data;
 const { Content } = await render(certificate);
 
 // Fallback por si los colores no vienen correctos
 const glowColor = firstColor || 'blue';
 ---
 
-<Layout title={`Certificado | ${title}`}>
-  <main class="min-h-screen bg-gray-950 text-white pb-20">
+<Layout title={`Certificado ${title} | JavierSG`} description={`Certificado oficial de ${title} expedido por Mimo.org.`}>
+  <div class="min-h-screen bg-gray-950 text-white pb-20">
     
     <section class="relative overflow-hidden bg-gray-900 border-b border-white/5 py-16 px-6">
       <div class={`absolute -top-24 -left-24 w-96 h-96 blur-[120px] opacity-20 rounded-full bg-${glowColor}-500`}></div>
@@ -41,9 +40,9 @@ const glowColor = firstColor || 'blue';
 
         <div class="text-center md:text-left">
           <span class="text-blue-500 font-mono text-sm tracking-widest uppercase">Certificación Oficial</span>
-          <h2 class="text-4xl md:text-6xl font-black mt-2 tracking-tight uppercase italic">
+          <h1 class="text-4xl md:text-6xl font-black mt-2 tracking-tight uppercase italic">
             {title}
-          </h2>
+          </h1>
           <p class="text-gray-400 mt-4 max-w-xl text-lg italic leading-relaxed">
             Validación de aptitudes técnicas y conocimientos avanzados en <span class="text-white font-semibold">{title}</span>.
           </p>
@@ -95,5 +94,5 @@ const glowColor = firstColor || 'blue';
 
       </div>
     </section>
-  </main>
+  </div>
 </Layout>

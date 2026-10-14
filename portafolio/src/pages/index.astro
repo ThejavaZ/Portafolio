@@ -10,17 +10,20 @@ const works = (await getCollection("works")).sort(
 const logoWelcome = "/logo.webp"
 ---
 
-<Layout title="Inicio | JavierSG">
+<Layout
+  title="Inicio | JavierSG"
+  description="Portafolio de JavierSG: programador backend especializado en Python y ASP.NET. Proyectos, experiencia y certificados."
+>
   <div class="flex flex-col gap-24 py-16 px-6 max-w-6xl mx-auto overflow-x-hidden">
     
     <section class="min-h-[70vh] flex flex-col items-center justify-center">
       <div class="text-center mb-16">
-        <h2 class="font-black text-5xl md:text-8xl tracking-tighter uppercase italic text-white animate-fade-in">
+        <h1 class="font-black text-5xl md:text-8xl tracking-tighter uppercase italic text-white animate-fade-in">
           Bienvenido a mi 
           <span class="block text-transparent bg-clip-text bg-gradient-to-b from-blue-400 to-blue-700 drop-shadow-sm">
             portafolio!
           </span>
-        </h2>
+        </h1>
       </div>
 
       <div class="flex flex-col lg:flex-row items-center gap-12 w-full bg-gray-800/20 p-8 md:p-12 rounded-[3rem] border border-white/5 backdrop-blur-xl shadow-2xl">

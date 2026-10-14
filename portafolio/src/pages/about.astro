@@ -8,11 +8,14 @@ const works = (await getCollection("works")).sort(
 );
 ---
 
-<Layout title="Acerca de | JavierSG">
-  <main class="max-w-5xl mx-auto px-4 py-10 space-y-12 text-white">
+<Layout
+  title="Acerca de | JavierSG"
+  description="Trayectoria, stack principal y especialidades de JavierSG: egresado de la UTH apasionado por el desarrollo backend."
+>
+  <div class="max-w-5xl mx-auto px-4 py-10 space-y-12 text-white">
     
     <section class="bg-gray-800/50 border border-white/5 p-8 rounded-3xl backdrop-blur-sm">
-      <h2 class="text-3xl font-bold mb-4 bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Mi Trayectoria</h2>
+      <h1 class="text-3xl font-bold mb-4 bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Mi Trayectoria</h1>
       <div class="grid md:grid-cols-2 gap-8 items-center">
         <p class="text-gray-300 leading-relaxed text-justify">
           Soy egresado de la <span class="text-white font-semibold">UTH</span>, apasionado por el desarrollo backend. Mi camino me ha llevado a especializarme en la arquitectura de servidores y bases de datos, siempre buscando la eficiencia y escalabilidad en cada proyecto que toco.
@@ -35,7 +38,7 @@ const works = (await getCollection("works")).sort(
         ].map((tech) => (
           <div class="flex flex-col items-center group">
             <div class={`p-4 bg-gray-900 rounded-2xl border-2 ${tech.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]`}>
-              <Image src={tech.src} alt={tech.name} class="w-12 h-12 object-contain" />
+              <Image src={tech.src} alt={tech.name} width={48} height={48} class="w-12 h-12 object-contain" />
             </div>
             <h3 class="mt-3 text-sm font-medium text-gray-400 group-hover:text-white transition-colors">{tech.name}</h3>
           </div>
@@ -59,7 +62,7 @@ const works = (await getCollection("works")).sort(
           { name: 'Herramientas', href: '/tools', icon: 'vscode.png', shadow: 'hover:shadow-blue-500/20' }
         ].map((item) => (
           <a href={`/technologies${item.href}`} class={`bg-gray-800/40 p-6 rounded-2xl border border-white/5 flex flex-col items-center transition-all hover:-translate-y-1 hover:bg-gray-800 ${item.shadow} shadow-lg`}>
-            <Image src={`/technologies/${item.icon}`} alt={item.name} class="w-12 mb-4" />
+            <Image src={`/technologies/${item.icon}`} alt={item.name} width={48} height={48} class="w-12 mb-4" />
             <h3 class="text-sm font-bold text-center">{item.name}</h3>
           </a>
         ))}
@@ -86,5 +89,5 @@ const works = (await getCollection("works")).sort(
       </ul>
     </section>
 
-  </main>
+  </div>
 </Layout>

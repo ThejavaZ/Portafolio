@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,9 +45,9 @@ export const Header = () => {
               />
             </a>
             <div className="hidden sm:block border-l border-gray-700 pl-4">
-              <h1 className="text-white font-bold text-lg leading-none">
+              <span className="block text-white font-bold text-lg leading-none">
                 Javier<span className="text-blue-500">SG</span>
-              </h1>
+              </span>
               <p className="text-gray-500 text-[10px] uppercase tracking-widest mt-1 font-semibold">
                 Backend Developer
               </p>
@@ -127,6 +127,7 @@ export const Header = () => {
         <button
           onClick={() => setIsOpen(false)}
           className="absolute top-8 right-8 text-gray-400 hover:text-white p-4 transition-transform hover:rotate-90"
+          aria-label="Cerrar menú"
         >
           <svg
             className="w-10 h-10"

@@ -13,7 +13,7 @@ export function getStaticPaths() {
 const { tech } = Astro.props;
 ---
 
-<Layout title={tech.name}>
+<Layout title={`${tech.name} | JavierSG`}>
   <header class={`${tech.theme} py-12 flex flex-col md:flex-row items-center justify-center gap-6 border-b border-white/10 shadow-2xl`}>
     <Image 
       transition:name={`${tech.id}-tech`} 
@@ -36,6 +36,8 @@ const { tech } = Astro.props;
             <Image 
               src={`/technologies/${item.img}`} 
               alt={item.name} 
+              width={56}
+              height={56}
               class="w-14 h-14 object-contain"
             />
           </div>

@@ -3,7 +3,6 @@ import { desktopData } from "./desktop-data";
 import { devopsData } from "./devops-data";
 import { frontendData } from "./frontend-data";
 import { gitData } from "./git-data";
-import { iotData } from "./iot-data";
 import { mobileData } from "./mobile-data";
 import { pythonData } from "./python-data";
 import { sqlData } from "./sql-data";

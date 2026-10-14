@@ -7,8 +7,8 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<Layout title="Mi Bitácora Tech">
-  <main class="max-w-6xl mx-auto px-6 py-20">
+<Layout title="Bitácora | JavierSG" description="Artículos de JavierSG sobre desarrollo backend, Go y tecnología.">
+  <div class="max-w-6xl mx-auto px-6 py-20">
     <h1 class="text-5xl font-black mb-12 text-center bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent italic uppercase">
         Bitácora de Desarrollo
     </h1>
@@ -28,5 +28,5 @@ const posts = (await getCollection("blog")).sort(
         </article>
       ))}
     </div>
-  </main>
+  </div>
 </Layout>
