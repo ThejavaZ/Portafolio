@@ -13,6 +13,8 @@ frameworks:
     "Pytest",
   ]
 type: "AI CLI & Tooling"
+order: 3
+status: "en-desarrollo"
 url_production: ""
 url_repo: "https://github.com/ThejavaZ/Liz-AI.git"
 urls: ["https://github.com/ThejavaZ/Liz-AI.git"]

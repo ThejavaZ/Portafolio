@@ -5,6 +5,8 @@ description: "Plataforma social completa con API REST en Laravel 13, panel de ad
 frameworks:
   ["Laravel 13", "PHP 8.3", "Vue 3", "Flutter", "Dart", "SQLite", "Sanctum"]
 type: "Full-Stack & Mobile Ecosystem"
+order: 2
+status: "en-desarrollo"
 url_production: ""
 urls: ["https://github.com/ThejavaZ"]
 ---

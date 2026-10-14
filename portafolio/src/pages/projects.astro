@@ -2,8 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import { projectStatus } from "../data/projectStatus";
 
-const projects = await getCollection("projects");
+const projects = (await getCollection("projects")).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
 ---
 
 <Layout title="Proyectos | JavierSG" description="Proyectos desarrollados por JavierSG: ERP, apps móviles, asistentes de IA y sistemas empresariales.">
@@ -38,7 +41,8 @@ const projects = await getCollection("projects");
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
       {projects.map((project) => {
         const { id, data } = project;
-        const { title, image, description, frameworks, type } = data;
+        const { title, image, description, frameworks, type, status } = data;
+        const statusInfo = status ? projectStatus[status] : undefined;
         
         return (
           <article
@@ -59,6 +63,12 @@ const projects = await getCollection("projects");
                 <div class="absolute top-4 right-4 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
                   {type || "System"}
                 </div>
+
+                {statusInfo && (
+                  <span class={`absolute top-4 left-4 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg ${statusInfo.cls}`}>
+                    {statusInfo.label}
+                  </span>
+                )}
               </div>
 
               <div class="p-8 space-y-4">

@@ -5,6 +5,8 @@ description: "Plataforma industrial con app móvil Android (Kotlin/Jetpack Compo
 frameworks:
   ["Kotlin", "Jetpack Compose", ".NET 8", "PostgreSQL", "Docker", "Room"]
 type: "IoT & Mobile Full-Stack"
+order: 1
+status: "funcional"
 url_production: ""
 urls: ["https://github.com/ThejavaZ"]
 ---

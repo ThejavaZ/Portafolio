@@ -4,6 +4,8 @@ image: "../../assets/projects/sisa.png"
 description: "Sistema empresarial para el control y mantenimiento de activos de hardware."
 frameworks: ["Laravel 12", "Bootstrap 5", "MySQL", "PHP"]
 type: "Empresarial"
+order: 5
+status: "funcional"
 url_production: "https://sisa-automatation.net"
 urls: ["https://github.com/ThejavaZ/Sisa.git"]
 ---

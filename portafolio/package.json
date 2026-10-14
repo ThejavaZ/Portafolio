@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/netlify": "^6.6.4",
     "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "^5.16.4",
     "tailwindcss": "^4.1.16",

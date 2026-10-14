@@ -13,6 +13,9 @@ const projects = defineCollection({
       title: z.string().optional(),
       image: image(),
       description: z.string().optional(),
+      // Orden de exhibición en /projects (menor primero) y estado del proyecto
+      order: z.number().optional(),
+      status: z.enum(["funcional", "en-desarrollo", "experimental"]).optional(),
     frameworks: z.array(z.string()).optional(), // Corregido el orden de array
     type: z.string().optional(),
     // Permitimos que sea una URL, un string vacío o nulo para que no explote
@@ -61,7 +64,7 @@ const blog = defineCollection({
     excerpt: z.string(),
     date: z.date(),
     author: z.string(),
-    category: z.enum(["Backend", "IoT", "Frontend", "DevOps", "Opinión"]),
+    category: z.enum(["Backend", "IoT", "Frontend", "DevOps", "Opinión", "Mobile", "Carrera"]),
   }),
 });
 

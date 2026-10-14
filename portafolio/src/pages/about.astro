@@ -34,7 +34,7 @@ const works = (await getCollection("works")).sort(
       <h2 class="text-center font-bold text-2xl mb-8 uppercase tracking-widest text-blue-500">Main Stack</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
         {[
-          { name: '.NET', src: '/technologies/net.png', color: 'border-violet-500/50' },
+          { name: 'C#/.NET', src: '/technologies/csharp.png', color: 'border-violet-500/50' },
           { name: 'PostgreSQL',  src: '/technologies/psql.webp', color: 'border-blue-500/50' },
           { name: 'SQL Server', src: '/technologies/sql-server.png', color: 'border-red-500/20' },
           { name: 'Python', src: '/technologies/python.png', color: 'border-blue-500/50' },
@@ -47,6 +47,17 @@ const works = (await getCollection("works")).sort(
             <h3 class="mt-3 text-sm font-medium text-gray-400 group-hover:text-white transition-colors">{tech.name}</h3>
           </div>
         ))}
+      </div>
+
+      <div class="mt-10 max-w-3xl mx-auto text-center">
+        <p class="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-blue-400 font-mono">
+          Backend Development · API Design · Database Architecture
+        </p>
+        <p class="mt-4 text-gray-400 italic leading-relaxed text-sm sm:text-base">
+          Desarrollo de APIs y servicios backend con C# y .NET, orientados a la mantenibilidad,
+          la persistencia de datos y la arquitectura de software. Experiencia complementaria en
+          Python, automatización y aplicaciones multiplataforma.
+        </p>
       </div>
     </section>
 

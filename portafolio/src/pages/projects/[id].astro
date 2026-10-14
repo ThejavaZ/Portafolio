@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
+import { projectStatus } from "../../data/projectStatus";
 
 export const getStaticPaths = async () => {
   const projects = await getCollection("projects");
@@ -17,7 +18,8 @@ export const getStaticPaths = async () => {
 const { project } = Astro.props;
 // En Astro 5, 'slug' ahora se llama 'id' por defecto en el objeto
 const { data, id } = project; 
-const { title, image, description, frameworks, type, url_production, url_repo,urls } = data;
+const { title, image, description, frameworks, type, url_production, url_repo, urls, status } = data;
+const statusInfo = status ? projectStatus[status] : undefined;
 const { Content } = await render(project);
 ---
 
@@ -33,6 +35,11 @@ const { Content } = await render(project);
           Volver
         </a>
         <div class="h-px flex-1 bg-white/10"></div>
+        {statusInfo && (
+          <span class={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${statusInfo.cls}`}>
+            {statusInfo.label}
+          </span>
+        )}
         <span class="text-xs font-mono text-gray-500 uppercase tracking-[0.3em]">{type || "Software"}</span>
       </div>
 
