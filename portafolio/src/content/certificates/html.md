@@ -5,4 +5,4 @@ firstColor: "orange"
 secondColor: "orange"
 ---
 
-Certificado HTML expendido por Mimo.org
+Certificado HTML expedido por Mimo.org

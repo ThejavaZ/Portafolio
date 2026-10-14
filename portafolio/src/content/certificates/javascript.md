@@ -5,4 +5,4 @@ firstColor: "yellow"
 secondColor: "yellow"
 ---
 
-Certificado JavaScript expendido por Mimo.org
+Certificado JavaScript expedido por Mimo.org

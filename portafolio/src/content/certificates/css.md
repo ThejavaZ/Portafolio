@@ -5,4 +5,4 @@ firstColor: "violet"
 secondColor: "violet"
 ---
 
-Certificado CSS expendido por Mimo.org
+Certificado CSS expedido por Mimo.org

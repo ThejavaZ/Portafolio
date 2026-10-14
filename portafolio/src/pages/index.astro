@@ -1,6 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import { Image } from "astro:assets"
+import { getCollection } from "astro:content"
+
+const works = (await getCollection("works")).sort(
+  (a, b) => b.data.startDate.localeCompare(a.data.startDate)
+)
 
 const logoWelcome = "/logo.webp"
 ---
@@ -35,10 +40,10 @@ const logoWelcome = "/logo.webp"
           </p>
           
           <div class="flex flex-wrap gap-6 pt-4">
-            <a href="https://github.com/" class="flex items-center gap-3 text-lg font-bold text-gray-500 hover:text-blue-400 transition-all">
+            <a href="https://github.com/ThejavaZ" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-lg font-bold text-gray-500 hover:text-blue-400 transition-all">
               <span class="p-2 bg-gray-800 rounded-lg">GH</span> GitHub
             </a>
-            <a href="https://linkedin.com/" class="flex items-center gap-3 text-lg font-bold text-gray-500 hover:text-blue-400 transition-all">
+            <a href="https://www.linkedin.com/in/javier-armando-sarmiento-gil-aa10b0249/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-lg font-bold text-gray-500 hover:text-blue-400 transition-all">
               <span class="p-2 bg-gray-800 rounded-lg">IN</span> LinkedIn
             </a>
           </div>
@@ -62,27 +67,29 @@ const logoWelcome = "/logo.webp"
       </div>
 
       <div class="space-y-12">
-        <div class="relative pl-10 border-l-2 border-blue-600/30">
-          <div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-gray-900 shadow-[0_0_15px_rgba(37,99,235,0.5)]"></div>
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 bg-gray-800/10 p-6 rounded-2xl border border-white/5 hover:bg-gray-800/30 transition-all">
-            <div>
-              <h3 class="text-2xl font-bold text-white">Desarrollador de software</h3>
-              <p class="text-blue-400 text-lg">Grupo Cubits</p>
+        {works.map((work, index) => index === 0 ? (
+          <div class="relative pl-10 border-l-2 border-blue-600/30">
+            <div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-gray-900 shadow-[0_0_15px_rgba(37,99,235,0.5)]"></div>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 bg-gray-800/10 p-6 rounded-2xl border border-white/5 hover:bg-gray-800/30 transition-all">
+              <div>
+                <h3 class="text-2xl font-bold text-white">{work.data.role}</h3>
+                <p class="text-blue-400 text-lg">{work.data.company}</p>
+              </div>
+              <span class="text-xs font-mono text-gray-500 uppercase tracking-widest bg-gray-900 px-4 py-2 rounded-full border border-white/5">{work.data.period}</span>
             </div>
-            <span class="text-xs font-mono text-gray-500 uppercase tracking-widest bg-gray-900 px-4 py-2 rounded-full border border-white/5">Feb 2026 - Present</span>
           </div>
-        </div>
-
-        <div class="relative pl-10 border-l-2 border-gray-700">
-          <div class="absolute -left-[9px] top-0 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-gray-900"></div>
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 p-6">
-            <div>
-              <h3 class="text-2xl font-bold text-gray-400">Ayudante de sistemas</h3>
-              <p class="text-gray-500 text-lg">Sisa Sistemas Automatizados</p>
+        ) : (
+          <div class="relative pl-10 border-l-2 border-gray-700">
+            <div class="absolute -left-[9px] top-0 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-gray-900"></div>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 p-6">
+              <div>
+                <h3 class="text-2xl font-bold text-gray-400">{work.data.role}</h3>
+                <p class="text-gray-500 text-lg">{work.data.company}</p>
+              </div>
+              <span class="text-xs font-mono text-gray-600">{work.data.period}</span>
             </div>
-            <span class="text-xs font-mono text-gray-600">Jun 2025 - Oct 2025</span>
           </div>
-        </div>
+        ))}
       </div>
     </section>
 
@@ -90,7 +97,7 @@ const logoWelcome = "/logo.webp"
       <h2 class="text-center font-black text-3xl italic uppercase tracking-widest text-white mb-16">Certificados</h2>
       
       <div class="flex flex-wrap justify-center gap-10">
-        {['html', 'css', 'javascript', 'typescript', 'python'].map((tech) => (
+        {['html', 'css', 'javascript', 'typescript', 'python', 'react'].map((tech) => (
           <div class="group relative">
             <a href={`/certificates/${tech}`} rel="noopener noreferrer">
               <img 

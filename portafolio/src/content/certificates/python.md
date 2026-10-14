@@ -5,11 +5,11 @@ firstColor: "blue"
 secondColor: "yellow"
 ---
 
-# Certificado **Python** expendido por Mimo.org
+# Certificado **Python** expedido por Mimo.org
 
-Certificado expendido por **[mimo.org](https://mimo.org/)** donde entendi y comprendi la sintaxis de python. incluyendo la estructuras de datos. control de estado, funciones, errores y modulos.
+Certificado expedido por **[mimo.org](https://mimo.org/)** donde entendí y comprendí la sintaxis de Python, incluyendo las estructuras de datos, el control de estado, funciones, errores y módulos.
 
-## librerias:
+## librerías:
 - os
 - math
-- request
+- requests

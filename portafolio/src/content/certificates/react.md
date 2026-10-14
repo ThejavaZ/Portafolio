@@ -5,4 +5,4 @@ firstColor: "blue"
 secondColor: "blue"
 ---
 
-Certificado React expendido por Mimo.org
+Certificado React expedido por Mimo.org

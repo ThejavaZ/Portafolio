@@ -1,6 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+const works = (await getCollection("works")).sort(
+  (a, b) => b.data.startDate.localeCompare(a.data.startDate)
+);
 ---
 
 <Layout title="Acerca de | JavierSG">
@@ -67,14 +72,17 @@ import { Image } from "astro:assets";
         Experiencia Laboral
       </h2>
       <ul class="space-y-4">
-        <li class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl border border-white/5">
-          <span class="font-bold">Desarrollador Backend Junior</span>
-          <span class="text-blue-400 text-sm">2023 - Actualidad</span>
-        </li>
-        <li class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl border border-white/5 opacity-70">
-          <span class="font-bold">Prácticas Profesionales - UTH</span>
-          <span class="text-gray-400 text-sm">2022</span>
-        </li>
+        {works.map((work, index) => (
+          <li class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl border border-white/5">
+            <div>
+              <span class="font-bold">{work.data.role}</span>
+              <span class="block text-gray-400 text-sm">{work.data.company}</span>
+            </div>
+            <span class:list={["text-sm", index === 0 ? "text-blue-400" : "text-gray-400"]}>
+              {work.data.period}
+            </span>
+          </li>
+        ))}
       </ul>
     </section>
 

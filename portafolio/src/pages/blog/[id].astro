@@ -1,29 +1,31 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { allPosts } from "../../data/blog-data";
+import { getCollection, render } from "astro:content";
 
-export function getStaticPaths() {
-  return allPosts.map((post) => ({
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
     params: { id: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
+const { Content } = await render(post);
 ---
 
-<Layout title={post.title}>
+<Layout title={post.data.title}>
   <article class="max-w-3xl mx-auto px-6 py-20">
     <header class="mb-10">
-      <span class="text-blue-500 font-bold uppercase tracking-tighter">{post.category}</span>
-      <h1 class="text-4xl md:text-6xl font-black my-4 leading-tight">{post.title}</h1>
-      <p class="text-gray-500 italic">Publicado el {post.date} por {post.author}</p>
+      <span class="text-blue-500 font-bold uppercase tracking-tighter">{post.data.category}</span>
+      <h1 class="text-4xl md:text-6xl font-black my-4 leading-tight">{post.data.title}</h1>
+      <p class="text-gray-500 italic">
+        Publicado el {post.data.date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} por {post.data.author}
+      </p>
     </header>
 
-    <div class="prose prose-invert prose-blue max-w-none">
-      <p class="text-xl leading-relaxed text-gray-300 whitespace-pre-line">
-        {post.content}
-      </p>
+    <div class="prose prose-invert prose-blue max-w-none text-xl leading-relaxed text-gray-300">
+      <Content />
     </div>
 
     <div class="mt-20 border-t border-white/10 pt-10 text-center">

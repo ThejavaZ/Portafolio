@@ -5,4 +5,4 @@ firstColor: "blue"
 secondColor: "blue"
 ---
 
-Certificado HTML expendido por Mimo.org
+Certificado TypeScript expedido por Mimo.org
