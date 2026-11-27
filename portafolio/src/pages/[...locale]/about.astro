@@ -44,6 +44,11 @@ const L = isEn
       workTitle: "Where I've worked",
       workDesc: "Professional history, most recent first.",
       companyLogo: (company: string) => `${company} logo`,
+      openToEyebrow: "What I'm looking for",
+      openToTitle: "Availability and preferences",
+      openToDesc: "What you should know before reaching out.",
+      openToNote: "Open to hearing about backend, APIs and data roles.",
+      openToCta: "Get in touch",
     }
   : {
       metaTitle: "Acerca de | JavierSG",
@@ -71,7 +76,30 @@ const L = isEn
       workTitle: "Dónde he trabajado",
       workDesc: "Trayectoria profesional ordenada de más reciente a más antigua.",
       companyLogo: (company: string) => `Logo de ${company}`,
+      openToEyebrow: "Qué busco",
+      openToTitle: "Disponibilidad y preferencias",
+      openToDesc: "Lo que conviene saber antes de escribirme.",
+      openToNote: "Abierto a escuchar propuestas de backend, APIs y datos.",
+      openToCta: "Escríbeme",
     };
+
+/**
+ * ⚠️ Revisa estos cuatro valores: son lo primero que mira un recruiter.
+ * Si algo no se ajusta a tu caso (modalidad, tipo de contrato…), cámbialo aquí.
+ */
+const openTo = isEn
+  ? [
+      { label: "Availability", value: "Available for projects and new opportunities" },
+      { label: "Modality", value: "Remote · Hermosillo, Mexico" },
+      { label: "Focus", value: "Backend, APIs and data" },
+      { label: "Looking for", value: "Full-time or freelance" },
+    ]
+  : [
+      { label: "Disponibilidad", value: "Disponible para proyectos y nuevas oportunidades" },
+      { label: "Modalidad", value: "Remoto · Hermosillo, México" },
+      { label: "Enfoque", value: "Backend, APIs y datos" },
+      { label: "Busco", value: "Roles full-time o freelance" },
+    ];
 
 const works = (await getCollection(isEn ? "worksEn" : "works")).sort((a, b) =>
   b.data.startDate.localeCompare(a.data.startDate)
@@ -148,6 +176,43 @@ const specialties = [
           loading="lazy"
           class="aspect-square w-full rounded-[1.1rem] object-cover object-[50%_25%]"
         />
+      </div>
+    </div>
+  </section>
+
+  {/* ============ QUÉ BUSCO ============ */}
+  <section class="shell py-14">
+    <SectionHeading
+      eyebrow={L.openToEyebrow}
+      title={L.openToTitle}
+      description={L.openToDesc}
+    />
+
+    <div class="card p-6 sm:p-8" data-reveal>
+      <dl class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          openTo.map((item, index) => (
+            <div
+              class="border-l-2 border-brand/40 pl-4"
+              data-reveal
+              style={`--reveal-delay: ${index * 60}ms`}
+            >
+              <dt class="font-mono text-[0.66rem] tracking-[0.2em] text-ink-3 uppercase">
+                {item.label}
+              </dt>
+              <dd class="mt-2 font-display text-lg leading-snug font-semibold text-ink">
+                {item.value}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div class="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+        <p class="text-sm text-ink-2">{L.openToNote}</p>
+        <ButtonLink href={link("/contact")} variant="soft" size="sm">
+          {L.openToCta}
+        </ButtonLink>
       </div>
     </div>
   </section>
