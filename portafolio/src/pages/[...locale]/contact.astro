@@ -1,6 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import SectionHeading from "../components/ui/SectionHeading.astro";
+import Layout from "../../layouts/Layout.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined } }, { params: { locale: "en" } }];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "es";
 
 const socials = [
   {
@@ -27,6 +33,8 @@ const socials = [
 <Layout
   title="Contacto | JavierSG"
   description="¿Tienes un proyecto o una vacante? Escríbeme: formulario directo, correo y redes de JavierSG."
+  locale={locale}
+  alternate
 >
   <section class="shell py-14 md:py-20">
     <SectionHeading

@@ -1,12 +1,21 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import photo from "../assets/javier-sarmiento.jpg";
-import SectionHeading from "../components/ui/SectionHeading.astro";
-import ButtonLink from "../components/ui/ButtonLink.astro";
-import { projectStatus } from "../data/projectStatus";
-import { allTechs } from "../data/tech-data";
+import photo from "../../assets/javier-sarmiento.jpg";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import ButtonLink from "../../components/ui/ButtonLink.astro";
+import { projectStatus } from "../../data/projectStatus";
+import { allTechs } from "../../data/tech-data";
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined } }, // español en /
+    { params: { locale: "en" } }, // inglés en /en
+  ];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "es";
 
 const works = (await getCollection("works")).sort((a, b) =>
   b.data.startDate.localeCompare(a.data.startDate)
@@ -88,6 +97,8 @@ const socials = [
 <Layout
   title="JavierSG — Backend Developer · Python, .NET y PostgreSQL"
   description="Portafolio de JavierSG, programador backend especializado en Python y ASP.NET: proyectos, experiencia, artículos técnicos y certificados."
+  locale={locale}
+  alternate
   jsonLd={jsonLd}
 >
   {/* ================= HERO ================= */}

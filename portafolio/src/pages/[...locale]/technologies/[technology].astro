@@ -1,14 +1,16 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import Layout from "../../../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { allTechs } from "../../data/tech-data";
+import { allTechs } from "../../../data/tech-data";
 
 export function getStaticPaths() {
-  return allTechs.map((tech) => ({
-    params: { technology: tech.id },
-    props: { tech },
-  }));
+  return allTechs.flatMap((tech) => [
+    { params: { locale: undefined, technology: tech.id }, props: { tech } },
+    { params: { locale: "en", technology: tech.id }, props: { tech } },
+  ]);
 }
+
+const locale = Astro.params.locale === "en" ? "en" : "es";
 
 const { tech } = Astro.props;
 
@@ -24,6 +26,8 @@ const themeGlow = tech.theme
   title={`${tech.name} | JavierSG`}
   description={tech.description ?? `Stack, herramientas y ecosistema de ${tech.name}.`}
   image={tech.logo}
+  locale={locale}
+  alternate
 >
   {/* ============ HEADER ============ */}
   <header class="relative overflow-hidden border-b border-line">

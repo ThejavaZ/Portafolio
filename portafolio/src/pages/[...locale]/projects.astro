@@ -1,9 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { projectStatus } from "../data/projectStatus";
-import SectionHeading from "../components/ui/SectionHeading.astro";
+import { projectStatus } from "../../data/projectStatus";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined } }, { params: { locale: "en" } }];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "es";
 
 const projects = (await getCollection("projects")).sort(
   (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
@@ -16,6 +22,8 @@ const cubits = (await getCollection("cubits")).sort(
 <Layout
   title="Proyectos | JavierSG"
   description="Proyectos desarrollados por JavierSG: ERP, apps móviles, asistentes de IA y sistemas empresariales."
+  locale={locale}
+  alternate
 >
   <section class="shell py-14 md:py-20">
     {/* Encabezado + buscador */}

@@ -1,13 +1,21 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import Layout from "../../../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { allTechs } from "../../data/tech-data";
-import SectionHeading from "../../components/ui/SectionHeading.astro";
+import { allTechs } from "../../../data/tech-data";
+import SectionHeading from "../../../components/ui/SectionHeading.astro";
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined } }, { params: { locale: "en" } }];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "es";
 ---
 
 <Layout
   title="Stack tecnológico | JavierSG"
   description="Todas las especialidades de JavierSG: Python, bases de datos, backend, frontend, DevOps, escritorio, móvil, Git y herramientas."
+  locale={locale}
+  alternate
 >
   <section class="shell py-14 md:py-20">
     <SectionHeading

@@ -1,10 +1,16 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import photo from "../assets/javier-sarmiento.jpg";
-import SectionHeading from "../components/ui/SectionHeading.astro";
-import ButtonLink from "../components/ui/ButtonLink.astro";
+import photo from "../../assets/javier-sarmiento.jpg";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import ButtonLink from "../../components/ui/ButtonLink.astro";
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined } }, { params: { locale: "en" } }];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "es";
 
 const works = (await getCollection("works")).sort((a, b) =>
   b.data.startDate.localeCompare(a.data.startDate)
@@ -35,6 +41,8 @@ const specialties = [
   title="Acerca de | JavierSG"
   description="Trayectoria, stack principal y especialidades de JavierSG: egresado de la UTH apasionado por el desarrollo backend."
   image={photo.src}
+  locale={locale}
+  alternate
 >
   {/* ============ TRAYECTORIA ============ */}
   <section class="shell grid items-center gap-12 pt-14 pb-16 md:pt-20 lg:grid-cols-12">

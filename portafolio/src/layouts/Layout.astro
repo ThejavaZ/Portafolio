@@ -9,6 +9,10 @@ interface LayoutProps {
   description?: string;
   image?: string;
   lang?: string;
+  /** Locale explícito; si no se pasa se deduce de la ruta (/en/...) */
+  locale?: "es" | "en";
+  /** Emite los <link rel="alternate" hreflang> de las páginas bilingües */
+  alternate?: boolean;
   /** Tipo de contenido para Open Graph */
   type?: "website" | "article";
   /** Datos estructurados JSON-LD (schema.org) para rich results */
@@ -19,13 +23,23 @@ const {
   title,
   description = "Portafolio de JavierSG, programador backend especializado en Python y ASP.NET.",
   image = "/logo.webp",
-  lang = "es",
+  locale: localeProp,
+  alternate = false,
   type = "website",
   jsonLd,
 } = Astro.props as LayoutProps;
 
+const locale = localeProp ?? (Astro.url.pathname.startsWith("/en") ? "en" : "es");
+const lang = locale;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
+
+// Páginas con versión en el otro idioma: / ↔ /en/...
+const esPath = locale === "en" ? Astro.url.pathname.replace(/^\/en/, "") || "/" : Astro.url.pathname;
+const enPath = locale === "en" ? Astro.url.pathname : Astro.url.pathname === "/" ? "/en" : `/en${Astro.url.pathname}`;
+const absolute = (path: string) => new URL(path, Astro.site).toString();
+const ogLocale = locale === "en" ? "en_US" : "es_MX";
 ---
 
 <!doctype html>
@@ -53,6 +67,16 @@ const imageURL = new URL(image, Astro.site);
       href={new URL("rss.xml", Astro.site)}
     />
 
+    {
+      alternate && (
+        <>
+          <link rel="alternate" hreflang="es" href={absolute(esPath)} />
+          <link rel="alternate" hreflang="en" href={absolute(enPath)} />
+          <link rel="alternate" hreflang="x-default" href={absolute(esPath)} />
+        </>
+      )
+    }
+
     <!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="JavierSG" />
@@ -60,7 +84,7 @@ const imageURL = new URL(image, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={imageURL} />
-    <meta property="og:locale" content="es_MX" />
+    <meta property="og:locale" content={ogLocale} />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
