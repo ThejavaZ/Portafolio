@@ -7,6 +7,7 @@ import SectionHeading from "../../components/ui/SectionHeading.astro";
 import ButtonLink from "../../components/ui/ButtonLink.astro";
 import { projectStatus } from "../../data/projectStatus";
 import { allTechs } from "../../data/tech-data";
+import { techName } from "../../i18n/tech";
 
 export function getStaticPaths() {
   return [
@@ -16,21 +17,96 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale === "en" ? "en" : "es";
+const isEn = locale === "en";
 
-const works = (await getCollection("works")).sort((a, b) =>
+/** Ruta localizada (las páginas solo en español no se prefijan) */
+const link = (path: string) => (isEn ? (path === "/" ? "/en" : `/en${path}`) : path);
+
+const works = (await getCollection(isEn ? "worksEn" : "works")).sort((a, b) =>
   b.data.startDate.localeCompare(a.data.startDate)
 );
 const certificates = await getCollection("certificates");
-const allProjects = (await getCollection("projects")).sort(
+const allProjects = (await getCollection(isEn ? "projectsEn" : "projects")).sort(
   (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
 );
 const featured = allProjects.slice(0, 3);
 
+// Copy de la página en ambos idiomas
+const L = isEn
+  ? {
+      status: "Available for new challenges",
+      heroBefore: "I build the",
+      heroAccent: "backend",
+      heroAfter: "that keeps your product running.",
+      intro: "I'm",
+      role: "a backend developer specializing in",
+      and: "and",
+      tail: "I design APIs, model data and ship services built to last.",
+      ctaProjects: "View projects",
+      ctaTalk: "Let's talk",
+      stats: ["Projects", "Certificates", "Specialties", "Companies"],
+      featuredEyebrow: "Recent work",
+      featuredTitle: "Featured projects",
+      viewAll: "View all",
+      experienceEyebrow: "Background",
+      experienceTitle: "Professional experience",
+      experienceDesc: "Where I've added value and the technology I've worked with.",
+      specialtiesEyebrow: "Explore",
+      specialtiesTitle: "Technologies I use",
+      specialtiesDesc: "Browse the full stack by category.",
+      certsEyebrow: "Credentials",
+      certsTitle: "Certificates",
+      ctaEyebrow: "Next step",
+      ctaTitleA: "Got a project in mind?",
+      ctaTitleB: "Let's build it.",
+      ctaText: "Write me and tell me what you need: I reply fast and straight to the point.",
+      ctaSend: "Send a message",
+      ctaCv: "Download CV",
+      inLanguage: "en",
+      jobTitle: "Backend Developer",
+      personDescription:
+        "Backend developer specializing in Python and ASP.NET: APIs, databases and software architecture.",
+    }
+  : {
+      status: "Disponible para nuevos retos",
+      heroBefore: "Construyo el",
+      heroAccent: "backend",
+      heroAfter: "que sostiene tu producto.",
+      intro: "Soy",
+      role: "programador backend especializado en",
+      and: "y",
+      tail: "Diseño APIs, modelo datos y despliego servicios pensados para durar.",
+      ctaProjects: "Ver proyectos",
+      ctaTalk: "Hablemos",
+      stats: ["Proyectos", "Certificados", "Especialidades", "Empresas"],
+      featuredEyebrow: "Trabajo reciente",
+      featuredTitle: "Proyectos destacados",
+      viewAll: "Ver todos",
+      experienceEyebrow: "Trayectoria",
+      experienceTitle: "Experiencia profesional",
+      experienceDesc: "Dónde he aportado valor y con qué tecnología he trabajado.",
+      specialtiesEyebrow: "Explora",
+      specialtiesTitle: "Tecnologías que uso",
+      specialtiesDesc: "Explora el stack completo por categoría.",
+      certsEyebrow: "Validación",
+      certsTitle: "Certificados",
+      ctaEyebrow: "Siguiente paso",
+      ctaTitleA: "¿Tienes un proyecto en mente?",
+      ctaTitleB: "Construyámoslo.",
+      ctaText: "Escríbeme y platícame qué necesitas: respondo rápido y sin rodeos.",
+      ctaSend: "Enviar mensaje",
+      ctaCv: "Descargar CV",
+      inLanguage: "es",
+      jobTitle: "Desarrollador Backend",
+      personDescription:
+        "Programador backend especializado en Python y ASP.NET: APIs, bases de datos y arquitectura de software.",
+    };
+
 const stats = [
-  { value: String(allProjects.length), suffix: "+", label: "Proyectos" },
-  { value: String(certificates.length), suffix: "", label: "Certificados" },
-  { value: String(allTechs.length), suffix: "", label: "Especialidades" },
-  { value: String(works.length), suffix: "", label: "Empresas" },
+  { value: String(allProjects.length), suffix: "+", label: L.stats[0] },
+  { value: String(certificates.length), suffix: "", label: L.stats[1] },
+  { value: String(allTechs.length), suffix: "", label: L.stats[2] },
+  { value: String(works.length), suffix: "", label: L.stats[3] },
 ];
 
 // Datos estructurados: identidad del sitio + persona
@@ -45,9 +121,8 @@ const jsonLd = {
       "@id": personId,
       name: "Javier Armando Sarmiento Gil",
       alternateName: "JavierSG",
-      jobTitle: "Desarrollador Backend",
-      description:
-        "Programador backend especializado en Python y ASP.NET: APIs, bases de datos y arquitectura de software.",
+      jobTitle: L.jobTitle,
+      description: L.personDescription,
       url: `${site}/`,
       email: "mailto:jsdash10000@gmail.com",
       image: `${site}/logo.webp`,
@@ -78,7 +153,7 @@ const jsonLd = {
       "@id": `${site}/#website`,
       url: `${site}/`,
       name: "JavierSG",
-      inLanguage: "es",
+      inLanguage: L.inLanguage,
       publisher: { "@id": personId },
     },
   ],
@@ -95,8 +170,16 @@ const socials = [
 ---
 
 <Layout
-  title="JavierSG — Backend Developer · Python, .NET y PostgreSQL"
-  description="Portafolio de JavierSG, programador backend especializado en Python y ASP.NET: proyectos, experiencia, artículos técnicos y certificados."
+  title={
+    isEn
+      ? "JavierSG — Backend Developer | Python, .NET & PostgreSQL"
+      : "JavierSG — Backend Developer · Python, .NET y PostgreSQL"
+  }
+  description={
+    isEn
+      ? "JavierSG's portfolio: backend developer specializing in Python and ASP.NET. Projects, experience, technical articles and certificates."
+      : "Portafolio de JavierSG, programador backend especializado en Python y ASP.NET: proyectos, experiencia, artículos técnicos y certificados."
+  }
   locale={locale}
   alternate
   jsonLd={jsonLd}
@@ -106,7 +189,7 @@ const socials = [
     <div class="lg:col-span-7">
       <span class="chip chip--accent" data-reveal>
         <span class="h-1.5 w-1.5 rounded-full bg-good"></span>
-        Disponible para nuevos retos
+        {L.status}
       </span>
 
       <h1
@@ -114,7 +197,7 @@ const socials = [
         data-reveal
         style="--reveal-delay: 80ms"
       >
-        Construyo el <span class="text-grad">backend</span> que sostiene tu producto.
+        {L.heroBefore} <span class="text-grad">{L.heroAccent}</span> {L.heroAfter}
       </h1>
 
       <p
@@ -122,20 +205,19 @@ const socials = [
         data-reveal
         style="--reveal-delay: 160ms"
       >
-        Soy <strong class="font-semibold text-ink">Javier</strong>, programador backend
-        especializado en <span class="font-mono text-[0.95em] text-accent">Python</span> y
-        <span class="font-mono text-[0.95em] text-accent">ASP.NET</span>. Diseño APIs, modelo
-        datos y despliego servicios pensados para durar.
+        {L.intro} <strong class="font-semibold text-ink">Javier</strong>, {L.role}
+        <span class="font-mono text-[0.95em] text-accent">Python</span> {L.and}
+        <span class="font-mono text-[0.95em] text-accent">ASP.NET</span>. {L.tail}
       </p>
 
       <div class="mt-9 flex flex-wrap items-center gap-3" data-reveal style="--reveal-delay: 240ms">
-        <ButtonLink href="/projects" size="lg">
-          Ver proyectos
+        <ButtonLink href={link("/projects")} size="lg">
+          {L.ctaProjects}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
             <path d="M5 12h14m-7-7l7 7-7 7" />
           </svg>
         </ButtonLink>
-        <ButtonLink href="/contact" variant="ghost" size="lg">Hablemos</ButtonLink>
+        <ButtonLink href={link("/contact")} variant="ghost" size="lg">{L.ctaTalk}</ButtonLink>
 
         <div class="flex items-center gap-2 sm:ml-2">
           {
@@ -209,15 +291,15 @@ const socials = [
       <section class="shell py-16">
         <div class="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="Trabajo reciente"
-            title="Proyectos destacados"
+            eyebrow={L.featuredEyebrow}
+            title={L.featuredTitle}
             class="flex-1"
           />
           <a
-            href="/projects"
+            href={link("/projects")}
             class="link-animated mb-10 inline-flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-ink-2 uppercase transition-colors hover:text-white md:mb-14"
           >
-            Ver todos
+            {L.viewAll}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-3.5 w-3.5">
               <path d="M5 12h14m-7-7l7 7-7 7" />
             </svg>
@@ -230,7 +312,7 @@ const socials = [
             const statusInfo = data.status ? projectStatus[data.status] : undefined;
             return (
               <a
-                href={`/projects/${id}`}
+                href={link(`/projects/${id}`)}
                 class="card card--hover group flex flex-col overflow-hidden"
                 data-reveal
                 style={`--reveal-delay: ${index * 90}ms`}
@@ -239,13 +321,13 @@ const socials = [
                   <Image
                     transition:name={`img-${id}`}
                     src={data.image}
-                    alt={data.title ?? "Imagen del proyecto"}
+                    alt={data.title ?? (isEn ? "Project image" : "Imagen del proyecto")}
                     class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/10 to-transparent"></div>
                   {statusInfo && (
                     <span class:list={["chip absolute top-3 left-3", statusInfo.cls]}>
-                      {statusInfo.label}
+                      {isEn ? statusInfo.labelEn : statusInfo.label}
                     </span>
                   )}
                 </div>
@@ -274,9 +356,9 @@ const socials = [
   {/* ================= EXPERIENCIA ================= */}
   <section class="shell py-16">
     <SectionHeading
-      eyebrow="Trayectoria"
-      title="Experiencia profesional"
-      description="Dónde he aportado valor y con qué tecnología he trabajado."
+      eyebrow={L.experienceEyebrow}
+      title={L.experienceTitle}
+      description={L.experienceDesc}
     />
 
     <ol class="relative space-y-6 border-l border-line pl-6 sm:pl-10">
@@ -301,7 +383,11 @@ const socials = [
                 {work.data.logo && (
                   <img
                     src={work.data.logo}
-                    alt={`Logo de ${work.data.company}`}
+                    alt={
+                      isEn
+                        ? `${work.data.company} logo`
+                        : `Logo de ${work.data.company}`
+                    }
                     width="48"
                     height="48"
                     loading="lazy"
@@ -335,9 +421,9 @@ const socials = [
   {/* ================= ESPECIALIDADES ================= */}
   <section class="shell py-16">
     <SectionHeading
-      eyebrow="Especialidades"
-      title="Tecnologías que uso"
-      description="Explora el stack completo por categoría."
+      eyebrow={L.specialtiesEyebrow}
+      title={L.specialtiesTitle}
+      description={L.specialtiesDesc}
       align="center"
     />
 
@@ -345,7 +431,7 @@ const socials = [
       {
         allTechs.map((tech) => (
           <a
-            href={`/technologies/${tech.id}`}
+            href={link(`/technologies/${tech.id}`)}
             class="card card--hover flex items-center gap-3 px-5 py-3.5"
           >
             <img
@@ -357,7 +443,7 @@ const socials = [
               class="h-7 w-7 object-contain"
             />
             <span class="font-mono text-xs tracking-[0.12em] text-ink-2 uppercase">
-              {tech.name}
+              {techName(tech.id, tech.name, locale)}
             </span>
           </a>
         ))
@@ -367,7 +453,7 @@ const socials = [
 
   {/* ================= CERTIFICADOS ================= */}
   <section class="shell py-14" id="certificados">
-    <SectionHeading eyebrow="Validación" title="Certificados" align="center" />
+    <SectionHeading eyebrow={L.certsEyebrow} title={L.certsTitle} align="center" />
 
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
       {
@@ -404,17 +490,15 @@ const socials = [
       <div class="absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-brand/25 blur-3xl"></div>
 
       <div class="relative">
-        <p class="eyebrow justify-center">Siguiente paso</p>
+        <p class="eyebrow justify-center">{L.ctaEyebrow}</p>
         <h2 class="mx-auto mt-5 max-w-2xl text-3xl leading-tight font-bold sm:text-4xl">
-          ¿Tienes un proyecto en mente? <span class="text-grad">Construyámoslo.</span>
+          {L.ctaTitleA} <span class="text-grad">{L.ctaTitleB}</span>
         </h2>
-        <p class="mx-auto mt-4 max-w-xl text-ink-2">
-          Escríbeme y platícame qué necesitas: respondo rápido y sin rodeos.
-        </p>
+        <p class="mx-auto mt-4 max-w-xl text-ink-2">{L.ctaText}</p>
 
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink href="/contact" size="lg">Enviar mensaje</ButtonLink>
-          <ButtonLink href="/cv.pdf" variant="ghost" size="lg" download>Descargar CV</ButtonLink>
+          <ButtonLink href={link("/contact")} size="lg">{L.ctaSend}</ButtonLink>
+          <ButtonLink href="/cv.pdf" variant="ghost" size="lg" download>{L.ctaCv}</ButtonLink>
         </div>
       </div>
     </div>
