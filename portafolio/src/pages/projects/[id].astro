@@ -20,11 +20,43 @@ const { title, image, description, frameworks, type, url_production, url_repo, u
 const isPortrait = image.width < image.height;
 const statusInfo = status ? projectStatus[status] : undefined;
 const { Content } = await render(project);
+
+// Datos estructurados: migas de pan + ficha del software
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const pageUrl = `${site}/projects/${id}`;
+const codeRepository = url_repo || (urls ?? []).find((url) => url.includes("github.com/"));
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Inicio", item: `${site}/` },
+        { "@type": "ListItem", position: 2, name: "Proyectos", item: `${site}/projects` },
+        { "@type": "ListItem", position: 3, name: title, item: pageUrl },
+      ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: title ?? id,
+      description,
+      url: pageUrl,
+      image: new URL(image.src, Astro.site).toString(),
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Web",
+      keywords: (frameworks ?? []).join(", "),
+      codeRepository,
+      author: { "@type": "Person", "@id": `${site}/#javier`, name: "JavierSG", url: `${site}/` },
+    },
+  ],
+};
 ---
 
 <Layout
   title={`${title} | JavierSG`}
   description={description ?? `Proyecto ${title} por JavierSG.`}
+  jsonLd={jsonLd}
 >
   <article class="shell max-w-6xl py-12 md:py-16">
     {/* Encabezado */}

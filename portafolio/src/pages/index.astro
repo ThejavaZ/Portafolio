@@ -24,6 +24,57 @@ const stats = [
   { value: String(works.length), suffix: "", label: "Empresas" },
 ];
 
+// Datos estructurados: identidad del sitio + persona
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const personId = `${site}/#javier`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: "Javier Armando Sarmiento Gil",
+      alternateName: "JavierSG",
+      jobTitle: "Desarrollador Backend",
+      description:
+        "Programador backend especializado en Python y ASP.NET: APIs, bases de datos y arquitectura de software.",
+      url: `${site}/`,
+      email: "mailto:jsdash10000@gmail.com",
+      image: `${site}/logo.webp`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Hermosillo",
+        addressRegion: "Sonora",
+        addressCountry: "MX",
+      },
+      knowsAbout: [
+        "Python",
+        "ASP.NET",
+        "C#",
+        "PostgreSQL",
+        "SQL Server",
+        "Docker",
+        "Diseño de APIs",
+        "Arquitectura de bases de datos",
+      ],
+      sameAs: [
+        "https://github.com/ThejavaZ",
+        "https://www.linkedin.com/in/javier-armando-sarmiento-gil-aa10b0249/",
+        "https://x.com/TheJavaZs",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site}/#website`,
+      url: `${site}/`,
+      name: "JavierSG",
+      inLanguage: "es",
+      publisher: { "@id": personId },
+    },
+  ],
+};
+
 const socials = [
   { name: "GitHub", short: "GH", href: "https://github.com/ThejavaZ" },
   {
@@ -37,6 +88,7 @@ const socials = [
 <Layout
   title="Inicio | JavierSG"
   description="Portafolio de JavierSG: programador backend especializado en Python y ASP.NET. Proyectos, experiencia y certificados."
+  jsonLd={jsonLd}
 >
   {/* ================= HERO ================= */}
   <section class="shell relative grid items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-12 lg:gap-10">
