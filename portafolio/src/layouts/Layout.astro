@@ -3,6 +3,7 @@ import ClientRouter from "astro/components/ClientRouter.astro";
 import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import { t } from "../i18n/ui";
 
 interface LayoutProps {
   title: string;
@@ -40,6 +41,7 @@ const esPath = locale === "en" ? Astro.url.pathname.replace(/^\/en/, "") || "/" 
 const enPath = locale === "en" ? Astro.url.pathname : Astro.url.pathname === "/" ? "/en" : `/en${Astro.url.pathname}`;
 const absolute = (path: string) => new URL(path, Astro.site).toString();
 const ogLocale = locale === "en" ? "en_US" : "es_MX";
+const strings = t(locale);
 ---
 
 <!doctype html>
@@ -119,7 +121,7 @@ const ogLocale = locale === "en" ? "en_US" : "es_MX";
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:rounded-xl focus:bg-brand focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-glow"
     >
-      Saltar al contenido
+      {strings.skip}
     </a>
 
     <!-- Fondo ambiental: aurora + rejilla + grano -->
@@ -131,13 +133,13 @@ const ogLocale = locale === "en" ? "en_US" : "es_MX";
       <div class="ambient__noise"></div>
     </div>
 
-    <Header />
+    <Header locale={locale} alternate={alternate} />
 
     <main id="main" tabindex="-1" class="relative flex-1">
       <slot />
     </main>
 
-    <Footer />
+    <Footer locale={locale} />
 
     <script>
     // Revelado progresivo al hacer scroll (una sola vez por elemento)

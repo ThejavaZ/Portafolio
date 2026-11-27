@@ -1,24 +1,45 @@
 ---
+import { alternatePath, t, type Locale } from "../../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+  /** true si la página actual tiene versión en el otro idioma */
+  alternate?: boolean;
+}
+
+const { locale = "es", alternate = false } = Astro.props as Props;
+const strings = t(locale);
+
+// Ruta localizada para la navegación
+const link = (path: string) =>
+  locale === "en" ? (path === "/" ? "/en" : `/en${path}`) : path;
+
 const menuItems = [
-  { name: "Inicio", path: "/" },
-  { name: "Sobre mí", path: "/about" },
-  { name: "Proyectos", path: "/projects" },
-  { name: "Stack", path: "/technologies" },
-  { name: "Blog", path: "/blog" },
-  { name: "Contacto", path: "/contact" },
+  { name: strings.nav.home, base: "/", href: link("/") },
+  { name: strings.nav.about, base: "/about", href: link("/about") },
+  { name: strings.nav.projects, base: "/projects", href: link("/projects") },
+  { name: strings.nav.stack, base: "/technologies", href: link("/technologies") },
+  // El blog sigue siendo solo español: no se prefiere con /en
+  { name: strings.nav.blog, base: "/blog", href: "/blog" },
+  { name: strings.nav.contact, base: "/contact", href: link("/contact") },
 ];
 
-const pathname = (Astro.url.pathname.replace(/\/+$/, "") || "/");
+// Sin prefijo de idioma para que el resaltado activo funcione en /en/...
+const pathname = (
+  Astro.url.pathname.replace(/^\/en(?=\/|$)/, "").replace(/\/+$/, "") || "/"
+);
 
 const isActive = (path: string) =>
   path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`);
+
+const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
 ---
 
 <header id="top" class="sticky top-0 z-50 w-full">
   <div class="border-b border-line bg-bg/70 backdrop-blur-xl supports-[backdrop-filter]:bg-bg/60">
     <div class="shell flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
       {/* Marca */}
-      <a href="/" class="group flex items-center gap-3" aria-label="JavierSG — inicio">
+      <a href={locale === "en" ? "/en" : "/"} class="group flex items-center gap-3" aria-label={strings.brand.home}>
         <span class="relative block">
           <img
             src="/logo.webp"
@@ -37,21 +58,21 @@ const isActive = (path: string) =>
             Javier<span class="text-brand">SG</span>
           </span>
           <span class="mt-1 block font-mono text-[0.6rem] tracking-[0.22em] text-ink-3 uppercase">
-            Backend Developer
+            {strings.brand.role}
           </span>
         </span>
       </a>
 
-      {/* Nav desktop */}
-      <nav class="hidden items-center gap-1 lg:flex" aria-label="Navegación principal">
+      {/* Nav desktop (lg+) */}
+      <nav class="hidden items-center gap-1 lg:flex" aria-label={strings.navLabel.main}>
         {
           menuItems.map((item) => (
             <a
-              href={item.path}
-              aria-current={isActive(item.path) ? "page" : undefined}
+              href={item.href}
+              aria-current={isActive(item.base) ? "page" : undefined}
               class:list={[
                 "relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200",
-                isActive(item.path)
+                isActive(item.base)
                   ? "text-white"
                   : "text-ink-2 hover:text-white",
               ]}
@@ -60,7 +81,7 @@ const isActive = (path: string) =>
               <span
                 class:list={[
                   "absolute inset-x-4 -bottom-0.5 h-px bg-gradient-to-r from-brand to-accent transition-transform duration-300",
-                  isActive(item.path) ? "scale-x-100" : "scale-x-0",
+                  isActive(item.base) ? "scale-x-100" : "scale-x-0",
                 ]}
               />
             </a>
@@ -74,7 +95,7 @@ const isActive = (path: string) =>
           href="https://github.com/ThejavaZ"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Perfil de GitHub"
+          aria-label={strings.actions.github}
           class="hidden h-10 w-10 items-center justify-center rounded-xl border border-line text-ink-2 transition-all hover:border-brand/50 hover:text-white sm:flex"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
@@ -96,13 +117,24 @@ const isActive = (path: string) =>
             />
             <path d="M12 11v6m0 0l-3-3m3 3l3-3" />
           </svg>
-          Descargar CV
+          {strings.actions.cv}
+        </a>
+
+        {/* Conmutador de idioma */}
+        <a
+          href={switchHref}
+          lang={locale === "es" ? "en" : "es"}
+          aria-label={strings.langSwitch.label}
+          title={strings.langSwitch.label}
+          class="flex h-10 min-w-10 items-center justify-center rounded-xl border border-line px-3 font-mono text-xs font-semibold tracking-widest text-ink-2 transition-all hover:border-brand/50 hover:text-white"
+        >
+          {strings.langSwitch.text}
         </a>
 
         <button
           id="menu-open"
           class="flex h-10 w-10 items-center justify-center rounded-xl border border-line text-ink transition-colors hover:border-brand/50 hover:text-white lg:hidden"
-          aria-label="Abrir menú"
+          aria-label={strings.actions.openMenu}
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
@@ -136,7 +168,7 @@ const isActive = (path: string) =>
     <button
       id="menu-close"
       class="flex h-10 w-10 items-center justify-center rounded-xl border border-line text-ink-2 transition-all hover:rotate-90 hover:border-brand/50 hover:text-white"
-      aria-label="Cerrar menú"
+      aria-label={strings.actions.closeMenu}
     >
       <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12" />
@@ -144,16 +176,16 @@ const isActive = (path: string) =>
     </button>
   </div>
 
-  <nav class="flex flex-1 flex-col items-center justify-center gap-7 px-6" aria-label="Menú móvil">
+  <nav class="flex flex-1 flex-col items-center justify-center gap-7 px-6" aria-label={strings.navLabel.mobile}>
     {
       menuItems.map((item, index) => (
         <a
-          href={item.path}
+          href={item.href}
           data-mobile-link
-          aria-current={isActive(item.path) ? "page" : undefined}
+          aria-current={isActive(item.base) ? "page" : undefined}
           class:list={[
             "font-display text-4xl font-bold tracking-tight transition-all duration-300 sm:text-5xl",
-            isActive(item.path) ? "text-grad" : "text-ink-2 hover:text-white",
+            isActive(item.base) ? "text-grad" : "text-ink-2 hover:text-white",
           ]}
           style={`transition-delay: ${index * 45}ms`}
         >
@@ -162,11 +194,14 @@ const isActive = (path: string) =>
       ))
     }
     <a href="/cv.pdf" download data-mobile-link class="btn btn--primary btn--lg mt-4">
-      Descargar CV
+      {strings.actions.cv}
     </a>
   </nav>
 
   <div class="flex items-center justify-center gap-6 pb-10 font-mono text-xs tracking-widest text-ink-3 uppercase">
+    <a href={switchHref} lang={locale === "es" ? "en" : "es"} data-mobile-link>
+      {strings.langSwitch.text}
+    </a>
     <a href="https://github.com/ThejavaZ" target="_blank" rel="noopener noreferrer" data-mobile-link
       >GitHub</a
     >

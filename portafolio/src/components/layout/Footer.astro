@@ -1,13 +1,22 @@
 ---
+import { t, type Locale } from "../../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "es" } = Astro.props as Props;
+const strings = t(locale).footer;
+
 const currentYear = new Date().getFullYear();
 
 const navLinks = [
-  { name: "Inicio", path: "/" },
-  { name: "Sobre mí", path: "/about" },
-  { name: "Proyectos", path: "/projects" },
-  { name: "Stack", path: "/technologies" },
-  { name: "Blog", path: "/blog" },
-  { name: "Contacto", path: "/contact" },
+  { name: t(locale).nav.home, path: locale === "en" ? "/en" : "/" },
+  { name: t(locale).nav.about, path: locale === "en" ? "/en/about" : "/about" },
+  { name: t(locale).nav.projects, path: locale === "en" ? "/en/projects" : "/projects" },
+  { name: t(locale).nav.stack, path: locale === "en" ? "/en/technologies" : "/technologies" },
+  { name: t(locale).nav.blog, path: "/blog" },
+  { name: t(locale).nav.contact, path: locale === "en" ? "/en/contact" : "/contact" },
 ];
 
 const socialLinks = [
@@ -27,7 +36,7 @@ const socialLinks = [
     icon: "M18.9 2H22l-6.8 7.8L23 22h-6.3l-4.9-6.4L6.2 22H3l7.3-8.3L2 2h6.4l4.4 5.9L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z",
   },
   {
-    name: "Correo",
+    name: locale === "en" ? "Email" : "Correo",
     href: "mailto:jsdash10000@gmail.com",
     icon: "M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm2 .4V17h14V7.4l-7 4.6-7-4.6ZM7.4 7 12 10.1 16.6 7H7.4Z",
   },
@@ -38,12 +47,11 @@ const socialLinks = [
   <div class="shell grid gap-12 py-14 md:grid-cols-12">
     {/* Marca */}
     <div class="md:col-span-5">
-      <a href="/" class="font-display text-2xl font-bold tracking-tight">
+      <a href={locale === "en" ? "/en" : "/"} class="font-display text-2xl font-bold tracking-tight">
         Javier<span class="text-grad">SG</span>
       </a>
       <p class="mt-4 max-w-sm text-sm leading-relaxed text-ink-2">
-        Desarrollador backend enfocado en crear soluciones eficientes, escalables y bien
-        construidas. APIs, datos y todo lo que hay detrás de un buen producto.
+        {strings.tagline}
       </p>
 
       <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-2">
@@ -52,15 +60,15 @@ const socialLinks = [
           <span class="relative inline-flex h-2 w-2 rounded-full bg-good"></span>
         </span>
         <span class="font-mono text-[0.68rem] tracking-[0.18em] text-ink-2 uppercase">
-          Disponible para proyectos
+          {strings.available}
         </span>
       </div>
     </div>
 
     {/* Navegación */}
-    <nav class="md:col-span-3" aria-label="Navegación del pie de página">
+    <nav class="md:col-span-3" aria-label={strings.navigation}>
       <h3 class="font-mono text-[0.7rem] tracking-[0.24em] text-ink-3 uppercase">
-        Navegación
+        {strings.navigation}
       </h3>
       <ul class="mt-5 grid gap-3 text-sm">
         {
@@ -81,7 +89,7 @@ const socialLinks = [
     {/* Contacto */}
     <div class="md:col-span-4">
       <h3 class="font-mono text-[0.7rem] tracking-[0.24em] text-ink-3 uppercase">
-        Contacto
+        {strings.contact}
       </h3>
       <ul class="mt-5 grid gap-3 text-sm">
         <li>
@@ -96,7 +104,7 @@ const socialLinks = [
             >+52 662 203 7327</a
           >
         </li>
-        <li class="text-ink-3">Hermosillo, Sonora · México</li>
+        <li class="text-ink-3">{strings.location}</li>
       </ul>
 
       <div class="mt-6 flex flex-wrap gap-2.5">
@@ -123,10 +131,10 @@ const socialLinks = [
     <div
       class="shell flex flex-col items-center justify-between gap-3 py-6 font-mono text-[0.68rem] tracking-[0.16em] text-ink-3 uppercase sm:flex-row"
     >
-      <span>© {currentYear} JavierSG · Todos los derechos reservados</span>
+      <span>{strings.rights.replace("{year}", String(currentYear))}</span>
       <div class="flex items-center gap-5">
-        <span>Hecho con Astro & Tailwind</span>
-        <a href="#top" class="transition-colors hover:text-brand">Volver arriba ↑</a>
+        <span>{strings.made}</span>
+        <a href="#top" class="transition-colors hover:text-brand">{strings.top}</a>
       </div>
     </div>
   </div>
