@@ -53,6 +53,8 @@ const cubits = (await getCollection("cubits")).sort(
 
     <p
       class="mt-6 font-mono text-xs tracking-[0.2em] text-ink-3 uppercase"
+      role="status"
+      aria-live="polite"
       data-reveal
       style="--reveal-delay: 160ms"
     >
@@ -210,6 +212,8 @@ const cubits = (await getCollection("cubits")).sort(
 
     <p
       id="projects-empty"
+      role="status"
+      aria-live="polite"
       class="hidden py-16 text-center text-ink-2 italic"
     >
       No se encontraron proyectos con esa búsqueda.
