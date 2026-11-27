@@ -69,6 +69,14 @@ const imageURL = new URL(image, Astro.site);
   </head>
 
   <body class="flex min-h-dvh flex-col bg-bg text-ink">
+    {/* Accesibilidad: primer elemento enfocable del documento */}
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:rounded-xl focus:bg-brand focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-glow"
+    >
+      Saltar al contenido
+    </a>
+
     <!-- Fondo ambiental: aurora + rejilla + grano -->
     <div class="ambient" aria-hidden="true">
       <div class="ambient__grid"></div>
@@ -80,7 +88,7 @@ const imageURL = new URL(image, Astro.site);
 
     <Header />
 
-    <main class="relative flex-1">
+    <main id="main" tabindex="-1" class="relative flex-1">
       <slot />
     </main>
 
