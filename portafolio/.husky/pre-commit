@@ -1,0 +1,2 @@
+# Los hooks se ejecutan desde la raíz del repo: entramos en el paquete
+cd portafolio && pnpm lint-staged

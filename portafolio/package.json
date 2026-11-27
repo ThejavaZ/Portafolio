@@ -12,7 +12,21 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prepare": "cd .. && husky portafolio/.husky",
     "astro": "astro"
+  },
+  "lint-staged": {
+    "*.astro": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,mjs,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yaml,yml,css}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@astrojs/netlify": "^6.6.4",
@@ -30,6 +44,8 @@
     "eslint": "^10.15.0",
     "eslint-plugin-astro": "^3.2.2",
     "globals": "^17.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.2",
     "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
     "typescript": "^5.9.3",
