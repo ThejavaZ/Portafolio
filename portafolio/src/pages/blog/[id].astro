@@ -59,7 +59,12 @@ const formattedDate = post.data.date.toLocaleDateString("es-ES", {
 });
 ---
 
-<Layout title={`${post.data.title} | JavierSG`} description={post.data.excerpt} jsonLd={jsonLd}>
+<Layout
+  title={`${post.data.title} | JavierSG`}
+  description={post.data.excerpt}
+  type="article"
+  jsonLd={jsonLd}
+>
   <article class="shell max-w-3xl py-14 md:py-20">
     <header class="mb-10 space-y-5">
       <div class="flex flex-wrap items-center gap-3" data-reveal>
