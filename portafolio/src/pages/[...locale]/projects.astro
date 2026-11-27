@@ -10,18 +10,70 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale === "en" ? "en" : "es";
+const isEn = locale === "en";
 
-const projects = (await getCollection("projects")).sort(
+/** Ruta localizada */
+const link = (path: string) => (isEn ? (path === "/" ? "/en" : `/en${path}`) : path);
+
+const L = isEn
+  ? {
+      title: "Projects",
+      description:
+        "Projects built by JavierSG: ERPs, mobile apps, AI assistants and enterprise systems.",
+      eyebrow: "Portfolio",
+      subtitle: "Professional work and personal projects. Filter by technology or name.",
+      placeholder: "Search by technology or name...",
+      searchAria: "Search projects by name or technology",
+      count: "repositories found",
+      empty: "No projects matched that search.",
+      proEyebrow: "Professional experience",
+      proTitle: "Projects at work",
+      proDesc: "Work delivered in a professional environment; each card shows the company. General description only: no code, screenshots or internal information.",
+      professional: "Professional",
+      mine: "My contribution",
+      learned: "What I learned from it",
+      personalEyebrow: "Personal projects",
+      personalTitle: "Ideas I built",
+      personalDesc: "Experiments, tools and products of my own.",
+      details: "View details",
+      projectImage: "Project image",
+      system: "System",
+    }
+  : {
+      title: "Proyectos",
+      description:
+        "Proyectos desarrollados por JavierSG: ERP, apps móviles, asistentes de IA y sistemas empresariales.",
+      eyebrow: "Portafolio",
+      subtitle: "Trabajo profesional y proyectos personales. Filtra por tecnología o nombre.",
+      placeholder: "Buscar por tecnología o nombre...",
+      searchAria: "Buscar proyectos por nombre o tecnología",
+      count: "repositorios encontrados",
+      empty: "No se encontraron proyectos con esa búsqueda.",
+      proEyebrow: "Experiencia profesional",
+      proTitle: "Proyectos en empresa",
+      proDesc: "Desarrollos realizados en un entorno profesional, sin código ni información interna.",
+      professional: "Profesional",
+      mine: "Mi participación",
+      learned: "Qué me dejó",
+      personalEyebrow: "Proyectos personales",
+      personalTitle: "Ideas que construí",
+      personalDesc: "Experimentos, herramientas y productos propios.",
+      details: "Ver detalles",
+      projectImage: "Imagen del proyecto",
+      system: "System",
+    };
+
+const projects = (await getCollection(isEn ? "projectsEn" : "projects")).sort(
   (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
 );
-const cubits = (await getCollection("cubits")).sort(
+const cubits = (await getCollection(isEn ? "cubitsEn" : "cubits")).sort(
   (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
 );
 ---
 
 <Layout
-  title="Proyectos | JavierSG"
-  description="Proyectos desarrollados por JavierSG: ERP, apps móviles, asistentes de IA y sistemas empresariales."
+  title={`${L.title} | JavierSG`}
+  description={L.description}
   locale={locale}
   alternate
 >
@@ -29,9 +81,9 @@ const cubits = (await getCollection("cubits")).sort(
     {/* Encabezado + buscador */}
     <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
       <SectionHeading
-        eyebrow="Portafolio"
-        title="Proyectos"
-        description="Trabajo profesional y proyectos personales. Filtra por tecnología o nombre."
+        eyebrow={L.eyebrow}
+        title={L.title}
+        description={L.subtitle}
         spacing="none"
       />
 
@@ -52,8 +104,8 @@ const cubits = (await getCollection("cubits")).sort(
         <input
           id="project-search"
           type="text"
-          placeholder="Buscar por tecnología o nombre..."
-          aria-label="Buscar proyectos por nombre o tecnología"
+          placeholder={L.placeholder}
+          aria-label={L.searchAria}
           class="field pl-12"
         />
       </div>
@@ -67,15 +119,15 @@ const cubits = (await getCollection("cubits")).sort(
       style="--reveal-delay: 160ms"
     >
       <span id="projects-count" class="text-brand">{projects.length}</span>
-      repositorios encontrados
+      {L.count}
     </p>
 
     {/* --- EXPERIENCIA PROFESIONAL --- */}
     <section class="mt-16">
       <SectionHeading
-        eyebrow="Experiencia profesional"
-        title="Proyectos en empresa"
-        description="Desarrollos realizados en un entorno profesional, sin código ni información interna."
+        eyebrow={L.proEyebrow}
+        title={L.proTitle}
+        description={L.proDesc}
       />
 
       <div class="grid gap-6 md:grid-cols-2">
@@ -90,7 +142,9 @@ const cubits = (await getCollection("cubits")).sort(
                 style={`--reveal-delay: ${index * 90}ms`}
               >
                 <div class="relative overflow-hidden border-b border-line bg-gradient-to-br from-brand-2/25 via-surface to-surface px-6 py-7">
-                  <span class="chip chip--violet absolute top-4 left-4">Profesional</span>
+                  <span class="chip chip--violet absolute top-4 left-4">
+                    {L.professional}
+                  </span>
                   <span class="chip absolute top-4 right-4">{company}</span>
                   <p class="mt-6 font-display text-2xl leading-tight font-bold text-white sm:text-3xl">
                     {name}
@@ -107,7 +161,7 @@ const cubits = (await getCollection("cubits")).sort(
 
                   <div>
                     <p class="font-mono text-[0.66rem] tracking-[0.24em] text-ink-3 uppercase">
-                      Mi participación
+                      {L.mine}
                     </p>
                     <p class="mt-1.5 text-sm leading-relaxed text-ink-2">{participation}</p>
                   </div>
@@ -123,7 +177,7 @@ const cubits = (await getCollection("cubits")).sort(
                   {learnings && (
                     <div class="mt-auto rounded-xl border-l-2 border-brand/60 bg-white/[0.03] px-4 py-3">
                       <p class="font-mono text-[0.66rem] tracking-[0.24em] text-ink-3 uppercase">
-                        Qué me dejó
+                        {L.learned}
                       </p>
                       <p class="mt-1 text-sm leading-relaxed text-ink-2 italic">{learnings}</p>
                     </div>
@@ -139,9 +193,9 @@ const cubits = (await getCollection("cubits")).sort(
     {/* --- PROYECTOS PERSONALES --- */}
     <section class="mt-20">
       <SectionHeading
-        eyebrow="Proyectos personales"
-        title="Ideas que construí"
-        description="Experimentos, herramientas y productos propios."
+        eyebrow={L.personalEyebrow}
+        title={L.personalTitle}
+        description={L.personalDesc}
       />
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -159,12 +213,12 @@ const cubits = (await getCollection("cubits")).sort(
                 data-reveal
                 style={`--reveal-delay: ${(index % 3) * 80}ms`}
               >
-                <a href={`/projects/${id}`} class="flex h-full flex-col">
+                <a href={link(`/projects/${id}`)} class="flex h-full flex-col">
                   <div class="relative aspect-video overflow-hidden">
                     <Image
                       transition:name={`img-${id}`}
                       src={image}
-                      alt={title ?? "Imagen del proyecto"}
+                      alt={title ?? L.projectImage}
                       class:list={[
                         "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105",
                         isPortrait && "object-top",
@@ -174,10 +228,10 @@ const cubits = (await getCollection("cubits")).sort(
                       class="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent"
                     ></div>
 
-                    <span class="chip absolute top-3 right-3">{type || "System"}</span>
+                    <span class="chip absolute top-3 right-3">{type || L.system}</span>
                     {statusInfo && (
                       <span class:list={["chip absolute top-3 left-3", statusInfo.cls]}>
-                        {statusInfo.label}
+                        {isEn ? statusInfo.labelEn : statusInfo.label}
                       </span>
                     )}
                   </div>
@@ -198,7 +252,7 @@ const cubits = (await getCollection("cubits")).sort(
                     <span
                       class="mt-auto inline-flex items-center gap-2 pt-4 font-mono text-[0.68rem] tracking-[0.2em] text-ink-2 uppercase transition-all group-hover:gap-3.5 group-hover:text-brand"
                     >
-                      Ver detalles
+                      {L.details}
                       <svg
                         viewBox="0 0 24 24"
                         fill="none"
@@ -224,7 +278,7 @@ const cubits = (await getCollection("cubits")).sort(
       aria-live="polite"
       class="hidden py-16 text-center text-ink-2 italic"
     >
-      No se encontraron proyectos con esa búsqueda.
+      {L.empty}
     </p>
   </section>
 </Layout>

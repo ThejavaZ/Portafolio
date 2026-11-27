@@ -5,15 +5,26 @@ import Layout from "../../../layouts/Layout.astro";
 import { projectStatus } from "../../../data/projectStatus";
 
 export const getStaticPaths = async () => {
-  const projects = await getCollection("projects");
+  const spanish = await getCollection("projects");
+  const english = await getCollection("projectsEn");
 
-  return projects.flatMap((project) => [
-    { params: { locale: undefined, id: project.id }, props: { project } },
-    { params: { locale: "en", id: project.id }, props: { project } },
-  ]);
+  return [
+    ...spanish.map((project) => ({
+      params: { locale: undefined, id: project.id },
+      props: { project },
+    })),
+    ...english.map((project) => ({
+      params: { locale: "en", id: project.id },
+      props: { project },
+    })),
+  ];
 };
 
 const locale = Astro.params.locale === "en" ? "en" : "es";
+const isEn = locale === "en";
+
+/** Ruta localizada */
+const link = (path: string) => (isEn ? (path === "/" ? "/en" : `/en${path}`) : path);
 
 const { project } = Astro.props;
 const { data, id } = project;
@@ -22,6 +33,30 @@ const { title, image, description, frameworks, type, url_production, url_repo, u
 const isPortrait = image.width < image.height;
 const statusInfo = status ? projectStatus[status] : undefined;
 const { Content } = await render(project);
+
+const L = isEn
+  ? {
+      back: "Back",
+      stack: "Technology stack",
+      docs: "Documentation / links",
+      repo: "View repository",
+      all: "View all projects",
+      home: "Home",
+      section: "Projects",
+      image: "Project image",
+      fallbackDescription: `Project ${title} by JavierSG.`,
+    }
+  : {
+      back: "Volver",
+      stack: "Stack tecnológico",
+      docs: "Documentación / links",
+      repo: "Ver repositorio",
+      all: "Ver todos los proyectos",
+      home: "Inicio",
+      section: "Proyectos",
+      image: "Imagen del proyecto",
+      fallbackDescription: `Proyecto ${title} por JavierSG.`,
+    };
 
 // Datos estructurados: migas de pan + ficha del software
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
@@ -34,8 +69,8 @@ const jsonLd = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Inicio", item: `${site}/` },
-        { "@type": "ListItem", position: 2, name: "Proyectos", item: `${site}/projects` },
+        { "@type": "ListItem", position: 1, name: L.home, item: `${site}/` },
+        { "@type": "ListItem", position: 2, name: L.section, item: `${site}/projects` },
         { "@type": "ListItem", position: 3, name: title, item: pageUrl },
       ],
     },
@@ -57,7 +92,7 @@ const jsonLd = {
 
 <Layout
   title={`${title} | JavierSG`}
-  description={description ?? `Proyecto ${title} por JavierSG.`}
+  description={description ?? L.fallbackDescription}
   image={image.src}
   locale={locale}
   alternate
@@ -68,16 +103,20 @@ const jsonLd = {
     <header class="space-y-6">
       <div class="flex flex-wrap items-center gap-4" data-reveal>
         <a
-          href="/projects"
+          href={link("/projects")}
           class="link-animated inline-flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.2em] text-ink-2 uppercase transition-colors hover:text-brand"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
             <path d="M19 12H5m7-7l-7 7 7 7" />
           </svg>
-          Volver
+          {L.back}
         </a>
         <span class="h-px flex-1 bg-line"></span>
-        {statusInfo && <span class:list={["chip", statusInfo.cls]}>{statusInfo.label}</span>}
+        {statusInfo && (
+          <span class:list={["chip", statusInfo.cls]}>
+            {isEn ? statusInfo.labelEn : statusInfo.label}
+          </span>
+        )}
         <span class="chip">{type || "Software"}</span>
       </div>
 
@@ -114,7 +153,7 @@ const jsonLd = {
         <Image
           transition:name={`img-${id}`}
           src={image}
-          alt={title ?? "Imagen del proyecto"}
+          alt={title ?? L.image}
           class:list={[
             "mx-auto h-auto max-h-[70vh] w-full object-contain",
             isPortrait && "max-w-sm",
@@ -138,7 +177,7 @@ const jsonLd = {
       <aside class="lg:col-span-1">
         <div class="card sticky top-24 p-6 sm:p-7" data-reveal style="--reveal-delay: 80ms">
           <h3 class="border-b border-line pb-4 font-mono text-[0.7rem] tracking-[0.24em] text-ink-3 uppercase">
-            Stack tecnológico
+            {L.stack}
           </h3>
 
           <div class="mt-5 flex flex-wrap gap-1.5">
@@ -168,7 +207,7 @@ const jsonLd = {
               urls && urls.length > 0 && (
                 <div>
                   <span class="font-mono text-[0.66rem] tracking-[0.24em] text-ink-3 uppercase">
-                    Documentación / links
+                    {L.docs}
                   </span>
                   <ul class="mt-2 grid gap-2">
                     {urls.map((url) => (
@@ -209,7 +248,7 @@ const jsonLd = {
                   <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
                     <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 6 0c2.295-1.552 3.3-1.23 3.3-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
                   </svg>
-                  Ver repositorio
+                  {L.repo}
                 </a>
               )
             }
@@ -219,11 +258,11 @@ const jsonLd = {
     </div>
 
     <div class="mt-14 flex justify-center" data-reveal>
-      <a href="/projects" class="btn btn--ghost">
+      <a href={link("/projects")} class="btn btn--ghost">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
           <path d="M19 12H5m7-7l-7 7 7 7" />
         </svg>
-        Ver todos los proyectos
+        {L.all}
       </a>
     </div>
   </article>
