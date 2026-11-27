@@ -31,6 +31,9 @@ jobs:
       - name: Formato (Prettier)
         run: pnpm format:check
 
+      - name: Lint (ESLint)
+        run: pnpm lint
+
       - name: Type-check (astro check)
         run: pnpm check
 
