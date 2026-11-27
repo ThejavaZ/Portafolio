@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@netlify/edge-functions-dev@1.0.16':
+    hash: fa1b7d69c53026dde0614613bf3275fdb3d6562d63ee6da94329ba36fbc5ea74
+    path: patches/@netlify__edge-functions-dev@1.0.16.patch
+
 importers:
 
   .:
@@ -5135,7 +5140,7 @@ snapshots:
       '@netlify/config': 24.4.4
       '@netlify/db-dev': 0.7.0
       '@netlify/dev-utils': 4.4.3
-      '@netlify/edge-functions-dev': 1.0.16
+      '@netlify/edge-functions-dev': 1.0.16(patch_hash=fa1b7d69c53026dde0614613bf3275fdb3d6562d63ee6da94329ba36fbc5ea74)
       '@netlify/functions-dev': 1.2.4(rollup@4.60.0)
       '@netlify/headers': 2.1.8
       '@netlify/images': 1.3.7(@netlify/blobs@10.7.4)
@@ -5196,7 +5201,7 @@ snapshots:
 
   '@netlify/edge-functions-bootstrap@2.16.0': {}
 
-  '@netlify/edge-functions-dev@1.0.16':
+  '@netlify/edge-functions-dev@1.0.16(patch_hash=fa1b7d69c53026dde0614613bf3275fdb3d6562d63ee6da94329ba36fbc5ea74)':
     dependencies:
       '@netlify/dev-utils': 4.4.3
       '@netlify/edge-bundler': 14.9.19

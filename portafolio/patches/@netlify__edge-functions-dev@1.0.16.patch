@@ -1,0 +1,15 @@
+diff --git a/dist/node/main.js b/dist/node/main.js
+index 4d66fb56936f7c8148b46ffeb8f398d2a16e06f0..aa64e953053f0199fb7ad36ecb916c1f5fe9bc6a 100644
+--- a/dist/node/main.js
++++ b/dist/node/main.js
+@@ -256,7 +256,9 @@ var EdgeFunctionsHandler = class {
+       denoPort,
+       requestTimeout: this.requestTimeout
+     };
+-    const denoFlags = ["--allow-scripts", "--quiet", "--no-lock"];
++    // pnpm patch: Deno >= 2.9.6 rechaza `--allow-scripts` en `deno eval`
++    // (issue netlify/framework-adapters#67) y el servidor de Edge no arrancaba.
++    const denoFlags = ["--quiet", "--no-lock"];
+     const script = `import('${pathToFileURL(denoRunPath).toString()}');`;
+     try {
+       await denoBridge.runInBackground(["eval", ...denoFlags, script, JSON.stringify(runOptions)], processRef, {
