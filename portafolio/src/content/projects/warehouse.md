@@ -25,6 +25,9 @@ urls:
     "https://github.com/ThejavaZ/Warehouse-API",
     "https://github.com/ThejavaZ/Warehouse-Client",
   ]
+results:
+  - { value: "188", label: "pruebas automatizadas" }
+  - { value: "2", label: "aplicaciones desacopladas (API + cliente)" }
 ---
 
 **Warehouse** es un sistema de gestión de almacenes e inventario desarrollado como una aplicación desacoplada, utilizando ASP.NET Core para el backend y Vue 3 para el cliente web. El proyecto busca implementar una solución modular para administrar usuarios, productos, almacenes y operaciones de inventario mediante una API REST.

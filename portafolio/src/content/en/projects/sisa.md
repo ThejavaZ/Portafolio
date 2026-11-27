@@ -9,6 +9,8 @@ status: "funcional"
 url_production: "https://sisa-automatation.net"
 url_repo: "https://github.com/ThejavaZ/Sisa"
 urls: ["https://github.com/ThejavaZ/Sisa"]
+results:
+  - { value: "-40%", label: "IT team response time" }
 ---
 
 System built during my internship at **SISA Sistemas Automatizados (SISA&AUT)**. The main goal was to digitize and centralize the assignment of computer equipment to staff.

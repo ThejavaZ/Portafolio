@@ -18,6 +18,9 @@ status: "en-desarrollo"
 url_production: ""
 url_repo: "https://github.com/ThejavaZ/Liz-AI"
 urls: ["https://github.com/ThejavaZ/Liz-AI"]
+results:
+  - { value: "121+", label: "pruebas con pytest" }
+  - { value: "4", label: "proveedores de LLM" }
 ---
 
 **Liz-AI** es un asistente personal inteligente diseñado específicamente para entornos Linux, enfocado en optimizar flujos de trabajo de desarrollo, tareas de sistema y la interacción directa mediante la terminal con un enfoque estricto en modularidad y seguridad.

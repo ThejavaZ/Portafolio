@@ -24,6 +24,11 @@ urls:
     "https://github.com/ThejavaZ/laranet-docs",
     "https://www.nuget.org/packages/Laranet.Data",
   ]
+results:
+  - { value: "10", label: "paquetes publicados en NuGet" }
+  - { value: "488", label: "pruebas automatizadas" }
+  - { value: "68", label: "páginas de documentación" }
+  - { value: "28 → 6", label: "líneas de registro por recurso" }
 ---
 
 **Laranet** es un toolkit modular para .NET inspirado en Laravel cuyo objetivo no es hacer que .NET parezca Laravel, sino **hacer que .NET se sienta mejor para trabajar**: APIs expresivas, abstracciones reutilizables y patrones pensados para el desarrollador, sin reemplazar ni pelearse con el ecosistema nativo.

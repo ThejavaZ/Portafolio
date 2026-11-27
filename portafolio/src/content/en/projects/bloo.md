@@ -22,6 +22,10 @@ urls:
     "https://github.com/ThejavaZ/erp-client",
     "https://github.com/ThejavaZ/erp-api",
   ]
+results:
+  - { value: "77", label: "PHPUnit tests" }
+  - { value: "107+", label: "permissions with Spatie" }
+  - { value: "~280 MB", label: "multi-stage Docker image" }
 ---
 
 **Bloo ERP** is a decoupled, multi-tenant SaaS (Software as a Service) platform for end-to-end inventory, invoicing and commercial operations across multiple companies, kept isolated and secure.

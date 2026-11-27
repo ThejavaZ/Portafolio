@@ -28,8 +28,18 @@ const link = (path: string) => (isEn ? (path === "/" ? "/en" : `/en${path}`) : p
 
 const { project } = Astro.props;
 const { data, id } = project;
-const { title, image, description, frameworks, type, url_production, url_repo, urls, status } =
-  data;
+const {
+    title,
+    image,
+    description,
+    frameworks,
+    type,
+    url_production,
+    url_repo,
+    urls,
+    status,
+    results,
+  } = data;
 const isPortrait = image.width < image.height;
 const statusInfo = status ? projectStatus[status] : undefined;
 const { Content } = await render(project);
@@ -45,6 +55,7 @@ const L = isEn
       section: "Projects",
       image: "Project image",
       fallbackDescription: `Project ${title} by JavierSG.`,
+      resultsLabel: "Key results",
     }
   : {
       back: "Volver",
@@ -56,6 +67,7 @@ const L = isEn
       section: "Proyectos",
       image: "Imagen del proyecto",
       fallbackDescription: `Proyecto ${title} por JavierSG.`,
+      resultsLabel: "Resultados clave",
     };
 
 // Datos estructurados: migas de pan + ficha del software
@@ -142,6 +154,27 @@ const jsonLd = {
         )
       }
     </header>
+
+    {/* Resultados medibles */}
+    {
+      results && results.length > 0 && (
+        <section
+          class="grid grid-cols-2 gap-4 sm:grid-cols-4"
+          aria-label={L.resultsLabel}
+          data-reveal
+          style="--reveal-delay: 140ms"
+        >
+          {results.map((result) => (
+            <div class="card p-5 text-center">
+              <p class="font-display text-2xl font-bold text-grad">{result.value}</p>
+              <p class="mt-1 font-mono text-[0.64rem] leading-relaxed tracking-[0.14em] text-ink-3 uppercase">
+                {result.label}
+              </p>
+            </div>
+          ))}
+        </section>
+      )
+    }
 
     {/* Imagen principal */}
     <div

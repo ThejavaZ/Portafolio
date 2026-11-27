@@ -9,6 +9,8 @@ status: "funcional"
 url_production: "https://sisa-automatation.net"
 url_repo: "https://github.com/ThejavaZ/Sisa"
 urls: ["https://github.com/ThejavaZ/Sisa"]
+results:
+  - { value: "-40%", label: "tiempo de respuesta del área de sistemas" }
 ---
 
 Sistema desarrollado durante las estadías en **SISA Sistemas Automatizados (SISA&AUT)**. El objetivo principal fue digitalizar y centralizar el control de asignación de equipos de cómputo al personal.

@@ -22,6 +22,10 @@ urls:
     "https://github.com/ThejavaZ/erp-client",
     "https://github.com/ThejavaZ/erp-api",
   ]
+results:
+  - { value: "77", label: "pruebas PHPUnit" }
+  - { value: "107+", label: "permisos con Spatie" }
+  - { value: "~280 MB", label: "imagen Docker multi-etapa" }
 ---
 
 **Bloo ERP** es una plataforma SaaS (Software as a Service) desacoplada y multi-tenant diseñada para la gestión integral de inventarios, facturación y operaciones comerciales para múltiples empresas de manera aislada y segura.

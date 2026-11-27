@@ -25,6 +25,9 @@ urls:
     "https://github.com/ThejavaZ/Warehouse-API",
     "https://github.com/ThejavaZ/Warehouse-Client",
   ]
+results:
+  - { value: "188", label: "automated tests" }
+  - { value: "2", label: "decoupled apps (API + client)" }
 ---
 
 **Warehouse** is a warehouse and inventory management system built as a decoupled application, using ASP.NET Core for the backend and Vue 3 for the web client. The project aims to deliver a modular solution for managing users, products, warehouses and inventory operations through a REST API.

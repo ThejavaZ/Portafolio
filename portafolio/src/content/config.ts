@@ -20,6 +20,10 @@ const projectsSchema = ({ image }: SchemaContext) =>
     // En urls, permitimos que el array esté vacío o que los strings no sean URLs perfectas si están vacíos
     url_repo: z.string().url().or(z.literal("")).optional(),
     urls: z.array(z.string()).optional(),
+    // Resultados medibles del proyecto (se muestran como cifras destacadas)
+    results: z
+      .array(z.object({ value: z.string(), label: z.string() }))
+      .optional(),
   });
 
 const worksSchema = z.object({
