@@ -2,6 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { allTechs } from "../../../data/tech-data";
+import { techDescription, techName } from "../../../i18n/tech";
 import SectionHeading from "../../../components/ui/SectionHeading.astro";
 
 export function getStaticPaths() {
@@ -9,26 +10,59 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale === "en" ? "en" : "es";
+const isEn = locale === "en";
+
+/** Ruta localizada */
+const link = (path: string) => (isEn ? (path === "/" ? "/en" : `/en${path}`) : path);
+
+const L = isEn
+  ? {
+      metaTitle: "Tech stack | JavierSG",
+      metaDescription:
+        "All of JavierSG's specialties: Python, databases, backend, frontend, DevOps, desktop, mobile, Git and tools.",
+      eyebrow: "Stack",
+      title: "Technologies and specialties",
+      description:
+        "Nine categories with the full stack, the tools and the use cases behind each one.",
+      perTech: (count: number) => `${count} technologies`,
+      descriptionOf: (id: string, text: string | undefined) =>
+        techDescription(id, text, locale),
+      view: "View stack",
+      techName: (id: string, name: string) => techName(id, name, locale),
+    }
+  : {
+      metaTitle: "Stack tecnológico | JavierSG",
+      metaDescription:
+        "Todas las especialidades de JavierSG: Python, bases de datos, backend, frontend, DevOps, escritorio, móvil, Git y herramientas.",
+      eyebrow: "Stack",
+      title: "Tecnologías y especialidades",
+      description:
+        "Nueve categorías con el stack completo, las herramientas y los casos de uso de cada una.",
+      perTech: (count: number) => `${count} tecnologías`,
+      descriptionOf: (id: string, text: string | undefined) => text,
+      view: "Ver stack",
+      techName: (id: string, name: string) => name,
+    };
 ---
 
 <Layout
-  title="Stack tecnológico | JavierSG"
-  description="Todas las especialidades de JavierSG: Python, bases de datos, backend, frontend, DevOps, escritorio, móvil, Git y herramientas."
+  title={L.metaTitle}
+  description={L.metaDescription}
   locale={locale}
   alternate
 >
   <section class="shell py-14 md:py-20">
     <SectionHeading
-      eyebrow="Stack"
-      title="Tecnologías y especialidades"
-      description="Nueve categorías con el stack completo, las herramientas y los casos de uso de cada una."
+      eyebrow={L.eyebrow}
+      title={L.title}
+      description={L.description}
     />
 
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {
         allTechs.map((tech, index) => (
           <a
-            href={`/technologies/${tech.id}`}
+            href={link(`/technologies/${tech.id}`)}
             class="card card--hover group flex h-full flex-col gap-4 p-6"
             data-reveal
             style={`--reveal-delay: ${(index % 3) * 70}ms`}
@@ -37,7 +71,7 @@ const locale = Astro.params.locale === "en" ? "en" : "es";
               <div class="rounded-2xl border border-line bg-surface-2 p-3 transition-transform duration-300 group-hover:-translate-y-1">
                 <Image
                   src={tech.logo}
-                  alt={tech.name}
+                  alt={L.techName(tech.id, tech.name)}
                   width={44}
                   height={44}
                   class="h-11 w-11 object-contain"
@@ -45,22 +79,24 @@ const locale = Astro.params.locale === "en" ? "en" : "es";
               </div>
               <div>
                 <h2 class="text-lg leading-tight font-semibold transition-colors group-hover:text-brand">
-                  {tech.name}
+                  {L.techName(tech.id, tech.name)}
                 </h2>
                 <p class="mt-1 font-mono text-[0.66rem] tracking-[0.16em] text-ink-3 uppercase">
-                  {tech.stack.length} tecnologías
+                  {L.perTech(tech.stack.length)}
                 </p>
               </div>
             </div>
 
             {
               tech.description && (
-                <p class="text-sm leading-relaxed text-ink-2">{tech.description}</p>
+                <p class="text-sm leading-relaxed text-ink-2">
+                  {L.descriptionOf(tech.id, tech.description)}
+                </p>
               )
             }
 
             <span class="mt-auto inline-flex items-center gap-2 font-mono text-[0.68rem] tracking-[0.18em] text-ink-2 uppercase transition-all group-hover:gap-3.5 group-hover:text-brand">
-              Ver stack
+              {L.view}
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
