@@ -39,6 +39,7 @@ const socials = [
     <div class="grid gap-8 lg:grid-cols-2">
       {/* ---------- Formulario ---------- */}
       <form
+        id="contact-form"
         name="contacto"
         method="POST"
         data-netlify="true"
@@ -120,6 +121,30 @@ const socials = [
         </p>
       </form>
 
+      {/* Confirmación tras enviar (se muestra con el script de abajo) */}
+      <div
+        id="form-success"
+        class="card hidden flex-col items-center gap-5 p-10 text-center"
+        role="status"
+        aria-live="polite"
+        tabindex="-1"
+      >
+        <span class="flex h-14 w-14 items-center justify-center rounded-full bg-good/15 text-good">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-7 w-7">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+          </svg>
+        </span>
+        <div class="space-y-2">
+          <h2 class="text-2xl font-bold">Mensaje enviado</h2>
+          <p class="text-ink-2">
+            Gracias por escribirme. Te contesto lo antes posible, normalmente en menos de 24 h.
+          </p>
+        </div>
+        <button type="button" id="form-reset" class="btn btn--ghost btn--sm">
+          Enviar otro mensaje
+        </button>
+      </div>
+
       {/* ---------- Redes + mapa ---------- */}
       <div class="flex flex-col gap-6">
         <div class="grid gap-4 sm:grid-cols-3" data-reveal style="--reveal-delay: 80ms">
@@ -165,3 +190,75 @@ const socials = [
     </div>
   </section>
 </Layout>
+
+<script>
+  function initContactForm() {
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const success = document.getElementById("form-success");
+    const reset = document.getElementById("form-reset");
+    if (!form || !success || form.dataset.bound === "1") return;
+
+    form.dataset.bound = "1";
+    const submitButton = form.querySelector<HTMLButtonElement>("button[type=submit]");
+    const originalLabel = submitButton?.innerHTML ?? "";
+
+    const showSuccess = () => {
+      form.classList.add("hidden");
+      success.classList.remove("hidden");
+      success.classList.add("flex");
+      success.focus();
+      success.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+
+    const restoreButton = () => {
+      if (!submitButton) return;
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalLabel;
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Enviando…";
+      }
+
+      try {
+        if (import.meta.env.DEV) {
+          // Sin backend en local: simulamos el envío para ver el estado
+          await new Promise((resolve) => setTimeout(resolve, 700));
+        } else {
+          const params = new URLSearchParams();
+          new FormData(form).forEach((value, key) => {
+            if (typeof value === "string") params.append(key, value);
+          });
+
+          const response = await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params.toString(),
+          });
+
+          if (!response.ok) throw new Error(`Error ${response.status}`);
+        }
+
+        showSuccess();
+      } catch {
+        // Si falla la petición, dejamos que el navegador haga el POST nativo
+        restoreButton();
+        form.submit();
+      }
+    });
+
+    reset?.addEventListener("click", () => {
+      form.reset();
+      success.classList.add("hidden");
+      success.classList.remove("flex");
+      form.classList.remove("hidden");
+      form.querySelector<HTMLElement>("input")?.focus();
+    });
+  }
+
+  document.addEventListener("astro:page-load", initContactForm);
+</script>
