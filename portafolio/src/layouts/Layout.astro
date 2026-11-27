@@ -46,6 +46,12 @@ const imageURL = new URL(image, Astro.site);
     <meta name="author" content="JavierSG" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Bitácora de JavierSG"
+      href={new URL("rss.xml", Astro.site)}
+    />
 
     <!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
     <meta property="og:type" content={type} />
