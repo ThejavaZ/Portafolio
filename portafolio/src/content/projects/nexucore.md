@@ -17,6 +17,7 @@ type: "Full-Stack ERP"
 order: 5
 status: "en-desarrollo"
 url_production: ""
+url_repo: "https://github.com/ThejavaZ/AriaTechShop-ERP"
 urls: ["https://github.com/ThejavaZ/AriaTechShop-ERP"]
 ---
 

@@ -17,6 +17,7 @@ type: "Open Source Developer Toolkit"
 order: 0
 status: "en-desarrollo"
 url_production: ""
+url_repo: "https://github.com/ThejavaZ/Laranet"
 urls:
   [
     "https://github.com/ThejavaZ/Laranet",

@@ -7,7 +7,8 @@ type: "Empresarial"
 order: 5
 status: "funcional"
 url_production: "https://sisa-automatation.net"
-urls: ["https://github.com/ThejavaZ/Sisa.git"]
+url_repo: "https://github.com/ThejavaZ/Sisa"
+urls: ["https://github.com/ThejavaZ/Sisa"]
 ---
 
 Sistema desarrollado durante las estadías en **SISA Sistemas Automatizados (SISA&AUT)**. El objetivo principal fue digitalizar y centralizar el control de asignación de equipos de cómputo al personal.
