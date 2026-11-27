@@ -7,6 +7,64 @@ export function getStaticPaths() {
 }
 
 const locale = Astro.params.locale === "en" ? "en" : "es";
+const isEn = locale === "en";
+
+const L = isEn
+  ? {
+      metaTitle: "Contact | JavierSG",
+      metaDescription:
+        "Got a project or a job opening? Reach out: contact form, email and JavierSG's social profiles.",
+      eyebrow: "Contact",
+      title: "Shall we talk backend?",
+      description: "Send me a message or find me on social media. I reply fast and straight to the point.",
+      name: "Name",
+      namePlaceholder: "e.g. John Doe",
+      email: "Email",
+      emailPlaceholder: "you@example.com",
+      subject: "Subject",
+      subjectPlaceholder: "How can I help you?",
+      message: "Message",
+      messagePlaceholder: "Write your message here...",
+      honeypot: "Do not fill this out:",
+      submit: "Send message",
+      sending: "Sending…",
+      note: "Usually replying within 24 hours",
+      successTitle: "Message sent",
+      successText: "Thanks for writing. I'll get back to you as soon as I can, usually within 24 hours.",
+      sendAnother: "Send another message",
+      location: "Location: Hermosillo, Mexico",
+      mapTitle: "Location map: Hermosillo, Sonora, Mexico",
+      linkedin: "LinkedIn profile",
+      emailLabel: "Email",
+    }
+  : {
+      metaTitle: "Contacto | JavierSG",
+      metaDescription:
+        "¿Tienes un proyecto o una vacante? Escríbeme: formulario directo, correo y redes de JavierSG.",
+      eyebrow: "Contacto",
+      title: "¿Hablamos de backend?",
+      description: "Envíame un mensaje o búscame en mis redes. Respondo rápido y sin rodeos.",
+      name: "Nombre",
+      namePlaceholder: "Ej. John Doe",
+      email: "Email",
+      emailPlaceholder: "tu@email.com",
+      subject: "Asunto",
+      subjectPlaceholder: "¿En qué puedo ayudarte?",
+      message: "Mensaje",
+      messagePlaceholder: "Escribe tu propuesta aquí...",
+      honeypot: "No llenes este campo:",
+      submit: "Enviar mensaje",
+      sending: "Enviando…",
+      note: "Respuesta habitual en menos de 24 h",
+      successTitle: "Mensaje enviado",
+      successText:
+        "Gracias por escribirme. Te contesto lo antes posible, normalmente en menos de 24 h.",
+      sendAnother: "Enviar otro mensaje",
+      location: "Ubicación: Hermosillo, México",
+      mapTitle: "Mapa de ubicación: Hermosillo, Sonora, México",
+      linkedin: "Perfil de LinkedIn",
+      emailLabel: "Correo",
+    };
 
 const socials = [
   {
@@ -19,10 +77,10 @@ const socials = [
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/javier-armando-sarmiento-gil-aa10b0249/",
     icon: "M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C21.4 8.65 22 11 22 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.57-2.3 3.2V21h-4V9Z",
-    label: "Perfil de LinkedIn",
+    label: L.linkedin,
   },
   {
-    name: "Correo",
+    name: L.emailLabel,
     href: "mailto:jsdash10000@gmail.com",
     icon: "M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm2 .4V17h14V7.4l-7 4.6-7-4.6ZM7.4 7 12 10.1 16.6 7H7.4Z",
     label: "jsdash10000@gmail.com",
@@ -31,16 +89,17 @@ const socials = [
 ---
 
 <Layout
-  title="Contacto | JavierSG"
-  description="¿Tienes un proyecto o una vacante? Escríbeme: formulario directo, correo y redes de JavierSG."
+  title={L.metaTitle}
+  description={L.metaDescription}
   locale={locale}
   alternate
 >
   <section class="shell py-14 md:py-20">
     <SectionHeading
-      eyebrow="Contacto"
-      title="¿Hablamos de backend?"
-      description="Envíame un mensaje o búscame en mis redes. Respondo rápido y sin rodeos."
+      eyebrow={L.eyebrow}
+      title={L.title}
+      suffix=""
+      description={L.description}
       align="center"
     />
 
@@ -57,34 +116,34 @@ const socials = [
       >
         <input type="hidden" name="form-name" value="contacto" />
         <p class="hidden">
-          <label>No llenes este campo: <input name="bot-field" /></label>
+          <label>{L.honeypot} <input name="bot-field" /></label>
         </p>
 
         <div class="grid gap-5 md:grid-cols-2">
           <div class="flex flex-col gap-2">
             <label for="name" class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
-              >Nombre</label
+              >{L.name}</label
             >
             <input
               type="text"
               id="name"
               name="name"
               required
-              placeholder="Ej. John Doe"
+              placeholder={L.namePlaceholder}
               class="field"
             />
           </div>
 
           <div class="flex flex-col gap-2">
             <label for="email" class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
-              >Email</label
+              >{L.email}</label
             >
             <input
               type="email"
               id="email"
               name="email"
               required
-              placeholder="tu@email.com"
+              placeholder={L.emailPlaceholder}
               class="field"
             />
           </div>
@@ -92,40 +151,44 @@ const socials = [
 
         <div class="mt-5 flex flex-col gap-2">
           <label for="subject" class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
-            >Asunto</label
+            >{L.subject}</label
           >
           <input
             type="text"
             id="subject"
             name="subject"
             required
-            placeholder="¿En qué puedo ayudarte?"
+            placeholder={L.subjectPlaceholder}
             class="field"
           />
         </div>
 
         <div class="mt-5 flex flex-col gap-2">
           <label for="message" class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
-            >Mensaje</label
+            >{L.message}</label
           >
           <textarea
             id="message"
             name="message"
             required
             rows="5"
-            placeholder="Escribe tu propuesta aquí..."
+            placeholder={L.messagePlaceholder}
             class="field resize-none"></textarea>
         </div>
 
-        <button type="submit" class="btn btn--primary btn--lg mt-7 w-full">
-          Enviar mensaje
+        <button
+          type="submit"
+          data-sending={L.sending}
+          class="btn btn--primary btn--lg mt-7 w-full"
+        >
+          {L.submit}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4.5 w-4.5">
             <path d="M5 12h14m-7-7l7 7-7 7" />
           </svg>
         </button>
 
         <p class="mt-4 text-center font-mono text-[0.66rem] tracking-[0.14em] text-ink-3 uppercase">
-          Respuesta habitual en menos de 24 h
+          {L.note}
         </p>
       </form>
 
@@ -143,13 +206,11 @@ const socials = [
           </svg>
         </span>
         <div class="space-y-2">
-          <h2 class="text-2xl font-bold">Mensaje enviado</h2>
-          <p class="text-ink-2">
-            Gracias por escribirme. Te contesto lo antes posible, normalmente en menos de 24 h.
-          </p>
+          <h2 class="text-2xl font-bold">{L.successTitle}</h2>
+          <p class="text-ink-2">{L.successText}</p>
         </div>
         <button type="button" id="form-reset" class="btn btn--ghost btn--sm">
-          Enviar otro mensaje
+          {L.sendAnother}
         </button>
       </div>
 
@@ -183,11 +244,11 @@ const socials = [
             <span
               class="chip absolute top-3 left-3 z-10 bg-surface/90 backdrop-blur-md"
             >
-              Ubicación: Hermosillo, México
+              {L.location}
             </span>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d111516.34005086815!2d-111.0289893081123!3d29.088914652253337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86ce836f6630f57d%3A0x600b33230a133f92!2sHermosillo%2C%20Son.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx"
-              title="Mapa de ubicación: Hermosillo, Sonora, México"
+              title={L.mapTitle}
               class="absolute inset-0 h-full w-full border-none grayscale invert contrast-125 opacity-80"
               allowfullscreen=""
               loading="lazy"
@@ -229,7 +290,7 @@ const socials = [
 
       if (submitButton) {
         submitButton.disabled = true;
-        submitButton.textContent = "Enviando…";
+        submitButton.textContent = submitButton.dataset.sending ?? "…";
       }
 
       try {
