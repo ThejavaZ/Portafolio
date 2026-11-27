@@ -60,7 +60,9 @@ const L = isEn
 
 // Datos estructurados: migas de pan + ficha del software
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
-const pageUrl = `${site}/projects/${id}`;
+const homeItem = isEn ? `${site}/en/` : `${site}/`;
+const projectsItem = isEn ? `${site}/en/projects` : `${site}/projects`;
+const pageUrl = isEn ? `${site}/en/projects/${id}` : `${site}/projects/${id}`;
 const codeRepository = url_repo || (urls ?? []).find((url) => url.includes("github.com/"));
 
 const jsonLd = {
@@ -69,8 +71,8 @@ const jsonLd = {
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: L.home, item: `${site}/` },
-        { "@type": "ListItem", position: 2, name: L.section, item: `${site}/projects` },
+        { "@type": "ListItem", position: 1, name: L.home, item: homeItem },
+        { "@type": "ListItem", position: 2, name: L.section, item: projectsItem },
         { "@type": "ListItem", position: 3, name: title, item: pageUrl },
       ],
     },

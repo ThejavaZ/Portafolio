@@ -5,14 +5,75 @@ import { getCollection } from "astro:content";
 import photo from "../../assets/javier-sarmiento.jpg";
 import SectionHeading from "../../components/ui/SectionHeading.astro";
 import ButtonLink from "../../components/ui/ButtonLink.astro";
+import { techName } from "../../i18n/tech";
 
 export function getStaticPaths() {
   return [{ params: { locale: undefined } }, { params: { locale: "en" } }];
 }
 
 const locale = Astro.params.locale === "en" ? "en" : "es";
+const isEn = locale === "en";
 
-const works = (await getCollection("works")).sort((a, b) =>
+/** Ruta localizada */
+const link = (path: string) => (isEn ? (path === "/" ? "/en" : `/en${path}`) : path);
+
+const L = isEn
+  ? {
+      metaTitle: "About | JavierSG",
+      metaDescription:
+        "JavierSG's background, core stack and specialties: UTH graduate passionate about backend development.",
+      eyebrow: "About me",
+      title: "My background",
+      p1a: "I'm a graduate of ",
+      p1b: " with one driving idea: understanding how the pieces fit together. That's why I specialized in ",
+      p1c: ", always looking for efficiency and scalability in everything I build.",
+      p1Strong: "server and database architecture",
+      p2: "Today I build software for corporate clients: APIs, integrations and services that have to work on Monday at 8 a.m.",
+      ctaProjects: "View projects",
+      ctaContact: "Contact",
+      photoAlt: "Photo of Javier Armando Sarmiento Gil",
+      stackEyebrow: "Core stack",
+      stackTitle: "What I work with daily",
+      stackDesc: "Backend, data and infrastructure: the core I build on.",
+      stackLead:
+        "API and backend services development with C# and .NET, focused on maintainability, data persistence and software architecture. Complementary experience in Python, automation and cross-platform applications.",
+      specialtiesEyebrow: "Explore",
+      specialtiesTitle: "Specialties",
+      specialtiesDesc: "Each category with its stack, tools and use cases.",
+      workEyebrow: "Work experience",
+      workTitle: "Where I've worked",
+      workDesc: "Professional history, most recent first.",
+      companyLogo: (company: string) => `${company} logo`,
+    }
+  : {
+      metaTitle: "Acerca de | JavierSG",
+      metaDescription:
+        "Trayectoria, stack principal y especialidades de JavierSG: egresado de la UTH apasionado por el desarrollo backend.",
+      eyebrow: "Sobre mí",
+      title: "Mi trayectoria",
+      p1a: "Soy egresado de la ",
+      p1b: " y me mueve una sola idea: entender cómo encajan las piezas. Por eso me especialicé en la ",
+      p1c: ", buscando eficiencia y escalabilidad en cada proyecto que toco.",
+      p1Strong: "arquitectura de servidores y bases de datos",
+      p2: "Hoy trabajo construyendo software para clientes corporativos: APIs, integraciones y servicios que tienen que funcionar el lunes a las 8 a. m.",
+      ctaProjects: "Ver proyectos",
+      ctaContact: "Contacto",
+      photoAlt: "Foto de Javier Armando Sarmiento Gil",
+      stackEyebrow: "Stack principal",
+      stackTitle: "Con qué trabajo a diario",
+      stackDesc: "Backend, datos e infraestructura: el núcleo sobre el que construyo.",
+      stackLead:
+        "Desarrollo de APIs y servicios backend con C# y .NET, orientados a la mantenibilidad, la persistencia de datos y la arquitectura de software. Experiencia complementaria en Python, automatización y aplicaciones multiplataforma.",
+      specialtiesEyebrow: "Explora",
+      specialtiesTitle: "Especialidades",
+      specialtiesDesc: "Cada categoría con su stack, herramientas y casos de uso.",
+      workEyebrow: "Experiencia laboral",
+      workTitle: "Dónde he trabajado",
+      workDesc: "Trayectoria profesional ordenada de más reciente a más antigua.",
+      companyLogo: (company: string) => `Logo de ${company}`,
+    };
+
+const works = (await getCollection(isEn ? "worksEn" : "works")).sort((a, b) =>
   b.data.startDate.localeCompare(a.data.startDate)
 );
 
@@ -38,8 +99,8 @@ const specialties = [
 ---
 
 <Layout
-  title="Acerca de | JavierSG"
-  description="Trayectoria, stack principal y especialidades de JavierSG: egresado de la UTH apasionado por el desarrollo backend."
+  title={L.metaTitle}
+  description={L.metaDescription}
   image={photo.src}
   locale={locale}
   alternate
@@ -48,23 +109,18 @@ const specialties = [
   <section class="shell grid items-center gap-12 pt-14 pb-16 md:pt-20 lg:grid-cols-12">
     <div class="lg:col-span-7">
       <SectionHeading
-        eyebrow="Sobre mí"
-        title="Mi trayectoria"
+        eyebrow={L.eyebrow}
+        title={L.title}
         suffix=""
         spacing="none"
       />
 
       <div class="mt-6 space-y-5 text-lg leading-relaxed text-ink-2" data-reveal>
         <p>
-          Soy egresado de la <strong class="font-semibold text-ink">UTH</strong> y me mueve una
-          sola idea: entender cómo encajan las piezas. Por eso me especialicé en la
-          <strong class="font-semibold text-ink"> arquitectura de servidores y bases de datos</strong>,
-          buscando eficiencia y escalabilidad en cada proyecto que toco.
+          {L.p1a}<strong class="font-semibold text-ink">UTH</strong>{L.p1b}
+          <strong class="font-semibold text-ink">{L.p1Strong}</strong>{L.p1c}
         </p>
-        <p>
-          Hoy trabajo construyendo software para clientes corporativos: APIs, integraciones y
-          servicios que tienen que funcionar el lunes a las 8 a. m.
-        </p>
+        <p>{L.p2}</p>
       </div>
 
       <div class="mt-8 flex flex-wrap gap-3" data-reveal style="--reveal-delay: 120ms">
@@ -75,8 +131,8 @@ const specialties = [
       </div>
 
       <div class="mt-9 flex flex-wrap gap-3" data-reveal style="--reveal-delay: 180ms">
-        <ButtonLink href="/projects">Ver proyectos</ButtonLink>
-        <ButtonLink href="/contact" variant="ghost">Contacto</ButtonLink>
+        <ButtonLink href={link("/projects")}>{L.ctaProjects}</ButtonLink>
+        <ButtonLink href={link("/contact")} variant="ghost">{L.ctaContact}</ButtonLink>
       </div>
     </div>
 
@@ -88,7 +144,7 @@ const specialties = [
       <div class="card p-2">
         <Image
           src={photo}
-          alt="Foto de Javier Armando Sarmiento Gil"
+          alt={L.photoAlt}
           loading="lazy"
           class="aspect-square w-full rounded-[1.1rem] object-cover object-[50%_25%]"
         />
@@ -99,10 +155,10 @@ const specialties = [
   {/* ============ MAIN STACK ============ */}
   <section class="shell py-14">
     <SectionHeading
-      eyebrow="Stack principal"
-      title="Con qué trabajo a diario"
+      eyebrow={L.stackEyebrow}
+      title={L.stackTitle}
       align="center"
-      description="Backend, datos e infraestructura: el núcleo sobre el que construyo."
+      description={L.stackDesc}
     />
 
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5" data-reveal>
@@ -124,20 +180,16 @@ const specialties = [
       <p class="font-mono text-[0.7rem] tracking-[0.28em] text-accent uppercase">
         Backend development · API design · Database architecture
       </p>
-      <p class="mt-4 leading-relaxed text-ink-2">
-        Desarrollo de APIs y servicios backend con C# y .NET, orientados a la mantenibilidad,
-        la persistencia de datos y la arquitectura de software. Experiencia complementaria en
-        Python, automatización y aplicaciones multiplataforma.
-      </p>
+      <p class="mt-4 leading-relaxed text-ink-2">{L.stackLead}</p>
     </div>
   </section>
 
   {/* ============ ESPECIALIDADES ============ */}
   <section class="shell py-14">
     <SectionHeading
-      eyebrow="Explora"
-      title="Especialidades"
-      description="Cada categoría con su stack, herramientas y casos de uso."
+      eyebrow={L.specialtiesEyebrow}
+      title={L.specialtiesTitle}
+      description={L.specialtiesDesc}
       align="center"
     />
 
@@ -145,7 +197,7 @@ const specialties = [
       {
         specialties.map((item, index) => (
           <a
-            href={`/technologies${item.href}`}
+            href={link(`/technologies${item.href}`)}
             class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
             data-reveal
             style={`--reveal-delay: ${(index % 5) * 60}ms`}
@@ -153,14 +205,14 @@ const specialties = [
             <div class="rounded-xl border border-line bg-surface-2 p-3 transition-transform duration-300 group-hover:-translate-y-1">
               <Image
                 src={`/technologies/${item.icon}`}
-                alt={item.name}
+                alt={techName(item.href.replace("/", ""), item.name, locale)}
                 width={40}
                 height={40}
                 class="h-10 w-10 object-contain"
               />
             </div>
             <h3 class="font-mono text-[0.7rem] tracking-[0.14em] text-ink-2 uppercase transition-colors group-hover:text-white">
-              {item.name}
+              {techName(item.href.replace("/", ""), item.name, locale)}
             </h3>
           </a>
         ))
@@ -171,10 +223,10 @@ const specialties = [
   {/* ============ EXPERIENCIA LABORAL ============ */}
   <section class="shell py-14">
     <SectionHeading
-      eyebrow="Experiencia laboral"
-      title="Dónde he trabajado"
+      eyebrow={L.workEyebrow}
+      title={L.workTitle}
       suffix=""
-      description="Trayectoria profesional ordenada de más reciente a más antigua."
+      description={L.workDesc}
     />
 
     <ul class="grid gap-4">
@@ -189,7 +241,7 @@ const specialties = [
               {work.data.logo && (
                 <img
                   src={work.data.logo}
-                  alt={`Logo de ${work.data.company}`}
+                  alt={L.companyLogo(work.data.company)}
                   width="44"
                   height="44"
                   loading="lazy"

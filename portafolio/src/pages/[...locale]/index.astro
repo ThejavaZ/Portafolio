@@ -150,8 +150,8 @@ const jsonLd = {
     },
     {
       "@type": "WebSite",
-      "@id": `${site}/#website`,
-      url: `${site}/`,
+      "@id": isEn ? `${site}/en#website` : `${site}/#website`,
+      url: isEn ? `${site}/en` : `${site}/`,
       name: "JavierSG",
       inLanguage: L.inLanguage,
       publisher: { "@id": personId },
