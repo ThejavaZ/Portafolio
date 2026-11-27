@@ -1,0 +1,21 @@
+---
+interface Props {
+  tone?: "default" | "brand" | "accent" | "good" | "warn" | "violet";
+  class?: string;
+}
+
+const { tone = "default", class: className = "" } = Astro.props as Props;
+
+const toneClass = {
+  default: "",
+  brand: "chip--brand",
+  accent: "chip--accent",
+  good: "chip--good",
+  warn: "chip--warn",
+  violet: "chip--violet",
+}[tone];
+---
+
+<span class:list={["chip", toneClass, className]}>
+  <slot />
+</span>

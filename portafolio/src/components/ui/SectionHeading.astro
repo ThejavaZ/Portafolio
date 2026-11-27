@@ -1,0 +1,64 @@
+---
+interface Props {
+  /** Texto pequeño en mono sobre el título */
+  eyebrow?: string;
+  /** Título de la sección */
+  title: string;
+  /** Acento final del título (por defecto punto) */
+  suffix?: string;
+  description?: string;
+  align?: "left" | "center";
+  /** Espacio inferior: "md" (por defecto) deja de separar del contenido siguiente */
+  spacing?: "md" | "none";
+  /** Clases extra para el contenedor */
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  suffix = ".",
+  description,
+  align = "left",
+  spacing = "md",
+  class: className = "",
+} = Astro.props as Props;
+---
+
+<div
+  class:list={[
+    spacing === "md" && "mb-10 md:mb-14",
+    align === "center" && "mx-auto max-w-3xl text-center",
+    className,
+  ]}
+>
+  {
+    eyebrow && (
+      <p class="eyebrow mb-4" data-reveal>
+        {eyebrow}
+      </p>
+    )
+  }
+
+  <h2
+    class="text-3xl leading-[1.05] font-bold sm:text-4xl md:text-[2.75rem]"
+    data-reveal
+    style="--reveal-delay: 60ms"
+    >{title}<span class="text-grad">{suffix}</span></h2
+  >
+
+  {
+    description && (
+      <p
+        class:list={[
+          "mt-4 text-base leading-relaxed text-ink-2 sm:text-lg",
+          align === "center" ? "mx-auto max-w-2xl" : "max-w-2xl",
+        ]}
+        data-reveal
+        style="--reveal-delay: 120ms"
+      >
+        {description}
+      </p>
+    )
+  }
+</div>

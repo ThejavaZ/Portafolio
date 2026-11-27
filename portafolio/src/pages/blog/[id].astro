@@ -12,24 +12,76 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const categoryTone: Record<string, string> = {
+  Backend: "chip--brand",
+  IoT: "chip--accent",
+  Frontend: "chip--good",
+  DevOps: "chip--accent",
+  "Opinión": "chip--violet",
+  Mobile: "chip--warn",
+  Carrera: "chip--violet",
+};
+
+const formattedDate = post.data.date.toLocaleDateString("es-ES", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
 <Layout title={`${post.data.title} | JavierSG`} description={post.data.excerpt}>
-  <article class="max-w-3xl mx-auto px-6 py-20">
-    <header class="mb-10">
-      <span class="text-blue-500 font-bold uppercase tracking-tighter">{post.data.category}</span>
-      <h1 class="text-4xl md:text-6xl font-black my-4 leading-tight">{post.data.title}</h1>
-      <p class="text-gray-500 italic">
-        Publicado el {post.data.date.toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} por {post.data.author}
+  <article class="shell max-w-3xl py-14 md:py-20">
+    <header class="mb-10 space-y-5">
+      <div class="flex flex-wrap items-center gap-3" data-reveal>
+        <a
+          href="/blog"
+          class="link-animated inline-flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.2em] text-ink-2 uppercase transition-colors hover:text-brand"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+            <path d="M19 12H5m7-7l-7 7 7 7" />
+          </svg>
+          Bitácora
+        </a>
+        <span class="h-px flex-1 bg-line"></span>
+        <span class:list={["chip", categoryTone[post.data.category] ?? "chip--brand"]}>
+          {post.data.category}
+        </span>
+      </div>
+
+      <h1
+        class="text-3xl leading-[1.05] font-bold tracking-tight sm:text-5xl"
+        data-reveal
+        style="--reveal-delay: 60ms"
+      >
+        {post.data.title}
+      </h1>
+
+      <p
+        class="font-mono text-xs tracking-[0.14em] text-ink-3 uppercase"
+        data-reveal
+        style="--reveal-delay: 120ms"
+      >
+        {formattedDate} · {post.data.author}
       </p>
     </header>
 
-    <div class="prose prose-invert prose-blue max-w-none text-xl leading-relaxed text-gray-300 prose-img:rounded-2xl prose-img:max-w-full prose-img:h-auto">
-      <Content />
+    <div class="card p-6 sm:p-9" data-reveal style="--reveal-delay: 160ms">
+      <div class="article">
+        <Content />
+      </div>
     </div>
 
-    <div class="mt-20 border-t border-white/10 pt-10 text-center">
-      <a href="/blog" class="text-blue-400 font-bold uppercase text-sm tracking-widest">← Volver a la bitácora</a>
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8">
+      <a href="/blog" class="btn btn--ghost btn--sm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+          <path d="M19 12H5m7-7l-7 7 7 7" />
+        </svg>
+        Volver a la bitácora
+      </a>
+      <a href="/contact" class="link-animated font-mono text-xs tracking-[0.18em] text-ink-2 uppercase hover:text-brand">
+        ¿Hablamos de esto?
+      </a>
     </div>
   </article>
 </Layout>

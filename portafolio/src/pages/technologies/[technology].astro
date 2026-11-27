@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { allTechs } from "../../data/tech-data"; // Importas tus datos
+import { allTechs } from "../../data/tech-data";
 
 export function getStaticPaths() {
   return allTechs.map((tech) => ({
@@ -11,50 +11,102 @@ export function getStaticPaths() {
 }
 
 const { tech } = Astro.props;
+
+// "theme" viene de los datos con clases tipo `bg-green-700 dark:bg-gray-900`.
+// Nos quedamos solo con las de color para usarlas como glow del encabezado.
+const themeGlow = tech.theme
+  .split(/\s+/)
+  .filter((cls) => cls && !cls.startsWith("dark:"))
+  .join(" ");
 ---
 
-<Layout title={`${tech.name} | JavierSG`}>
-  <header class={`${tech.theme} py-12 flex flex-col md:flex-row items-center justify-center gap-6 border-b border-white/10 shadow-2xl`}>
-    <Image 
-      transition:name={`${tech.id}-tech`} 
-      src={tech.logo} 
-      alt={tech.name} 
-      width={120} 
-      height={120} 
-      fit="contain"
-      class="w-[120px] h-[120px] object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-    />
-    <h1 class="text-5xl md:text-6xl font-black text-white tracking-tighter italic uppercase">{tech.name}</h1>
+<Layout
+  title={`${tech.name} | JavierSG`}
+  description={tech.description ?? `Stack, herramientas y ecosistema de ${tech.name}.`}
+>
+  {/* ============ HEADER ============ */}
+  <header class="relative overflow-hidden border-b border-line">
+    <div class:list={["absolute inset-0 opacity-25 blur-3xl", themeGlow]} aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg"></div>
+
+    <div class="shell relative flex flex-col items-center gap-6 py-14 text-center md:py-16">
+      <div class="card p-5" data-reveal>
+        <Image
+          transition:name={`${tech.id}-tech`}
+          src={tech.logo}
+          alt={tech.name}
+          width={96}
+          height={96}
+          fit="contain"
+          class="h-24 w-24 object-contain drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]"
+        />
+      </div>
+
+      <div>
+        <p class="eyebrow justify-center" data-reveal style="--reveal-delay: 60ms">
+          Especialidad
+        </p>
+        <h1
+          class="mt-3 text-4xl leading-tight font-bold tracking-tight sm:text-6xl"
+          data-reveal
+          style="--reveal-delay: 100ms"
+        >
+          {tech.name}
+        </h1>
+        {
+          tech.description && (
+            <p
+              class="mx-auto mt-4 max-w-2xl leading-relaxed text-ink-2"
+              data-reveal
+              style="--reveal-delay: 160ms"
+            >
+              {tech.description}
+            </p>
+          )
+        }
+      </div>
+    </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-6 py-16">
-    <h2 class="text-center text-gray-500 font-bold uppercase tracking-[0.3em] mb-12 text-sm">Tech Stack & Ecosystem</h2>
-    
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-      {tech.stack.map((item) => (
-        <div class="group bg-gray-900/40 border border-white/5 p-6 rounded-3xl flex flex-col items-center transition-all duration-500 hover:bg-gray-800 hover:border-blue-500/30 hover:-translate-y-2 shadow-xl">
-          <div class="bg-gray-950 p-5 rounded-2xl mb-5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-            <Image 
-              src={`/technologies/${item.img}`} 
-              alt={item.name} 
-              width={56}
-              height={56}
-              class="w-14 h-14 object-contain"
-            />
-          </div>
-          <h3 class="font-bold text-lg text-white mb-1">{item.name}</h3>
-          <span class="text-[10px] font-black text-blue-500 uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full">
-            {item.type}
-          </span>
-        </div>
-      ))}
-    </div>
-
-    <div class="mt-20 flex justify-center">
-      <a href="/about" class="group flex items-center gap-3 text-gray-400 hover:text-white transition-colors font-bold uppercase text-xs tracking-widest">
-        <span class="transition-transform group-hover:-translate-x-2">←</span> 
+  {/* ============ STACK ============ */}
+  <main class="shell py-14 md:py-16">
+    <div class="flex flex-wrap items-center justify-between gap-4" data-reveal>
+      <div>
+        <p class="eyebrow">Stack & ecosistema</p>
+        <p class="mt-3 text-sm text-ink-2">
+          {tech.stack.length} tecnologías en esta categoría
+        </p>
+      </div>
+      <a href="/about" class="btn btn--ghost btn--sm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+          <path d="M19 12H5m7-7l-7 7 7 7" />
+        </svg>
         Volver a especialidades
       </a>
+    </div>
+
+    <div class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      {
+        tech.stack.map((item, index) => (
+          <div
+            class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
+            data-reveal
+            style={`--reveal-delay: ${(index % 4) * 60}ms`}
+          >
+            <div class="rounded-2xl border border-line bg-surface-2 p-4 transition-transform duration-300 group-hover:-translate-y-1">
+              <Image
+                src={`/technologies/${item.img}`}
+                alt={item.name}
+                width={56}
+                height={56}
+                class="h-14 w-14 object-contain"
+              />
+            </div>
+            <h2 class="font-display text-base leading-tight font-semibold">{item.name}</h2>
+            <span class="chip chip--brand">{item.type}</span>
+          </div>
+        ))
+      }
     </div>
   </main>
 </Layout>

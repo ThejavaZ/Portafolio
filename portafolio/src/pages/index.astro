@@ -1,134 +1,359 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import { Image } from "astro:assets"
-import { getCollection } from "astro:content"
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import photo from "../assets/javier-sarmiento.jpg";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import ButtonLink from "../components/ui/ButtonLink.astro";
+import { projectStatus } from "../data/projectStatus";
+import { allTechs } from "../data/tech-data";
 
-const works = (await getCollection("works")).sort(
-  (a, b) => b.data.startDate.localeCompare(a.data.startDate)
-)
+const works = (await getCollection("works")).sort((a, b) =>
+  b.data.startDate.localeCompare(a.data.startDate)
+);
+const certificates = await getCollection("certificates");
+const allProjects = (await getCollection("projects")).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
+const featured = allProjects.slice(0, 3);
 
-const logoWelcome = "/logo.webp"
+const stats = [
+  { value: String(allProjects.length), suffix: "+", label: "Proyectos" },
+  { value: String(certificates.length), suffix: "", label: "Certificados" },
+  { value: String(allTechs.length), suffix: "", label: "Especialidades" },
+  { value: String(works.length), suffix: "", label: "Empresas" },
+];
+
+const socials = [
+  { name: "GitHub", short: "GH", href: "https://github.com/ThejavaZ" },
+  {
+    name: "LinkedIn",
+    short: "IN",
+    href: "https://www.linkedin.com/in/javier-armando-sarmiento-gil-aa10b0249/",
+  },
+];
 ---
 
 <Layout
   title="Inicio | JavierSG"
   description="Portafolio de JavierSG: programador backend especializado en Python y ASP.NET. Proyectos, experiencia y certificados."
 >
-  <div class="flex flex-col gap-24 py-16 px-6 max-w-6xl mx-auto overflow-x-clip">
-    
-    <section class="min-h-[70vh] flex flex-col items-center justify-center">
-      <div class="text-center mb-16">
-        <h1 class="font-black text-5xl md:text-8xl tracking-tighter uppercase italic text-white animate-fade-in">
-          Bienvenido a mi 
-          <span class="block text-transparent bg-clip-text bg-gradient-to-b from-blue-400 to-blue-700 drop-shadow-sm">
-            portafolio!
-          </span>
-        </h1>
+  {/* ================= HERO ================= */}
+  <section class="shell relative grid items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-7">
+      <span class="chip chip--accent" data-reveal>
+        <span class="h-1.5 w-1.5 rounded-full bg-good"></span>
+        Disponible para nuevos retos
+      </span>
+
+      <h1
+        class="mt-7 text-[2.6rem] leading-[0.98] font-bold tracking-tight sm:text-6xl lg:text-[4.25rem]"
+        data-reveal
+        style="--reveal-delay: 80ms"
+      >
+        Construyo el <span class="text-grad">backend</span> que sostiene tu producto.
+      </h1>
+
+      <p
+        class="mt-6 max-w-xl text-lg leading-relaxed text-ink-2"
+        data-reveal
+        style="--reveal-delay: 160ms"
+      >
+        Soy <strong class="font-semibold text-ink">Javier</strong>, programador backend
+        especializado en <span class="font-mono text-[0.95em] text-accent">Python</span> y
+        <span class="font-mono text-[0.95em] text-accent">ASP.NET</span>. Diseño APIs, modelo
+        datos y despliego servicios pensados para durar.
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3" data-reveal style="--reveal-delay: 240ms">
+        <ButtonLink href="/projects" size="lg">
+          Ver proyectos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+            <path d="M5 12h14m-7-7l7 7-7 7" />
+          </svg>
+        </ButtonLink>
+        <ButtonLink href="/contact" variant="ghost" size="lg">Hablemos</ButtonLink>
+
+        <div class="flex items-center gap-2 sm:ml-2">
+          {
+            socials.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface font-mono text-xs font-semibold text-ink-2 transition-all hover:-translate-y-0.5 hover:border-brand/50 hover:text-white"
+                aria-label={social.name}
+              >
+                {social.short}
+              </a>
+            ))
+          }
+        </div>
       </div>
 
-      <div class="flex flex-col lg:flex-row items-center gap-12 w-full bg-gray-800/20 p-8 md:p-12 rounded-[3rem] border border-white/5 backdrop-blur-xl shadow-2xl">
-        <div class="w-full lg:w-1/2 group">
-          <Image 
-            src={logoWelcome} 
-            alt="JavierSG Logo"
-            width={256}
-            height={156}
-            loading="eager"
-            fetchpriority="high"
-            class="w-full max-w-sm h-auto mx-auto rounded-[2rem] shadow-2xl transition-all duration-500 group-hover:scale-[1.03] group-hover:rotate-1 border border-blue-500/10"
+      <div class="mt-12 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
+        {
+          stats.map((stat, index) => (
+            <div
+              class="card px-4 py-5 text-center"
+              data-reveal
+              style={`--reveal-delay: ${280 + index * 60}ms`}
+            >
+              <p class="font-display text-3xl font-bold text-white">
+                {stat.value}
+                <span class="text-brand">{stat.suffix}</span>
+              </p>
+              <p class="mt-1 font-mono text-[0.62rem] tracking-[0.18em] text-ink-3 uppercase">
+                {stat.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Retrato */}
+    <div class="relative mx-auto w-full max-w-sm lg:col-span-5" data-reveal style="--reveal-delay: 200ms">
+      <div class="absolute -inset-6 -z-10 rounded-[2.5rem] bg-gradient-to-br from-brand/30 via-accent/10 to-brand-2/25 blur-3xl"></div>
+
+      <div class="card overflow-hidden p-2">
+        <Image
+          src={photo}
+          alt="Javier Armando Sarmiento Gil"
+          width={640}
+          height={800}
+          loading="eager"
+          fetchpriority="high"
+          class="aspect-[4/5] w-full rounded-[1.1rem] object-cover object-[50%_22%] saturate-[0.9]"
+        />
+      </div>
+
+      <span class="chip chip--brand absolute -left-3 top-8 shadow-card backdrop-blur-md sm:-left-8">
+        Python
+      </span>
+      <span class="chip absolute -right-2 top-1/3 shadow-card backdrop-blur-md sm:-right-8">
+        .NET
+      </span>
+      <span class="chip chip--accent absolute -bottom-4 left-8 shadow-card backdrop-blur-md sm:left-16">
+        PostgreSQL
+      </span>
+    </div>
+  </section>
+
+  {/* ================= PROYECTOS DESTACADOS ================= */}
+  {
+    featured.length > 0 && (
+      <section class="shell py-16">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+          <SectionHeading
+            eyebrow="Trabajo reciente"
+            title="Proyectos destacados"
+            class="flex-1"
           />
+          <a
+            href="/projects"
+            class="link-animated mb-10 inline-flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-ink-2 uppercase transition-colors hover:text-white md:mb-14"
+          >
+            Ver todos
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-3.5 w-3.5">
+              <path d="M5 12h14m-7-7l7 7-7 7" />
+            </svg>
+          </a>
         </div>
 
-        <div class="w-full lg:w-1/2 space-y-8">
-          <p class="text-2xl md:text-3xl text-gray-300 leading-tight font-light">
-            ¡Hola! Soy un <span class="text-blue-500 font-bold">programador backend</span>. Especialista en <span class="text-blue-400 italic">Python</span> y <span class="text-blue-400 italic">ASP.NET</span>.
-          </p>
-          
-          <div class="flex flex-wrap gap-6 pt-4">
-            <a href="https://github.com/ThejavaZ" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-lg font-bold text-gray-500 hover:text-blue-400 transition-all">
-              <span class="p-2 bg-gray-800 rounded-lg">GH</span> GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/javier-armando-sarmiento-gil-aa10b0249/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-lg font-bold text-gray-500 hover:text-blue-400 transition-all">
-              <span class="p-2 bg-gray-800 rounded-lg">IN</span> LinkedIn
-            </a>
-          </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {featured.map((project, index) => {
+            const { id, data } = project;
+            const statusInfo = data.status ? projectStatus[data.status] : undefined;
+            return (
+              <a
+                href={`/projects/${id}`}
+                class="card card--hover group flex flex-col overflow-hidden"
+                data-reveal
+                style={`--reveal-delay: ${index * 90}ms`}
+              >
+                <div class="relative aspect-video overflow-hidden">
+                  <Image
+                    transition:name={`img-${id}`}
+                    src={data.image}
+                    alt={data.title ?? "Imagen del proyecto"}
+                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/10 to-transparent"></div>
+                  {statusInfo && (
+                    <span class:list={["chip absolute top-3 left-3", statusInfo.cls]}>
+                      {statusInfo.label}
+                    </span>
+                  )}
+                </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <a href="/projects" class="text-center bg-blue-600 hover:bg-blue-500 text-white font-black uppercase italic py-5 rounded-2xl transition-all shadow-lg shadow-blue-600/20 active:scale-95">
-              Proyectos
-            </a>
-            <a href="/contact" class="text-center border-2 border-blue-600/40 hover:bg-blue-600/10 text-white font-black uppercase italic py-5 rounded-2xl transition-all">
-              Contacto
-            </a>
-          </div>
+                <div class="flex flex-1 flex-col gap-3 p-6">
+                  <h3 class="text-xl leading-snug font-semibold transition-colors group-hover:text-brand">
+                    {data.title}
+                  </h3>
+                  <p class="line-clamp-3 text-sm leading-relaxed text-ink-2">
+                    {data.description}
+                  </p>
+                  <div class="mt-auto flex flex-wrap gap-1.5 pt-3">
+                    {(data.frameworks ?? []).slice(0, 3).map((tech) => (
+                      <span class="chip">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    )
+  }
+
+  {/* ================= EXPERIENCIA ================= */}
+  <section class="shell py-16">
+    <SectionHeading
+      eyebrow="Trayectoria"
+      title="Experiencia profesional"
+      description="Dónde he aportado valor y con qué tecnología he trabajado."
+    />
+
+    <ol class="relative space-y-6 border-l border-line pl-6 sm:pl-10">
+      {
+        works.map((work, index) => (
+          <li class="relative" data-reveal style={`--reveal-delay: ${index * 80}ms`}>
+            <span
+              class:list={[
+                "absolute top-7 -left-[1.68rem] h-3 w-3 rounded-full ring-4 ring-bg sm:-left-[2.68rem]",
+                index === 0
+                  ? "bg-brand shadow-[0_0_16px_rgba(79,125,255,0.9)]"
+                  : "bg-surface-2 border border-line-strong",
+              ]}
+            />
+            <article
+              class:list={[
+                "card flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between",
+                index === 0 && "border-brand/30",
+              ]}
+            >
+              <div class="flex items-center gap-4">
+                {work.data.logo && (
+                  <img
+                    src={work.data.logo}
+                    alt={`Logo de ${work.data.company}`}
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                    class:list={[
+                      "h-12 w-12 shrink-0 rounded-xl border border-line bg-surface-2 object-contain p-1.5",
+                      index !== 0 && "opacity-70",
+                    ]}
+                  />
+                )}
+                <div>
+                  <h3 class="text-lg font-semibold">{work.data.role}</h3>
+                  <p class="text-sm text-brand">{work.data.company}</p>
+                </div>
+              </div>
+
+              <span
+                class:list={[
+                  "chip self-start sm:self-auto",
+                  index === 0 && "chip--brand",
+                ]}
+              >
+                {work.data.period}
+              </span>
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  {/* ================= ESPECIALIDADES ================= */}
+  <section class="shell py-16">
+    <SectionHeading
+      eyebrow="Especialidades"
+      title="Tecnologías que uso"
+      description="Explora el stack completo por categoría."
+      align="center"
+    />
+
+    <div class="flex flex-wrap justify-center gap-3" data-reveal>
+      {
+        allTechs.map((tech) => (
+          <a
+            href={`/technologies/${tech.id}`}
+            class="card card--hover flex items-center gap-3 px-5 py-3.5"
+          >
+            <img
+              src={tech.logo}
+              alt=""
+              width="28"
+              height="28"
+              loading="lazy"
+              class="h-7 w-7 object-contain"
+            />
+            <span class="font-mono text-xs tracking-[0.12em] text-ink-2 uppercase">
+              {tech.name}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  {/* ================= CERTIFICADOS ================= */}
+  <section class="shell py-14" id="certificados">
+    <SectionHeading eyebrow="Validación" title="Certificados" align="center" />
+
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      {
+        certificates.map((certificate, index) => (
+          <a
+            href={`/certificates/${certificate.id}`}
+            class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
+            data-reveal
+            style={`--reveal-delay: ${index * 50}ms`}
+          >
+            <img
+              src={`/technologies/${certificate.data.title}.png`}
+              alt={certificate.data.title}
+              width="56"
+              height="56"
+              loading="lazy"
+              class="h-14 w-14 object-contain opacity-60 grayscale transition-all duration-500 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0"
+            />
+            <span class="font-mono text-[0.68rem] tracking-[0.16em] text-ink-3 uppercase transition-colors group-hover:text-white">
+              {certificate.data.title}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  {/* ================= CTA ================= */}
+  <section class="shell py-16">
+    <div
+      class="card relative overflow-hidden px-6 py-14 text-center sm:px-12"
+      data-reveal
+    >
+      <div class="absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-brand/25 blur-3xl"></div>
+
+      <div class="relative">
+        <p class="eyebrow justify-center">Siguiente paso</p>
+        <h2 class="mx-auto mt-5 max-w-2xl text-3xl leading-tight font-bold sm:text-4xl">
+          ¿Tienes un proyecto en mente? <span class="text-grad">Construyámoslo.</span>
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-ink-2">
+          Escríbeme y platícame qué necesitas: respondo rápido y sin rodeos.
+        </p>
+
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <ButtonLink href="/contact" size="lg">Enviar mensaje</ButtonLink>
+          <ButtonLink href="/cv.pdf" variant="ghost" size="lg" download>Descargar CV</ButtonLink>
         </div>
       </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto w-full">
-      <div class="flex items-center gap-6 mb-16">
-        <h2 class="text-4xl font-black italic uppercase text-white shrink-0">Experiencia</h2>
-        <div class="h-[2px] w-full bg-gradient-to-r from-blue-500/50 to-transparent"></div>
-      </div>
-
-      <div class="space-y-12">
-        {works.map((work, index) => index === 0 ? (
-          <div class="relative pl-10 border-l-2 border-blue-600/30">
-            <div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full ring-4 ring-gray-900 shadow-[0_0_15px_rgba(37,99,235,0.5)]"></div>
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 bg-gray-800/10 p-6 rounded-2xl border border-white/5 hover:bg-gray-800/30 transition-all">
-              <div class="flex items-center gap-4">
-                {work.data.logo && (
-                  <img src={work.data.logo} alt={`Logo de ${work.data.company}`} width="48" height="48" loading="lazy" class="w-12 h-12 object-contain shrink-0" />
-                )}
-                <div>
-                  <h3 class="text-2xl font-bold text-white">{work.data.role}</h3>
-                  <p class="text-blue-400 text-lg">{work.data.company}</p>
-                </div>
-              </div>
-              <span class="text-xs font-mono text-gray-500 uppercase tracking-widest bg-gray-900 px-4 py-2 rounded-full border border-white/5">{work.data.period}</span>
-            </div>
-          </div>
-        ) : (
-          <div class="relative pl-10 border-l-2 border-gray-700">
-            <div class="absolute -left-[9px] top-0 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-gray-900"></div>
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 p-6">
-              <div class="flex items-center gap-4">
-                {work.data.logo && (
-                  <img src={work.data.logo} alt={`Logo de ${work.data.company}`} width="48" height="48" loading="lazy" class="w-12 h-12 object-contain shrink-0 opacity-80" />
-                )}
-                <div>
-                  <h3 class="text-2xl font-bold text-gray-400">{work.data.role}</h3>
-                  <p class="text-gray-500 text-lg">{work.data.company}</p>
-                </div>
-              </div>
-              <span class="text-xs font-mono text-gray-600">{work.data.period}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="bg-gradient-to-b from-gray-800/20 to-transparent rounded-[4rem] p-12 border border-white/5">
-      <h2 class="text-center font-black text-3xl italic uppercase tracking-widest text-white mb-16">Certificados</h2>
-      
-      <div class="flex flex-wrap justify-center gap-10">
-        {['html', 'css', 'javascript', 'typescript', 'python', 'react'].map((tech) => (
-          <div class="group relative">
-            <a href={`/certificates/${tech}`} rel="noopener noreferrer">
-              <img 
-                src={`/technologies/${tech}.png`} 
-                alt={tech}
-                width="80"
-                height="80"
-                loading="lazy"
-                class="w-20 h-20 object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 drop-shadow-2xl"
-              />
-            </a>
-            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-[0_0_10px_#3b82f6]"></div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-  </div>
+    </div>
+  </section>
 </Layout>

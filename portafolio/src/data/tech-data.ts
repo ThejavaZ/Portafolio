@@ -20,6 +20,7 @@ interface Technology {
   name: string;
   logo: string;
   theme: string;
+  description?: string;
   stack: StackItem[];
 }
 

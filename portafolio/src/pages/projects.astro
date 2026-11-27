@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { projectStatus } from "../data/projectStatus";
+import SectionHeading from "../components/ui/SectionHeading.astro";
 
 const projects = (await getCollection("projects")).sort(
   (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
@@ -12,172 +13,205 @@ const cubits = (await getCollection("cubits")).sort(
 );
 ---
 
-<Layout title="Proyectos | JavierSG" description="Proyectos desarrollados por JavierSG: ERP, apps móviles, asistentes de IA y sistemas empresariales.">
-  <section class="max-w-7xl mx-auto px-6 py-12">
-    
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-      <div class="space-y-2">
-        <h1 class="text-6xl font-black italic uppercase tracking-tighter text-white">
-          Proyectos<span class="text-blue-500">_</span>
-        </h1>
-        <p class="text-gray-500 font-mono text-sm tracking-widest">
-          <span id="projects-count">{projects.length}</span> REPOSITORIOS ENCONTRADOS
-        </p>
-      </div>
+<Layout
+  title="Proyectos | JavierSG"
+  description="Proyectos desarrollados por JavierSG: ERP, apps móviles, asistentes de IA y sistemas empresariales."
+>
+  <section class="shell py-14 md:py-20">
+    {/* Encabezado + buscador */}
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <SectionHeading
+        eyebrow="Portafolio"
+        title="Proyectos"
+        description="Trabajo profesional y proyectos personales. Filtra por tecnología o nombre."
+        spacing="none"
+      />
 
-      <div class="relative w-full md:w-96 group">
-        <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-          <svg class="w-5 h-5 text-gray-500 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-          </svg>
-        </div>
+      <div class="relative w-full lg:w-96" data-reveal style="--reveal-delay: 120ms">
+        <svg
+          class="pointer-events-none absolute top-1/2 left-4 h-4.5 w-4.5 -translate-y-1/2 text-ink-3"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
         <input
           id="project-search"
           type="text"
           placeholder="Buscar por tecnología o nombre..."
           aria-label="Buscar proyectos por nombre o tecnología"
-          class="w-full bg-gray-900/50 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all backdrop-blur-md"
+          class="field pl-12"
         />
       </div>
     </div>
 
+    <p
+      class="mt-6 font-mono text-xs tracking-[0.2em] text-ink-3 uppercase"
+      data-reveal
+      style="--reveal-delay: 160ms"
+    >
+      <span id="projects-count" class="text-brand">{projects.length}</span>
+      repositorios encontrados
+    </p>
+
     {/* --- EXPERIENCIA PROFESIONAL --- */}
-    <section class="mb-16">
-      <h2 class="text-3xl md:text-4xl font-black italic uppercase tracking-tighter text-white">
-        Experiencia profesional<span class="text-indigo-500">.</span>
-      </h2>
-      <p class="text-gray-500 text-sm mt-2 mb-8 max-w-3xl leading-relaxed">
-        Proyectos desarrollados en un entorno profesional; cada tarjeta indica la empresa.
-        Descripción general: sin código, capturas ni información interna.
-      </p>
+    <section class="mt-16">
+      <SectionHeading
+        eyebrow="Experiencia profesional"
+        title="Proyectos en empresa"
+        description="Desarrollos realizados en un entorno profesional, sin código ni información interna."
+      />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {cubits.map((project) => {
-          const { name, company, subtitle, description, participation, technologies, learnings } = project.data;
-          return (
-            <article class="group relative bg-gray-800/20 border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-indigo-500/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(99,102,241,0.08)]">
-              <div class="relative h-32 flex items-center justify-center bg-gradient-to-br from-indigo-600/25 via-gray-900/40 to-gray-900/5">
-                <span class="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-indigo-400/70 group-hover:text-indigo-300 transition-colors px-6 text-center">
-                  {name}
-                </span>
-                <span class="absolute top-4 left-4 bg-indigo-500/90 text-indigo-950 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
-                  Profesional
-                </span>
-                <span class="absolute top-4 right-4 bg-gray-900/80 border border-white/10 text-gray-300 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">
-                  {company}
-                </span>
-              </div>
-
-              <div class="p-8 space-y-4">
-                <div>
-                  <p class="text-[10px] font-mono uppercase tracking-[0.25em] text-indigo-400">{subtitle}</p>
-                  <h3 class="text-3xl font-black italic uppercase tracking-tighter text-white mt-1 group-hover:text-indigo-300 transition-colors">
+      <div class="grid gap-6 md:grid-cols-2">
+        {
+          cubits.map((project, index) => {
+            const { name, company, subtitle, description, participation, technologies, learnings } =
+              project.data;
+            return (
+              <article
+                class="card card--hover flex h-full flex-col overflow-hidden"
+                data-reveal
+                style={`--reveal-delay: ${index * 90}ms`}
+              >
+                <div class="relative overflow-hidden border-b border-line bg-gradient-to-br from-brand-2/25 via-surface to-surface px-6 py-7">
+                  <span class="chip chip--violet absolute top-4 left-4">Profesional</span>
+                  <span class="chip absolute top-4 right-4">{company}</span>
+                  <p class="mt-6 font-display text-2xl leading-tight font-bold text-white sm:text-3xl">
                     {name}
-                  </h3>
+                  </p>
                 </div>
 
-                <p class="text-gray-400 text-sm leading-relaxed">{description}</p>
+                <div class="flex flex-1 flex-col gap-5 p-6">
+                  <div>
+                    <p class="font-mono text-[0.66rem] tracking-[0.24em] text-accent uppercase">
+                      {subtitle}
+                    </p>
+                    <p class="mt-2 text-sm leading-relaxed text-ink-2">{description}</p>
+                  </div>
 
-                <div>
-                  <span class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Mi participación</span>
-                  <p class="text-gray-300 text-sm leading-relaxed">{participation}</p>
+                  <div>
+                    <p class="font-mono text-[0.66rem] tracking-[0.24em] text-ink-3 uppercase">
+                      Mi participación
+                    </p>
+                    <p class="mt-1.5 text-sm leading-relaxed text-ink-2">{participation}</p>
+                  </div>
+
+                  {technologies.length > 0 && (
+                    <div class="flex flex-wrap gap-1.5">
+                      {technologies.map((tech) => (
+                        <span class="chip">{tech}</span>
+                      ))}
+                    </div>
+                  )}
+
+                  {learnings && (
+                    <div class="mt-auto rounded-xl border-l-2 border-brand/60 bg-white/[0.03] px-4 py-3">
+                      <p class="font-mono text-[0.66rem] tracking-[0.24em] text-ink-3 uppercase">
+                        Qué me dejó
+                      </p>
+                      <p class="mt-1 text-sm leading-relaxed text-ink-2 italic">{learnings}</p>
+                    </div>
+                  )}
                 </div>
-
-                {technologies.length > 0 && (
-                  <div class="flex flex-wrap gap-2 pt-1">
-                    {technologies.map((tech) => (
-                      <span class="text-[10px] font-bold text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-lg uppercase tracking-wider">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                {learnings && (
-                  <div class="border-l-4 border-indigo-600 pl-4 py-1">
-                    <span class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1">Qué me dejó</span>
-                    <p class="text-gray-400 text-sm italic leading-relaxed">{learnings}</p>
-                  </div>
-                )}
-              </div>
-            </article>
-          );
-        })}
+              </article>
+            );
+          })
+        }
       </div>
     </section>
 
-    <h2 class="text-3xl md:text-4xl font-black italic uppercase tracking-tighter text-white mb-8">
-      Proyectos personales<span class="text-blue-500">.</span>
-    </h2>
+    {/* --- PROYECTOS PERSONALES --- */}
+    <section class="mt-20">
+      <SectionHeading
+        eyebrow="Proyectos personales"
+        title="Ideas que construí"
+        description="Experimentos, herramientas y productos propios."
+      />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-      {projects.map((project) => {
-        const { id, data } = project;
-        const { title, image, description, frameworks, type, status } = data;
-        const isPortrait = image.width < image.height;
-        const statusInfo = status ? projectStatus[status] : undefined;
-        
-        return (
-          <article
-            data-search={`${title ?? ""} ${description ?? ""} ${type ?? ""} ${(frameworks ?? []).join(" ")}`.toLowerCase()}
-            class="group relative bg-gray-800/20 border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-blue-500/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(37,99,235,0.1)]"
-          >
-            <a href={`/projects/${id}`} class="block h-full">
-              
-              <div class="relative aspect-video overflow-hidden">
-                <Image
-                  transition:name={`img-${id}`}
-                  src={image}
-                  alt={title ?? "Imagen del proyecto"}
-                  class:list={[
-                    "w-full h-full object-cover group-hover:scale-105 transition-transform duration-700",
-                    isPortrait && "object-top",
-                  ]}
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
-                
-                <div class="absolute top-4 right-4 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
-                  {type || "System"}
-                </div>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          projects.map((project, index) => {
+            const { id, data } = project;
+            const { title, image, description, frameworks, type, status } = data;
+            const isPortrait = image.width < image.height;
+            const statusInfo = status ? projectStatus[status] : undefined;
 
-                {statusInfo && (
-                  <span class={`absolute top-4 left-4 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg ${statusInfo.cls}`}>
-                    {statusInfo.label}
-                  </span>
-                )}
-              </div>
+            return (
+              <article
+                data-search={`${title ?? ""} ${description ?? ""} ${type ?? ""} ${(frameworks ?? []).join(" ")}`.toLowerCase()}
+                class="card card--hover group flex h-full flex-col overflow-hidden"
+                data-reveal
+                style={`--reveal-delay: ${(index % 3) * 80}ms`}
+              >
+                <a href={`/projects/${id}`} class="flex h-full flex-col">
+                  <div class="relative aspect-video overflow-hidden">
+                    <Image
+                      transition:name={`img-${id}`}
+                      src={image}
+                      alt={title ?? "Imagen del proyecto"}
+                      class:list={[
+                        "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105",
+                        isPortrait && "object-top",
+                      ]}
+                    />
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent"
+                    ></div>
 
-              <div class="p-8 space-y-4">
-                <h3 class="text-3xl font-black italic uppercase tracking-tighter text-white group-hover:text-blue-400 transition-colors">
-                  {title}
-                </h3>
-                
-                <p class="text-gray-400 text-sm leading-relaxed line-clamp-2 italic">
-                  {description}
-                </p>
+                    <span class="chip absolute top-3 right-3">{type || "System"}</span>
+                    {statusInfo && (
+                      <span class:list={["chip absolute top-3 left-3", statusInfo.cls]}>
+                        {statusInfo.label}
+                      </span>
+                    )}
+                  </div>
 
-                <div class="flex flex-wrap gap-2 pt-2">
-                  {frameworks && frameworks.map((tech) => (
-                    <span class="text-[10px] font-bold text-blue-300 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-lg uppercase tracking-wider">
-                      {tech}
+                  <div class="flex flex-1 flex-col gap-3 p-6">
+                    <h3 class="text-xl leading-snug font-semibold transition-colors group-hover:text-brand">
+                      {title}
+                    </h3>
+
+                    <p class="line-clamp-3 text-sm leading-relaxed text-ink-2">{description}</p>
+
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                      {(frameworks ?? []).slice(0, 4).map((tech) => (
+                        <span class="chip">{tech}</span>
+                      ))}
+                    </div>
+
+                    <span
+                      class="mt-auto inline-flex items-center gap-2 pt-4 font-mono text-[0.68rem] tracking-[0.2em] text-ink-2 uppercase transition-all group-hover:gap-3.5 group-hover:text-brand"
+                    >
+                      Ver detalles
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        class="h-3.5 w-3.5"
+                      >
+                        <path d="M5 12h14m-7-7l7 7-7 7" />
+                      </svg>
                     </span>
-                  ))}
-                </div>
+                  </div>
+                </a>
+              </article>
+            );
+          })
+        }
+      </div>
+    </section>
 
-                <div class="pt-4 flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.2em] group-hover:gap-4 transition-all">
-                  Ver Detalles
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="w-4 h-4 text-blue-500">
-                    <path d="M5 12h14m-7-7l7 7-7 7" />
-                  </svg>
-                </div>
-              </div>
-            </a>
-          </article>
-        );
-      })}
-    </div>
-
-    <p id="projects-empty" class="hidden text-center text-gray-500 italic py-16">
+    <p
+      id="projects-empty"
+      class="hidden py-16 text-center text-ink-2 italic"
+    >
       No se encontraron proyectos con esa búsqueda.
     </p>
   </section>

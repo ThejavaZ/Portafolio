@@ -4,110 +4,130 @@ import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 
 export const getStaticPaths = async () => {
-    const certificates = await getCollection("certificates");
-    return certificates.map((certificate) => ({
-        // En Astro 5 con loaders, usamos .id
-        params: { id: certificate.id },
-        props: { certificate }
-    }));
-}
+  const certificates = await getCollection("certificates");
+  return certificates.map((certificate) => ({
+    params: { id: certificate.id },
+    props: { certificate },
+  }));
+};
 
 const { certificate } = Astro.props;
-const { data, id } = certificate; // Extraemos 'id' en lugar de 'slug'
+const { data, id } = certificate;
 const { title, image, firstColor, secondColor } = data;
 const { Content } = await render(certificate);
 
 // Mapa estático: Tailwind 4 no genera clases construidas dinámicamente (bg-${color}-500)
 const gradientColors: Record<string, { from: string; to: string }> = {
-  blue: { from: "from-blue-500", to: "to-blue-700" },
-  yellow: { from: "from-yellow-400", to: "to-yellow-600" },
+  blue: { from: "from-brand", to: "to-brand-2" },
+  yellow: { from: "from-amber-400", to: "to-amber-600" },
   orange: { from: "from-orange-400", to: "to-orange-600" },
   violet: { from: "from-violet-500", to: "to-violet-700" },
-  red: { from: "from-red-500", to: "to-red-700" },
-  green: { from: "from-green-500", to: "to-green-700" },
+  red: { from: "from-rose-500", to: "to-rose-700" },
+  green: { from: "from-emerald-500", to: "to-emerald-700" },
 };
 
 const glowFrom = gradientColors[firstColor]?.from ?? gradientColors.blue.from;
 const glowTo = gradientColors[secondColor]?.to ?? gradientColors.blue.to;
 ---
 
-<Layout title={`Certificado ${title} | JavierSG`} description={`Certificado oficial de ${title} expedido por Mimo.org.`}>
-  <div class="min-h-screen bg-gray-950 text-white pb-20">
-    
-    <section class="relative overflow-hidden bg-gray-900 border-b border-white/5 py-16 px-6">
-      <div class={`absolute -top-24 -left-24 w-96 h-96 blur-[120px] opacity-20 rounded-full bg-gradient-to-br ${glowFrom} ${glowTo}`}></div>
-      
-      <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 relative z-10">
-        <div class="relative group">
-          <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-          
-          <img
-            transition:name={`img-${id}`} 
-            src={`/technologies/${title.toLowerCase()}.png`} 
-            alt={title}
-            width={160}
-            height={160}
-            loading="lazy"
-            class="relative w-32 h-32 md:w-40 md:h-40 object-contain bg-gray-800 p-4 rounded-2xl border border-white/10 shadow-2xl"
-          />
+<Layout
+  title={`Certificado ${title} | JavierSG`}
+  description={`Certificado oficial de ${title} expedido por Mimo.org.`}
+>
+  {/* Cabecera con glow de color */}
+  <section class="relative overflow-hidden border-b border-line">
+    <div
+      class:list={[
+        "absolute -top-32 left-1/2 h-72 w-[42rem] -translate-x-1/2 rounded-full blur-[110px]",
+        "bg-gradient-to-br opacity-30",
+        glowFrom,
+        glowTo,
+      ]}
+    >
+    </div>
+
+    <div class="shell relative flex flex-col items-center gap-7 py-14 md:flex-row md:py-16">
+      <div class="relative" data-reveal>
+        <div
+          class:list={[
+            "absolute -inset-2 rounded-3xl bg-gradient-to-br opacity-40 blur-xl",
+            glowFrom,
+            glowTo,
+          ]}
+        >
+        </div>
+        <img
+          transition:name={`img-${id}`}
+          src={`/technologies/${title.toLowerCase()}.png`}
+          alt={title}
+          width="144"
+          height="144"
+          loading="lazy"
+          class="relative h-32 w-32 rounded-2xl border border-line bg-surface-2 p-4 object-contain shadow-card md:h-36 md:w-36"
+        />
+      </div>
+
+      <div class="text-center md:text-left">
+        <p class="eyebrow" data-reveal>Certificación oficial</p>
+        <h1
+          class="mt-3 text-4xl leading-tight font-bold tracking-tight sm:text-6xl"
+          data-reveal
+          style="--reveal-delay: 60ms"
+        >
+          {title}
+        </h1>
+        <p
+          class="mt-4 max-w-xl leading-relaxed text-ink-2"
+          data-reveal
+          style="--reveal-delay: 120ms"
+        >
+          Validación de aptitudes técnicas y conocimientos avanzados en
+          <strong class="font-semibold text-ink">{title}</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Detalles */}
+  <section class="shell grid gap-8 py-14 lg:grid-cols-12">
+    <div class="lg:col-span-7" data-reveal>
+      <div class="card p-3 transition-transform duration-500 hover:-rotate-1">
+        <Image
+          src={image}
+          width={900}
+          alt={`Imagen del certificado ${title}`}
+          class="w-full rounded-[0.95rem] border border-line"
+        />
+      </div>
+    </div>
+
+    <div class="lg:col-span-5" data-reveal style="--reveal-delay: 80ms">
+      <div class="card flex h-full flex-col p-6 sm:p-8">
+        <h2 class="flex items-center gap-3 font-mono text-[0.72rem] tracking-[0.24em] text-ink-3 uppercase">
+          <span class="h-7 w-1 rounded-full bg-gradient-to-b from-brand to-accent"></span>
+          Detalles del logro
+        </h2>
+
+        <div class="article mt-6 flex-1 text-base">
+          <Content />
         </div>
 
-        <div class="text-center md:text-left">
-          <span class="text-blue-500 font-mono text-sm tracking-widest uppercase">Certificación Oficial</span>
-          <h1 class="text-4xl md:text-6xl font-black mt-2 tracking-tight uppercase italic">
-            {title}
-          </h1>
-          <p class="text-gray-400 mt-4 max-w-xl text-lg italic leading-relaxed">
-            Validación de aptitudes técnicas y conocimientos avanzados en <span class="text-white font-semibold">{title}</span>.
-          </p>
+        <div class="mt-8 flex items-center justify-between gap-4 border-t border-line pt-6">
+          <a href="/#certificados" class="btn btn--ghost btn--sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+              <path d="M19 12H5m7-7l-7 7 7 7" />
+            </svg>
+            Volver
+          </a>
+
+          <button
+            onclick="window.print()"
+            class="btn btn--soft btn--sm"
+          >
+            Imprimir constancia
+          </button>
         </div>
       </div>
-    </section>
-
-    <section class="relative z-10 max-w-6xl mx-auto px-6 -mt-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        
-        <div class="lg:col-span-7 group">
-          <div class="bg-gray-900 p-2 max-w-lg mx-auto rounded-3xl border border-white/10 shadow-2xl transition-transform hover:-rotate-1 duration-500">
-            <Image
-              src={image}
-              width={800}
-              alt={`Imagen del certificado ${title}`}
-              class="rounded-2xl w-full h-auto shadow-inner"
-            />
-          </div>
-        </div>
-
-        <div class="lg:col-span-5 flex flex-col lg:self-start">
-          <div class="bg-gray-900/50 backdrop-blur-xl border border-white/5 p-8 rounded-3xl flex-1 shadow-xl">
-            <h3 class="text-xl font-black uppercase italic mb-6 flex items-center gap-3">
-              <span class="w-2 h-8 bg-blue-600 rounded-full"></span>
-              Detalles del Logro
-            </h3>
-            
-            <div class="prose prose-invert prose-blue max-w-none text-gray-400 leading-relaxed italic mb-8 prose-img:rounded-2xl prose-img:max-w-full prose-img:h-auto">
-              <Content />
-            </div>
-
-            <div class="mt-auto pt-8 border-t border-white/5 flex items-center justify-between">
-              <a href="/" class="group flex items-center gap-2 text-gray-500 hover:text-blue-500 font-bold uppercase text-xs tracking-widest transition-all">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="w-4 h-4 group-hover:-translate-x-1 transition-transform">
-                  <path d="M19 12H5m7-7l-7 7 7 7" />
-                </svg>
-                Volver
-              </a>
-              
-              <button 
-                onclick="window.print()" 
-                class="text-[10px] font-black uppercase tracking-widest bg-white/5 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-lg transition-all border border-white/10"
-              >
-                Imprimir Ref.
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </Layout>

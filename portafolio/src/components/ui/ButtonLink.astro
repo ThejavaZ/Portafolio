@@ -1,0 +1,40 @@
+---
+interface Props {
+  href: string;
+  variant?: "primary" | "ghost" | "soft";
+  size?: "sm" | "md" | "lg";
+  external?: boolean;
+  download?: boolean;
+  class?: string;
+  "aria-label"?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  external = false,
+  download = false,
+  class: className = "",
+  ...rest
+} = Astro.props as Props;
+
+const classes = [
+  "btn",
+  `btn--${variant}`,
+  size === "lg" && "btn--lg",
+  size === "sm" && "btn--sm",
+  className,
+];
+---
+
+<a
+  href={href}
+  class:list={classes}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  download={download || undefined}
+  {...rest}
+>
+  <slot />
+</a>

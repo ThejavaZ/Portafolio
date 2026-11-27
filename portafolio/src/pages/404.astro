@@ -1,11 +1,39 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import ButtonLink from "../components/ui/ButtonLink.astro";
 ---
 
-<Layout title = "Página no encontrada | JavierSG">
-	<div class="py-20 flex flex-col">
-		<p class="text-9xl font-bold text-center h-2 py-50">404</p>
-		<p class="text-center">La pagina no funciona</p>
-		<a href="/" class="text-end transition ease-in hover:text-blue-500 hover:underline px-2">Ir al inicio</a>
-	</div>
+<Layout title="Página no encontrada | JavierSG">
+  <section class="shell flex min-h-[65vh] flex-col items-center justify-center py-20 text-center">
+    <p class="eyebrow" data-reveal>Error 404</p>
+
+    <h1
+      class="text-grad mt-6 text-[5.5rem] leading-none font-bold tracking-tighter sm:text-[9rem]"
+      data-reveal
+      style="--reveal-delay: 60ms"
+    >
+      404
+    </h1>
+
+    <p
+      class="mt-4 max-w-md text-lg leading-relaxed text-ink-2"
+      data-reveal
+      style="--reveal-delay: 120ms"
+    >
+      Esta ruta no existe (o ya no vive aquí). Parece un <code
+        class="rounded border border-line bg-white/5 px-2 py-0.5 font-mono text-[0.9em] text-accent">git push</code
+      > accidental.
+    </p>
+
+    <div class="mt-9 flex flex-wrap justify-center gap-3" data-reveal style="--reveal-delay: 180ms">
+      <ButtonLink href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+          <path d="M3 10.5 12 3l9 7.5" />
+          <path d="M5 9.5V21h14V9.5" />
+        </svg>
+        Ir al inicio
+      </ButtonLink>
+      <ButtonLink href="/projects" variant="ghost">Ver proyectos</ButtonLink>
+    </div>
+  </section>
 </Layout>

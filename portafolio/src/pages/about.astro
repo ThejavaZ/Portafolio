@@ -3,111 +3,202 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import photo from "../assets/javier-sarmiento.jpg";
+import SectionHeading from "../components/ui/SectionHeading.astro";
+import ButtonLink from "../components/ui/ButtonLink.astro";
 
-const works = (await getCollection("works")).sort(
-  (a, b) => b.data.startDate.localeCompare(a.data.startDate)
+const works = (await getCollection("works")).sort((a, b) =>
+  b.data.startDate.localeCompare(a.data.startDate)
 );
+
+const mainStack = [
+  { name: "C# / .NET", src: "/technologies/net.webp", ring: "hover:border-violet-400/50" },
+  { name: "PostgreSQL", src: "/technologies/psql.webp", ring: "hover:border-brand/50" },
+  { name: "SQL Server", src: "/technologies/sql-server.png", ring: "hover:border-rose-400/50" },
+  { name: "Python", src: "/technologies/python.png", ring: "hover:border-emerald-400/50" },
+  { name: "Docker", src: "/technologies/docker.png", ring: "hover:border-sky-400/50" },
+];
+
+const specialties = [
+  { name: "Python", href: "/python", icon: "python.png" },
+  { name: "Bases de Datos", href: "/sql", icon: "sql.png" },
+  { name: "Frontend", href: "/client", icon: "client.png" },
+  { name: "Backend", href: "/server", icon: "server.png" },
+  { name: "DevOps", href: "/devops", icon: "docker.png" },
+  { name: "Escritorio", href: "/desktop", icon: "desktop.png" },
+  { name: "Móvil", href: "/mobile", icon: "mobile.png" },
+  { name: "IoT", href: "/iot", icon: "iot.png" },
+  { name: "Git", href: "/git", icon: "git.png" },
+  { name: "Herramientas", href: "/tools", icon: "vscode.png" },
+];
 ---
 
 <Layout
   title="Acerca de | JavierSG"
   description="Trayectoria, stack principal y especialidades de JavierSG: egresado de la UTH apasionado por el desarrollo backend."
 >
-  <div class="max-w-5xl mx-auto px-4 py-10 space-y-12 text-white">
-    
-    <section class="bg-gray-800/50 border border-white/5 p-8 rounded-3xl backdrop-blur-sm">
-      <h1 class="text-3xl font-bold mb-4 bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Mi Trayectoria</h1>
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <p class="text-gray-300 leading-relaxed text-justify">
-          Soy egresado de la <span class="text-white font-semibold">UTH</span>, apasionado por el desarrollo backend. Mi camino me ha llevado a especializarme en la arquitectura de servidores y bases de datos, siempre buscando la eficiencia y escalabilidad en cada proyecto que toco.
+  {/* ============ TRAYECTORIA ============ */}
+  <section class="shell grid items-center gap-12 pt-14 pb-16 md:pt-20 lg:grid-cols-12">
+    <div class="lg:col-span-7">
+      <SectionHeading
+        eyebrow="Sobre mí"
+        title="Mi trayectoria"
+        suffix=""
+        spacing="none"
+      />
+
+      <div class="mt-6 space-y-5 text-lg leading-relaxed text-ink-2" data-reveal>
+        <p>
+          Soy egresado de la <strong class="font-semibold text-ink">UTH</strong> y me mueve una
+          sola idea: entender cómo encajan las piezas. Por eso me especialicé en la
+          <strong class="font-semibold text-ink"> arquitectura de servidores y bases de datos</strong>,
+          buscando eficiencia y escalabilidad en cada proyecto que toco.
         </p>
+        <p>
+          Hoy trabajo construyendo software para clientes corporativos: APIs, integraciones y
+          servicios que tienen que funcionar el lunes a las 8 a. m.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3" data-reveal style="--reveal-delay: 120ms">
+        <span class="chip chip--brand">Backend</span>
+        <span class="chip chip--accent">API Design</span>
+        <span class="chip chip--violet">Database Architecture</span>
+        <span class="chip">Hermosillo, MX</span>
+      </div>
+
+      <div class="mt-9 flex flex-wrap gap-3" data-reveal style="--reveal-delay: 180ms">
+        <ButtonLink href="/projects">Ver proyectos</ButtonLink>
+        <ButtonLink href="/contact" variant="ghost">Contacto</ButtonLink>
+      </div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-sm lg:col-span-5" data-reveal style="--reveal-delay: 140ms">
+      <div
+        class="absolute -inset-5 -z-10 rounded-[2.5rem] bg-gradient-to-br from-brand/30 to-brand-2/25 blur-3xl"
+      >
+      </div>
+      <div class="card p-2">
         <Image
           src={photo}
           alt="Foto de Javier Armando Sarmiento Gil"
           loading="lazy"
-          class="bg-gray-900 w-full max-w-xs aspect-square mx-auto object-cover object-[50%_25%] rounded-2xl border border-white/10 shadow-xl"
+          class="aspect-square w-full rounded-[1.1rem] object-cover object-[50%_25%]"
         />
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="bg-gray-800 p-8 rounded-3xl border border-white/5">
-      <h2 class="text-center font-bold text-2xl mb-8 uppercase tracking-widest text-blue-500">Main Stack</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-        {[
-          { name: 'C#/.NET', src: '/technologies/net.webp', color: 'border-violet-500/50' },
-          { name: 'PostgreSQL',  src: '/technologies/psql.webp', color: 'border-blue-500/50' },
-          { name: 'SQL Server', src: '/technologies/sql-server.png', color: 'border-red-500/20' },
-          { name: 'Python', src: '/technologies/python.png', color: 'border-blue-500/50' },
-          { name: 'Docker', src: '/technologies/docker.png', color: 'border-blue-500/50' }
-        ].map((tech) => (
-          <div class="flex flex-col items-center group">
-            <div class={`p-4 bg-gray-900 rounded-2xl border-2 ${tech.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]`}>
-              <Image src={tech.src} alt={tech.name} width={48} height={48} class="w-12 h-12 object-contain" />
+  {/* ============ MAIN STACK ============ */}
+  <section class="shell py-14">
+    <SectionHeading
+      eyebrow="Stack principal"
+      title="Con qué trabajo a diario"
+      align="center"
+      description="Backend, datos e infraestructura: el núcleo sobre el que construyo."
+    />
+
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5" data-reveal>
+      {
+        mainStack.map((tech) => (
+          <div class="card card--hover flex flex-col items-center gap-3 p-6 text-center">
+            <div class:list={["rounded-2xl border border-line bg-surface-2 p-4 transition-all duration-300", tech.ring]}>
+              <Image src={tech.src} alt={tech.name} width={48} height={48} class="h-12 w-12 object-contain" />
             </div>
-            <h3 class="mt-3 text-sm font-medium text-gray-400 group-hover:text-white transition-colors">{tech.name}</h3>
+            <h3 class="font-mono text-[0.7rem] tracking-[0.14em] text-ink-2 uppercase">
+              {tech.name}
+            </h3>
           </div>
-        ))}
-      </div>
+        ))
+      }
+    </div>
 
-      <div class="mt-10 max-w-3xl mx-auto text-center">
-        <p class="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-blue-400 font-mono">
-          Backend Development · API Design · Database Architecture
-        </p>
-        <p class="mt-4 text-gray-400 italic leading-relaxed text-sm sm:text-base">
-          Desarrollo de APIs y servicios backend con C# y .NET, orientados a la mantenibilidad,
-          la persistencia de datos y la arquitectura de software. Experiencia complementaria en
-          Python, automatización y aplicaciones multiplataforma.
-        </p>
-      </div>
-    </section>
+    <div class="mx-auto mt-10 max-w-3xl text-center" data-reveal>
+      <p class="font-mono text-[0.7rem] tracking-[0.28em] text-accent uppercase">
+        Backend development · API design · Database architecture
+      </p>
+      <p class="mt-4 leading-relaxed text-ink-2">
+        Desarrollo de APIs y servicios backend con C# y .NET, orientados a la mantenibilidad,
+        la persistencia de datos y la arquitectura de software. Experiencia complementaria en
+        Python, automatización y aplicaciones multiplataforma.
+      </p>
+    </div>
+  </section>
 
-    <section>
-      <h2 class="text-center font-bold text-2xl mb-8 text-white uppercase tracking-widest">Especialidades</h2>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {[
-          { name: 'Python', href: '/python', icon: 'python.png', shadow: 'hover:shadow-yellow-500/20' },
-          { name: 'Bases de Datos', href: '/sql', icon: 'sql.png', shadow: 'hover:shadow-blue-500/20' },
-          { name: 'Frontend', href: '/client', icon: 'client.png', shadow: 'hover:shadow-green-500/20' },
-          { name: 'Backend', href: '/server', icon: 'server.png', shadow: 'hover:shadow-orange-500/20' },
-          { name: 'DevOps', href: '/devops', icon: 'docker.png', shadow: 'hover:shadow-blue-400/20' },
-          { name: 'Escritorio', href: '/desktop', icon: 'desktop.png', shadow: 'hover:shadow-blue-400/20' },
-          { name: 'Movil', href: '/mobile', icon: 'mobile.png', shadow: 'hover:shadow-blue-400/20' },
-          { name: 'IoT', href: '/iot', icon: 'iot.png', shadow: 'hover:shadow-purple-500/20' },
-          { name: 'Git', href: '/git', icon: 'git.png', shadow: 'hover:shadow-red-500/20' },
-          { name: 'Herramientas', href: '/tools', icon: 'vscode.png', shadow: 'hover:shadow-blue-500/20' }
-        ].map((item) => (
-          <a href={`/technologies${item.href}`} class={`bg-gray-800/40 p-6 rounded-2xl border border-white/5 flex flex-col items-center transition-all hover:-translate-y-1 hover:bg-gray-800 ${item.shadow} shadow-lg`}>
-            <Image src={`/technologies/${item.icon}`} alt={item.name} width={48} height={48} class="w-12 h-12 object-contain mb-4" />
-            <h3 class="text-sm font-bold text-center">{item.name}</h3>
+  {/* ============ ESPECIALIDADES ============ */}
+  <section class="shell py-14">
+    <SectionHeading
+      eyebrow="Explora"
+      title="Especialidades"
+      description="Cada categoría con su stack, herramientas y casos de uso."
+      align="center"
+    />
+
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+      {
+        specialties.map((item, index) => (
+          <a
+            href={`/technologies${item.href}`}
+            class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
+            data-reveal
+            style={`--reveal-delay: ${(index % 5) * 60}ms`}
+          >
+            <div class="rounded-xl border border-line bg-surface-2 p-3 transition-transform duration-300 group-hover:-translate-y-1">
+              <Image
+                src={`/technologies/${item.icon}`}
+                alt={item.name}
+                width={40}
+                height={40}
+                class="h-10 w-10 object-contain"
+              />
+            </div>
+            <h3 class="font-mono text-[0.7rem] tracking-[0.14em] text-ink-2 uppercase transition-colors group-hover:text-white">
+              {item.name}
+            </h3>
           </a>
-        ))}
-      </div>
-    </section>
+        ))
+      }
+    </div>
+  </section>
 
-    <section class="bg-blue-600/10 border border-blue-500/20 p-8 rounded-3xl">
-      <h2 class="font-bold text-2xl mb-6 flex items-center gap-2">
-        <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
-        Experiencia Laboral
-      </h2>
-      <ul class="space-y-4">
-        {works.map((work, index) => (
-          <li class="flex justify-between items-center p-4 bg-gray-900/50 rounded-xl border border-white/5">
+  {/* ============ EXPERIENCIA LABORAL ============ */}
+  <section class="shell py-14">
+    <SectionHeading
+      eyebrow="Experiencia laboral"
+      title="Dónde he trabajado"
+      suffix=""
+      description="Trayectoria profesional ordenada de más reciente a más antigua."
+    />
+
+    <ul class="grid gap-4">
+      {
+        works.map((work, index) => (
+          <li
+            class="card flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between"
+            data-reveal
+            style={`--reveal-delay: ${index * 80}ms`}
+          >
             <div class="flex items-center gap-4">
               {work.data.logo && (
-                <img src={work.data.logo} alt={`Logo de ${work.data.company}`} width="40" height="40" loading="lazy" class="w-10 h-10 object-contain shrink-0" />
+                <img
+                  src={work.data.logo}
+                  alt={`Logo de ${work.data.company}`}
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                  class="h-11 w-11 shrink-0 rounded-xl border border-line bg-surface-2 object-contain p-1.5"
+                />
               )}
               <div>
-                <span class="font-bold">{work.data.role}</span>
-                <span class="block text-gray-400 text-sm">{work.data.company}</span>
+                <span class="block font-semibold">{work.data.role}</span>
+                <span class="block text-sm text-ink-2">{work.data.company}</span>
               </div>
             </div>
-            <span class:list={["text-sm", index === 0 ? "text-blue-400" : "text-gray-400"]}>
+            <span class:list={["chip self-start sm:self-auto", index === 0 && "chip--brand"]}>
               {work.data.period}
             </span>
           </li>
-        ))}
-      </ul>
-    </section>
-
-  </div>
+        ))
+      }
+    </ul>
+  </section>
 </Layout>
