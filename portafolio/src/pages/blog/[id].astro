@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import SpanishOnlyNotice from "../../components/ui/SpanishOnlyNotice.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -80,6 +81,8 @@ const related = (await getCollection("blog"))
   type="article"
   jsonLd={jsonLd}
 >
+  <SpanishOnlyNotice />
+
   <article class="shell max-w-3xl py-14 md:py-20">
     <header class="mb-10 space-y-5">
       <div class="flex flex-wrap items-center gap-3" data-reveal>

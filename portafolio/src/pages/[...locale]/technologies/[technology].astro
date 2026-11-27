@@ -20,7 +20,6 @@ const L = isEn
       stackEyebrow: "Stack & ecosystem",
       count: (total: number) => `${total} technologies in this category`,
       back: "View all specialties",
-      fallbackDescription: `Stack, tools and ecosystem of`,
       localizedName: (id: string, name: string) => techName(id, name, locale),
       localizedDescription: (id: string, text: string | undefined) =>
         techDescription(id, text, locale),
@@ -33,8 +32,8 @@ const L = isEn
       stackEyebrow: "Stack & ecosistema",
       count: (total: number) => `${total} tecnologías en esta categoría`,
       back: "Ver todas las especialidades",
-      localizedName: (id: string, name: string) => name,
-      localizedDescription: (id: string, text: string | undefined) => text,
+      localizedName: (_id: string, name: string) => name,
+      localizedDescription: (_id: string, text: string | undefined) => text,
       localizedType: (type: string) => type,
       metaDescription: (name: string, description?: string) =>
         description ?? `Stack, herramientas y ecosistema de ${name}.`,

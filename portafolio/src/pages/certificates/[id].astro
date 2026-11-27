@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
+import SpanishOnlyNotice from "../../components/ui/SpanishOnlyNotice.astro";
 
 export const getStaticPaths = async () => {
   const certificates = await getCollection("certificates");
@@ -35,6 +36,8 @@ const glowTo = gradientColors[secondColor]?.to ?? gradientColors.blue.to;
   description={`Certificado oficial de ${title} expedido por Mimo.org.`}
   image={image.src}
 >
+  <SpanishOnlyNotice />
+
   {/* Cabecera con glow de color */}
   <section class="relative overflow-hidden border-b border-line">
     <div

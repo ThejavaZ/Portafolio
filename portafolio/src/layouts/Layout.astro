@@ -115,7 +115,11 @@ const strings = t(locale);
     </noscript>
   </head>
 
-  <body class="flex min-h-dvh flex-col bg-bg text-ink">
+  <body
+    class="flex min-h-dvh flex-col bg-bg text-ink"
+    data-locale={locale}
+    data-alternate={alternate ? "1" : "0"}
+  >
     {/* Accesibilidad: primer elemento enfocable del documento */}
     <a
       href="#main"
@@ -174,6 +178,30 @@ const strings = t(locale);
     }
 
     document.addEventListener("astro:page-load", initReveal);
+  </script>
+
+  <script>
+    // Recuerda el idioma que está viendo el visitante para poder avisarle
+    // en las secciones que solo existen en español (blog, certificados).
+    function rememberLanguagePreference() {
+      const body = document.body;
+      const locale = body.dataset.locale ?? "es";
+      const alternate = body.dataset.alternate === "1";
+
+      try {
+        if (locale === "en") {
+          localStorage.setItem("javiersg-lang", "en");
+        } else if (alternate) {
+          // Está navegando la versión en español a propósito
+          localStorage.removeItem("javiersg-lang");
+        }
+      } catch {
+        // noop
+      }
+    }
+
+    rememberLanguagePreference();
+    document.addEventListener("astro:page-load", rememberLanguagePreference);
   </script>
   </body>
 </html>

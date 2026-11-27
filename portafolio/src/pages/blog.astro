@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import SectionHeading from "../components/ui/SectionHeading.astro";
+import SpanishOnlyNotice from "../components/ui/SpanishOnlyNotice.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
@@ -30,6 +31,8 @@ const [featured, ...rest] = posts;
   title="Bitácora | JavierSG"
   description="Artículos de JavierSG sobre desarrollo backend, Go y tecnología."
 >
+  <SpanishOnlyNotice />
+
   <section class="shell py-14 md:py-20">
     <SectionHeading
       eyebrow="Bitácora de desarrollo"
