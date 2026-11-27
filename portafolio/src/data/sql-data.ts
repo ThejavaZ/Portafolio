@@ -1,7 +1,7 @@
 export const sqlData = {
   id: "sql",
   name: "Bases de Datos",
-  logo: "/technologies/sql.png",
+  logo: "/technologies/sql.webp",
   theme: "bg-blue-800 dark:bg-gray-900", // Azul para diferenciarlo de Python (verde)
   description:
     "Diseño y administración de sistemas de gestión de bases de datos relacionales y no relacionales para garantizar la integridad y disponibilidad de la información.",
@@ -20,19 +20,19 @@ export const sqlData = {
     },
     {
       name: "MySQL",
-      img: "mysql.png",
+      img: "mysql.webp",
       type: "SQL (Relacional)",
       description: "Estándar de la industria para aplicaciones web.",
     },
     {
       name: "SQL Server",
-      img: "sql-server.png",
+      img: "sql-server.webp",
       type: "SQL (Enterprise)",
       description: "Soluciones empresariales con ecosistema .NET.",
     },
     {
       name: "MongoDB",
-      img: "mongodb.png",
+      img: "mongodb.webp",
       type: "NoSQL (Documental)",
       description: "Escalabilidad horizontal para datos no estructurados.",
     },

@@ -1,26 +1,26 @@
 export const gitData = {
   id: "git",
   name: "Control de Versiones",
-  logo: "/technologies/git.png",
+  logo: "/technologies/git.webp",
   theme: "bg-orange-700 dark:bg-gray-900", // El color naranja clásico de Git
   description:
     "Gestión profesional del código fuente, colaboración en equipo y control de cambios mediante sistemas distribuidos y plataformas en la nube.",
   stack: [
     {
       name: "Git",
-      img: "git.png",
+      img: "git.webp",
       type: "Motor de Versiones",
       description: "Control de cambios distribuido y manejo de ramas.",
     },
     {
       name: "GitHub",
-      img: "github.png",
+      img: "github.webp",
       type: "Plataforma Cloud",
       description: "Alojamiento de repositorios y colaboración (Open Source).",
     },
     {
       name: "GitLab",
-      img: "gitlab.png",
+      img: "gitlab.webp",
       type: "Plataforma DevOps",
       description: "Gestión de repositorios con CI/CD integrado.",
     },
@@ -32,13 +32,13 @@ export const gitData = {
     },
     {
       name: "GitFlow",
-      img: "gitflow.png", // Puedes usar un icono de flujo
+      img: "gitflow.webp", // Puedes usar un icono de flujo
       type: "Metodología",
       description: "Estrategia de ramificación para lanzamientos estables.",
     },
     {
       name: "GitHub Actions",
-      img: "github-actions.png",
+      img: "github-actions.webp",
       type: "Automatización",
       description: "Automatización de tareas directamente desde el repo.",
     },

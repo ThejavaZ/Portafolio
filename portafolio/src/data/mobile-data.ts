@@ -1,42 +1,42 @@
 export const mobileData = {
   id: "mobile",
   name: "Desarrollo Móvil",
-  logo: "/technologies/mobile.png",
+  logo: "/technologies/mobile.webp",
   theme: "bg-cyan-700 dark:bg-gray-900", // Un color cian que recuerda a Flutter/Android
   description:
     "Diseño y desarrollo de aplicaciones móviles nativas y multiplataforma con enfoque en rendimiento, fluidez y consumo eficiente de servicios cloud.",
   stack: [
     {
       name: "Kotlin",
-      img: "kotlin.png",
+      img: "kotlin.webp",
       type: "Nativo (Android)",
       description:
         "El lenguaje moderno y preferido para el desarrollo robusto en Android.",
     },
     {
       name: "Jetpack Compose",
-      img: "jetpack-compose.png",
+      img: "jetpack-compose.webp",
       type: "UI Toolkit",
       description:
         "Framework de UI declarativa para construir interfaces Android modernas y reactivas.",
     },
     // {
     //   name: "Java",
-    //   img: "java.png",
+    //   img: "java.webp",
     //   type: "Nativo (Android)",
     //   description:
     //     "Desarrollo de aplicaciones tradicionales y mantenimiento de sistemas legacy.",
     // },
     {
       name: "Dart",
-      img: "dart.png",
+      img: "dart.webp",
       type: "Lenguaje UI",
       description:
         "Lenguaje optimizado para interfaces de usuario rápidas y reactivas.",
     },
     {
       name: "Flutter",
-      img: "flutter.png",
+      img: "flutter.webp",
       type: "Multiplataforma",
       description:
         "Framework de Google para crear apps nativas con una sola base de código.",
@@ -50,7 +50,7 @@ export const mobileData = {
     // },
     {
       name: "Firebase",
-      img: "firebase.png",
+      img: "firebase.webp",
       type: "BaaS / Cloud",
       description:
         "Autenticación, base de datos en tiempo real y notificaciones push.",

@@ -1,46 +1,46 @@
 export const backendData = {
   id: "server", // Coincide con tu ruta /technologies/server
   name: "Backend",
-  logo: "/technologies/server.png",
+  logo: "/technologies/server.webp",
   theme: "bg-red-800 dark:bg-gray-900", // Rojo/Guinda para transmitir potencia y servidor
   description:
     "Especialista en la construcción de la lógica del lado del servidor, diseño de arquitecturas escalables y gestión de procesos críticos de negocio.",
   stack: [
     {
       name: "Python",
-      img: "python.png",
+      img: "python.webp",
       type: "Lenguaje de Programación",
       description: "Mi lenguaje principal para lógica compleja y scripts.",
     },
     {
       name: "Django",
-      img: "django.png",
+      img: "django.webp",
       type: "Framework Python",
       description: "Desarrollo backend robusto y seguro.",
     },
     {
       name: "FastAPI",
-      img: "fastapi.png",
+      img: "fastapi.webp",
       type: "Framework Python",
       description: "Creación de APIs de alto rendimiento.",
     },
     {
       name: "C#",
-      img: "csharp.png",
+      img: "csharp.webp",
       type: "Lenguaje de Programación",
       description:
         "Desarrollo de aplicaciones empresariales de alto rendimiento.",
     },
     {
       name: ".NET Core",
-      img: "net.png",
+      img: "net.webp",
       type: "Framework Enterprise",
       description:
         "Desarrollo de aplicaciones empresariales de alto rendimiento.",
     },
     {
       name: "ASP.NET Core",
-      img: "asp.png",
+      img: "asp.webp",
       type: "Framework Enterprise",
       description:
         "Desarrollo de aplicaciones empresariales de alto rendimiento.",
@@ -54,43 +54,43 @@ export const backendData = {
     },
     {
       name: "PHP",
-      img: "php.png",
+      img: "php.webp",
       type: "Lenguaje de Programación",
       description: "Desarrollo web dinámico y tradicional.",
     },
     {
       name: "Laravel",
-      img: "laravel.png",
+      img: "laravel.webp",
       type: "Framework PHP",
       description: "Elegancia y herramientas completas para el desarrollo web.",
     },
     {
       name: "Node.js",
-      img: "node.png",
+      img: "node.webp",
       type: "Entorno de Ejecución",
       description: "Escalabilidad con JavaScript en el lado del servidor.",
     },
     {
       name: "Express.js",
-      img: "express.png",
+      img: "express.webp",
       type: "Framework Node",
       description: "Framework minimalista para APIs rápidas.",
     },
     {
       name: "NestJS",
-      img: "nestjs.png",
+      img: "nestjs.webp",
       type: "Framework Node",
       description: "Framework minimalista para APIs rápidas.",
     },
     {
       name: "Strapi",
-      img: "strapi.png",
+      img: "strapi.webp",
       type: "CMS Headless",
       description: "Gestión de contenido flexible y API-first.",
     },
     {
       name: "Prisma",
-      img: "prisma.png",
+      img: "prisma.webp",
       type: "ORM",
       description: "ORM moderno para bases de datos SQL y NoSQL.",
     },
@@ -102,13 +102,13 @@ export const backendData = {
     },
     // {
     //   name: "Java",
-    //   img: "java.png",
+    //   img: "java.webp",
     //   type: "Lenguaje de Programación",
     //   description: "Lenguaje de programación orientado a objetos.",
     // },
     // {
     //   name: "Spring Boot",
-    //   img: "spring.png",
+    //   img: "spring.webp",
     //   type: "Framework Java",
     //   description: "Framework para aplicaciones Java empresariales.",
     // },
