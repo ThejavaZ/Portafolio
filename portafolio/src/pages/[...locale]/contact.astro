@@ -16,7 +16,8 @@ const L = isEn
         "Got a project or a job opening? Reach out: contact form, email and JavierSG's social profiles.",
       eyebrow: "Contact",
       title: "Shall we talk backend?",
-      description: "Send me a message or find me on social media. I reply fast and straight to the point.",
+      description:
+        "Send me a message or find me on social media. I reply fast and straight to the point.",
       name: "Name",
       namePlaceholder: "e.g. John Doe",
       email: "Email",
@@ -30,7 +31,8 @@ const L = isEn
       sending: "Sending…",
       note: "Usually replying within 24 hours",
       successTitle: "Message sent",
-      successText: "Thanks for writing. I'll get back to you as soon as I can, usually within 24 hours.",
+      successText:
+        "Thanks for writing. I'll get back to you as soon as I can, usually within 24 hours.",
       sendAnother: "Send another message",
       location: "Location: Hermosillo, Mexico",
       mapTitle: "Location map: Hermosillo, Sonora, Mexico",
@@ -88,12 +90,7 @@ const socials = [
 ];
 ---
 
-<Layout
-  title={L.metaTitle}
-  description={L.metaDescription}
-  locale={locale}
-  alternate
->
+<Layout title={L.metaTitle} description={L.metaDescription} locale={locale} alternate>
   <section class="shell py-14 md:py-20">
     <SectionHeading
       eyebrow={L.eyebrow}
@@ -116,14 +113,19 @@ const socials = [
       >
         <input type="hidden" name="form-name" value="contacto" />
         <p class="hidden">
-          <label>{L.honeypot} <input name="bot-field" /></label>
+          <label>
+            {L.honeypot} <input name="bot-field" />
+          </label>
         </p>
 
         <div class="grid gap-5 md:grid-cols-2">
           <div class="flex flex-col gap-2">
-            <label for="name" class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
-              >{L.name}</label
+            <label
+              for="name"
+              class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
             >
+              {L.name}
+            </label>
             <input
               type="text"
               id="name"
@@ -135,9 +137,12 @@ const socials = [
           </div>
 
           <div class="flex flex-col gap-2">
-            <label for="email" class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
-              >{L.email}</label
+            <label
+              for="email"
+              class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
             >
+              {L.email}
+            </label>
             <input
               type="email"
               id="email"
@@ -150,9 +155,12 @@ const socials = [
         </div>
 
         <div class="mt-5 flex flex-col gap-2">
-          <label for="subject" class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
-            >{L.subject}</label
+          <label
+            for="subject"
+            class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
           >
+            {L.subject}
+          </label>
           <input
             type="text"
             id="subject"
@@ -164,25 +172,31 @@ const socials = [
         </div>
 
         <div class="mt-5 flex flex-col gap-2">
-          <label for="message" class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
-            >{L.message}</label
+          <label
+            for="message"
+            class="font-mono text-[0.68rem] tracking-[0.2em] text-ink-3 uppercase"
           >
+            {L.message}
+          </label>
           <textarea
             id="message"
             name="message"
             required
             rows="5"
             placeholder={L.messagePlaceholder}
-            class="field resize-none"></textarea>
+            class="field resize-none"
+          ></textarea>
         </div>
 
-        <button
-          type="submit"
-          data-sending={L.sending}
-          class="btn btn--primary btn--lg mt-7 w-full"
-        >
+        <button type="submit" data-sending={L.sending} class="btn btn--primary btn--lg mt-7 w-full">
           {L.submit}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4.5 w-4.5">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            class="h-4.5 w-4.5"
+          >
             <path d="M5 12h14m-7-7l7 7-7 7" />
           </svg>
         </button>
@@ -201,7 +215,13 @@ const socials = [
         tabindex="-1"
       >
         <span class="flex h-14 w-14 items-center justify-center rounded-full bg-good/15 text-good">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-7 w-7">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            class="h-7 w-7"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
           </svg>
         </span>
@@ -217,33 +237,33 @@ const socials = [
       {/* ---------- Redes + mapa ---------- */}
       <div class="flex flex-col gap-6">
         <div class="grid gap-4 sm:grid-cols-3" data-reveal style="--reveal-delay: 80ms">
-          {
-            socials.map((social) => (
-              <a
-                href={social.href}
-                target={social.href.startsWith("mailto:") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
-              >
-                <span class="flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-surface-2 text-ink-2 transition-colors group-hover:border-brand/50 group-hover:text-white">
-                  <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6" aria-hidden="true">
-                    <path d={social.icon} />
-                  </svg>
-                </span>
-                <span class="font-mono text-[0.66rem] tracking-[0.14em] text-ink-3 uppercase">
-                  {social.name}
-                </span>
-                <span class="max-w-full truncate text-xs text-ink-3">{social.label}</span>
-              </a>
-            ))
-          }
+          {socials.map((social) => (
+            <a
+              href={social.href}
+              target={social.href.startsWith("mailto:") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
+            >
+              <span class="flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-surface-2 text-ink-2 transition-colors group-hover:border-brand/50 group-hover:text-white">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6" aria-hidden="true">
+                  <path d={social.icon} />
+                </svg>
+              </span>
+              <span class="font-mono text-[0.66rem] tracking-[0.14em] text-ink-3 uppercase">
+                {social.name}
+              </span>
+              <span class="max-w-full truncate text-xs text-ink-3">{social.label}</span>
+            </a>
+          ))}
         </div>
 
-        <div class="card relative flex-1 overflow-hidden p-2" data-reveal style="--reveal-delay: 140ms">
+        <div
+          class="card relative flex-1 overflow-hidden p-2"
+          data-reveal
+          style="--reveal-delay: 140ms"
+        >
           <div class="relative h-full min-h-[280px] overflow-hidden rounded-[1.1rem]">
-            <span
-              class="chip absolute top-3 left-3 z-10 bg-surface/90 backdrop-blur-md"
-            >
+            <span class="chip absolute top-3 left-3 z-10 bg-surface/90 backdrop-blur-md">
               {L.location}
             </span>
             <iframe
@@ -315,9 +335,8 @@ const socials = [
         showSuccess();
 
         // Evento de analítica (inofensivo si no hay script cargado)
-        const umami = (
-          window as typeof window & { umami?: { track: (event: string) => void } }
-        ).umami;
+        const umami = (window as typeof window & { umami?: { track: (event: string) => void } })
+          .umami;
         umami?.track("contact-submit");
       } catch {
         // Si falla la petición, dejamos que el navegador haga el POST nativo

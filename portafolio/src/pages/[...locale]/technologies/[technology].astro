@@ -85,17 +85,15 @@ const themeGlow = tech.theme
         >
           {L.localizedName(tech.id, tech.name)}
         </h1>
-        {
-          tech.description && (
-            <p
-              class="mx-auto mt-4 max-w-2xl leading-relaxed text-ink-2"
-              data-reveal
-              style="--reveal-delay: 160ms"
-            >
-              {L.localizedDescription(tech.id, tech.description)}
-            </p>
-          )
-        }
+        {tech.description && (
+          <p
+            class="mx-auto mt-4 max-w-2xl leading-relaxed text-ink-2"
+            data-reveal
+            style="--reveal-delay: 160ms"
+          >
+            {L.localizedDescription(tech.id, tech.description)}
+          </p>
+        )}
       </div>
     </div>
   </header>
@@ -108,7 +106,13 @@ const themeGlow = tech.theme
         <p class="mt-3 text-sm text-ink-2">{L.count(tech.stack.length)}</p>
       </div>
       <a href={isEn ? "/en/technologies" : "/technologies"} class="btn btn--ghost btn--sm">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-4 w-4">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          class="h-4 w-4"
+        >
           <path d="M19 12H5m7-7l-7 7 7 7" />
         </svg>
         {L.back}
@@ -116,27 +120,25 @@ const themeGlow = tech.theme
     </div>
 
     <div class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-      {
-        tech.stack.map((item, index) => (
-          <div
-            class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
-            data-reveal
-            style={`--reveal-delay: ${(index % 4) * 60}ms`}
-          >
-            <div class="rounded-2xl border border-line bg-surface-2 p-4 transition-transform duration-300 group-hover:-translate-y-1">
-              <Image
-                src={`/technologies/${item.img}`}
-                alt={item.name}
-                width={56}
-                height={56}
-                class="h-14 w-14 object-contain"
-              />
-            </div>
-            <h2 class="font-display text-base leading-tight font-semibold">{item.name}</h2>
-            <span class="chip chip--brand">{L.localizedType(item.type)}</span>
+      {tech.stack.map((item, index) => (
+        <div
+          class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
+          data-reveal
+          style={`--reveal-delay: ${(index % 4) * 60}ms`}
+        >
+          <div class="rounded-2xl border border-line bg-surface-2 p-4 transition-transform duration-300 group-hover:-translate-y-1">
+            <Image
+              src={`/technologies/${item.img}`}
+              alt={item.name}
+              width={56}
+              height={56}
+              class="h-14 w-14 object-contain"
+            />
           </div>
-        ))
-      }
+          <h2 class="font-display text-base leading-tight font-semibold">{item.name}</h2>
+          <span class="chip chip--brand">{L.localizedType(item.type)}</span>
+        </div>
+      ))}
     </div>
   </main>
 </Layout>

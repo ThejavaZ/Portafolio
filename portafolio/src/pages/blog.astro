@@ -16,7 +16,7 @@ const categoryTone: Record<string, string> = {
   IoT: "chip--accent",
   Frontend: "chip--good",
   DevOps: "chip--accent",
-  "Opinión": "chip--violet",
+  Opinión: "chip--violet",
   Mobile: "chip--warn",
   Carrera: "chip--violet",
 };
@@ -41,121 +41,119 @@ const [featured, ...rest] = posts;
     />
 
     {/* Filtro por categoría */}
-    <nav class="mb-9 flex flex-wrap items-center gap-2" aria-label="Filtrar por categoría" data-reveal>
-      <a href="/blog" class:list={["chip", !activeCategory && "chip--brand"]}>Todo</a>
-      {
-        categories.map((category) => (
-          <a
-            href={`/blog?categoria=${encodeURIComponent(category)}`}
-            class:list={[
-              "chip",
-              activeCategory === category ? "chip--brand" : categoryTone[category],
-            ]}
-          >
-            {category}
-          </a>
-        ))
-      }
+    <nav
+      class="mb-9 flex flex-wrap items-center gap-2"
+      aria-label="Filtrar por categoría"
+      data-reveal
+    >
+      <a href="/blog" class:list={["chip", !activeCategory && "chip--brand"]}>
+        Todo
+      </a>
+      {categories.map((category) => (
+        <a
+          href={`/blog?categoria=${encodeURIComponent(category)}`}
+          class:list={[
+            "chip",
+            activeCategory === category ? "chip--brand" : categoryTone[category],
+          ]}
+        >
+          {category}
+        </a>
+      ))}
       <span
         id="blog-count"
         role="status"
         aria-live="polite"
         class="ml-auto font-mono text-[0.68rem] tracking-[0.16em] text-ink-3 uppercase"
       >
-        {activeCategory ? `${posts.filter((post) => post.data.category === activeCategory).length} en ${activeCategory}` : `${posts.length} artículos`}
+        {activeCategory
+          ? `${posts.filter((post) => post.data.category === activeCategory).length} en ${activeCategory}`
+          : `${posts.length} artículos`}
       </span>
     </nav>
 
     <div class="grid gap-6 lg:grid-cols-3">
       {/* Post destacado */}
-      {
-        featured && (
-          <a
-            href={`/blog/${featured.id}`}
-            data-category={featured.data.category}
-            class="card card--hover group flex flex-col overflow-hidden lg:col-span-2"
-            data-reveal
-          >
-            <div class="flex flex-1 flex-col justify-between gap-6 bg-gradient-to-br from-brand/20 via-transparent to-accent/10 p-7 sm:p-10">
-              <div class="flex flex-wrap items-center gap-3">
-                <span class:list={["chip", categoryTone[featured.data.category] ?? "chip--brand"]}>
-                  {featured.data.category}
-                </span>
-                <span class="font-mono text-[0.68rem] tracking-[0.16em] text-ink-3 uppercase">
-                  {formatDate(featured.data.date)}
-                </span>
-                <span class="chip">Más reciente</span>
-              </div>
-
-              <div>
-                <h2 class="text-2xl leading-tight font-bold transition-colors group-hover:text-brand sm:text-4xl">
-                  {featured.data.title}
-                </h2>
-                <p class="mt-4 max-w-2xl leading-relaxed text-ink-2">
-                  {featured.data.excerpt}
-                </p>
-              </div>
-
-              <span class="inline-flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.2em] text-white uppercase">
-                Leer artículo
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1.5"
-                >
-                  <path d="M5 12h14m-7-7l7 7-7 7" />
-                </svg>
+      {featured && (
+        <a
+          href={`/blog/${featured.id}`}
+          data-category={featured.data.category}
+          class="card card--hover group flex flex-col overflow-hidden lg:col-span-2"
+          data-reveal
+        >
+          <div class="flex flex-1 flex-col justify-between gap-6 bg-gradient-to-br from-brand/20 via-transparent to-accent/10 p-7 sm:p-10">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class:list={["chip", categoryTone[featured.data.category] ?? "chip--brand"]}>
+                {featured.data.category}
               </span>
+              <span class="font-mono text-[0.68rem] tracking-[0.16em] text-ink-3 uppercase">
+                {formatDate(featured.data.date)}
+              </span>
+              <span class="chip">Más reciente</span>
             </div>
-          </a>
-        )
-      }
+
+            <div>
+              <h2 class="text-2xl leading-tight font-bold transition-colors group-hover:text-brand sm:text-4xl">
+                {featured.data.title}
+              </h2>
+              <p class="mt-4 max-w-2xl leading-relaxed text-ink-2">{featured.data.excerpt}</p>
+            </div>
+
+            <span class="inline-flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.2em] text-white uppercase">
+              Leer artículo
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1.5"
+              >
+                <path d="M5 12h14m-7-7l7 7-7 7" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      )}
 
       {/* Resto */}
       <div class="grid content-start gap-6">
-        {
-          rest.map((post, index) => (
-            <a
-              href={`/blog/${post.id}`}
-              data-category={post.data.category}
-              class="card card--hover group flex flex-col gap-3 p-6"
-              data-reveal
-              style={`--reveal-delay: ${index * 70}ms`}
-            >
-              <div class="flex items-center justify-between gap-3">
-                <span class:list={["chip", categoryTone[post.data.category] ?? "chip--brand"]}>
-                  {post.data.category}
-                </span>
-                <span class="font-mono text-[0.66rem] tracking-[0.14em] text-ink-3 uppercase">
-                  {formatDate(post.data.date)}
-                </span>
-              </div>
-
-              <h2 class="text-lg leading-snug font-semibold transition-colors group-hover:text-brand">
-                {post.data.title}
-              </h2>
-
-              <p class="line-clamp-2 text-sm leading-relaxed text-ink-2">
-                {post.data.excerpt}
-              </p>
-
-              <span class="mt-auto inline-flex items-center gap-1.5 pt-1 font-mono text-[0.68rem] tracking-[0.18em] text-ink-2 uppercase transition-colors group-hover:text-brand">
-                Leer más
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  class="h-3 w-3 transition-transform group-hover:translate-x-1"
-                >
-                  <path d="M5 12h14m-7-7l7 7-7 7" />
-                </svg>
+        {rest.map((post, index) => (
+          <a
+            href={`/blog/${post.id}`}
+            data-category={post.data.category}
+            class="card card--hover group flex flex-col gap-3 p-6"
+            data-reveal
+            style={`--reveal-delay: ${index * 70}ms`}
+          >
+            <div class="flex items-center justify-between gap-3">
+              <span class:list={["chip", categoryTone[post.data.category] ?? "chip--brand"]}>
+                {post.data.category}
               </span>
-            </a>
-          ))
-        }
+              <span class="font-mono text-[0.66rem] tracking-[0.14em] text-ink-3 uppercase">
+                {formatDate(post.data.date)}
+              </span>
+            </div>
+
+            <h2 class="text-lg leading-snug font-semibold transition-colors group-hover:text-brand">
+              {post.data.title}
+            </h2>
+
+            <p class="line-clamp-2 text-sm leading-relaxed text-ink-2">{post.data.excerpt}</p>
+
+            <span class="mt-auto inline-flex items-center gap-1.5 pt-1 font-mono text-[0.68rem] tracking-[0.18em] text-ink-2 uppercase transition-colors group-hover:text-brand">
+              Leer más
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                class="h-3 w-3 transition-transform group-hover:translate-x-1"
+              >
+                <path d="M5 12h14m-7-7l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        ))}
       </div>
     </div>
 
@@ -163,13 +161,9 @@ const [featured, ...rest] = posts;
       No hay artículos en esa categoría.
     </p>
 
-    {
-      posts.length === 0 && (
-        <p class="py-16 text-center text-ink-2 italic">
-          Todavía no hay artículos publicados.
-        </p>
-      )
-    }
+    {posts.length === 0 && (
+      <p class="py-16 text-center text-ink-2 italic">Todavía no hay artículos publicados.</p>
+    )}
   </section>
 </Layout>
 

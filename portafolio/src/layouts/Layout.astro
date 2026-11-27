@@ -38,8 +38,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
 
 // Páginas con versión en el otro idioma: / ↔ /en/...
-const esPath = locale === "en" ? Astro.url.pathname.replace(/^\/en/, "") || "/" : Astro.url.pathname;
-const enPath = locale === "en" ? Astro.url.pathname : Astro.url.pathname === "/" ? "/en" : `/en${Astro.url.pathname}`;
+const esPath =
+  locale === "en" ? Astro.url.pathname.replace(/^\/en/, "") || "/" : Astro.url.pathname;
+const enPath =
+  locale === "en"
+    ? Astro.url.pathname
+    : Astro.url.pathname === "/"
+      ? "/en"
+      : `/en${Astro.url.pathname}`;
 const absolute = (path: string) => new URL(path, Astro.site).toString();
 const ogLocale = locale === "en" ? "en_US" : "es_MX";
 const strings = t(locale);
@@ -70,15 +76,13 @@ const strings = t(locale);
       href={new URL("rss.xml", Astro.site)}
     />
 
-    {
-      alternate && (
-        <>
-          <link rel="alternate" hreflang="es" href={absolute(esPath)} />
-          <link rel="alternate" hreflang="en" href={absolute(enPath)} />
-          <link rel="alternate" hreflang="x-default" href={absolute(esPath)} />
-        </>
-      )
-    }
+    {alternate && (
+      <>
+        <link rel="alternate" hreflang="es" href={absolute(esPath)} />
+        <link rel="alternate" hreflang="en" href={absolute(enPath)} />
+        <link rel="alternate" hreflang="x-default" href={absolute(esPath)} />
+      </>
+    )}
 
     <!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
     <meta property="og:type" content={type} />
@@ -95,14 +99,12 @@ const strings = t(locale);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
 
-    {
-      jsonLd && (
-        <script
-          type="application/ld+json"
-          set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")}
-        />
-      )
-    }
+    {jsonLd && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")}
+      />
+    )}
 
     <ClientRouter />
 
@@ -115,16 +117,9 @@ const strings = t(locale);
       </style>
     </noscript>
 
-    {
-      analytics.websiteId && (
-        <script
-          is:inline
-          defer
-          src={analytics.scriptSrc}
-          data-website-id={analytics.websiteId}
-        />
-      )
-    }
+    {analytics.websiteId && (
+      <script is:inline defer src={analytics.scriptSrc} data-website-id={analytics.websiteId} />
+    )}
   </head>
 
   <body
@@ -158,62 +153,62 @@ const strings = t(locale);
     <Footer locale={locale} />
 
     <script>
-    // Revelado progresivo al hacer scroll (una sola vez por elemento)
-    let activeObservers: IntersectionObserver[] = [];
+      // Revelado progresivo al hacer scroll (una sola vez por elemento)
+      let activeObservers: IntersectionObserver[] = [];
 
-    function initReveal() {
-      // Al navegar con View Transitions descartamos los observadores de la página anterior
-      activeObservers.forEach((observer) => observer.disconnect());
-      activeObservers = [];
+      function initReveal() {
+        // Al navegar con View Transitions descartamos los observadores de la página anterior
+        activeObservers.forEach((observer) => observer.disconnect());
+        activeObservers = [];
 
-      const targets = document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)");
+        const targets = document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)");
 
-      if (!("IntersectionObserver" in window)) {
-        targets.forEach((el) => el.classList.add("is-visible"));
-        return;
-      }
-
-      const observer = new IntersectionObserver(
-        (entries, obs) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              obs.unobserve(entry.target);
-            }
-          }
-        },
-        { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
-      );
-
-      activeObservers.push(observer);
-      targets.forEach((el) => observer.observe(el));
-    }
-
-    document.addEventListener("astro:page-load", initReveal);
-  </script>
-
-  <script>
-    // Recuerda el idioma que está viendo el visitante para poder avisarle
-    // en las secciones que solo existen en español (blog, certificados).
-    function rememberLanguagePreference() {
-      const body = document.body;
-      const locale = body.dataset.locale ?? "es";
-      const alternate = body.dataset.alternate === "1";
-
-      try {
-        if (locale === "en") {
-          localStorage.setItem("javiersg-lang", "en");
-        } else if (alternate) {
-          // Está navegando la versión en español a propósito
-          localStorage.removeItem("javiersg-lang");
+        if (!("IntersectionObserver" in window)) {
+          targets.forEach((el) => el.classList.add("is-visible"));
+          return;
         }
-      } catch {
-        // noop
-      }
-    }
 
-    rememberLanguagePreference();
-    document.addEventListener("astro:page-load", rememberLanguagePreference);
-  </script>
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+        );
+
+        activeObservers.push(observer);
+        targets.forEach((el) => observer.observe(el));
+      }
+
+      document.addEventListener("astro:page-load", initReveal);
+    </script>
+
+    <script>
+      // Recuerda el idioma que está viendo el visitante para poder avisarle
+      // en las secciones que solo existen en español (blog, certificados).
+      function rememberLanguagePreference() {
+        const body = document.body;
+        const locale = body.dataset.locale ?? "es";
+        const alternate = body.dataset.alternate === "1";
+
+        try {
+          if (locale === "en") {
+            localStorage.setItem("javiersg-lang", "en");
+          } else if (alternate) {
+            // Está navegando la versión en español a propósito
+            localStorage.removeItem("javiersg-lang");
+          }
+        } catch {
+          // noop
+        }
+      }
+
+      rememberLanguagePreference();
+      document.addEventListener("astro:page-load", rememberLanguagePreference);
+    </script>
   </body>
 </html>

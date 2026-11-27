@@ -136,17 +136,15 @@ const specialties = [
   {/* ============ TRAYECTORIA ============ */}
   <section class="shell grid items-center gap-12 pt-14 pb-16 md:pt-20 lg:grid-cols-12">
     <div class="lg:col-span-7">
-      <SectionHeading
-        eyebrow={L.eyebrow}
-        title={L.title}
-        suffix=""
-        spacing="none"
-      />
+      <SectionHeading eyebrow={L.eyebrow} title={L.title} suffix="" spacing="none" />
 
       <div class="mt-6 space-y-5 text-lg leading-relaxed text-ink-2" data-reveal>
         <p>
-          {L.p1a}<strong class="font-semibold text-ink">UTH</strong>{L.p1b}
-          <strong class="font-semibold text-ink">{L.p1Strong}</strong>{L.p1c}
+          {L.p1a}
+          <strong class="font-semibold text-ink">UTH</strong>
+          {L.p1b}
+          <strong class="font-semibold text-ink">{L.p1Strong}</strong>
+          {L.p1c}
         </p>
         <p>{L.p2}</p>
       </div>
@@ -160,15 +158,18 @@ const specialties = [
 
       <div class="mt-9 flex flex-wrap gap-3" data-reveal style="--reveal-delay: 180ms">
         <ButtonLink href={link("/projects")}>{L.ctaProjects}</ButtonLink>
-        <ButtonLink href={link("/contact")} variant="ghost">{L.ctaContact}</ButtonLink>
+        <ButtonLink href={link("/contact")} variant="ghost">
+          {L.ctaContact}
+        </ButtonLink>
       </div>
     </div>
 
-    <div class="relative mx-auto w-full max-w-sm lg:col-span-5" data-reveal style="--reveal-delay: 140ms">
-      <div
-        class="absolute -inset-5 -z-10 rounded-[2.5rem] bg-gradient-to-br from-brand/30 to-brand-2/25 blur-3xl"
-      >
-      </div>
+    <div
+      class="relative mx-auto w-full max-w-sm lg:col-span-5"
+      data-reveal
+      style="--reveal-delay: 140ms"
+    >
+      <div class="absolute -inset-5 -z-10 rounded-[2.5rem] bg-gradient-to-br from-brand/30 to-brand-2/25 blur-3xl"></div>
       <div class="card p-2">
         <Image
           src={photo}
@@ -182,30 +183,24 @@ const specialties = [
 
   {/* ============ QUÉ BUSCO ============ */}
   <section class="shell py-14">
-    <SectionHeading
-      eyebrow={L.openToEyebrow}
-      title={L.openToTitle}
-      description={L.openToDesc}
-    />
+    <SectionHeading eyebrow={L.openToEyebrow} title={L.openToTitle} description={L.openToDesc} />
 
     <div class="card p-6 sm:p-8" data-reveal>
       <dl class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          openTo.map((item, index) => (
-            <div
-              class="border-l-2 border-brand/40 pl-4"
-              data-reveal
-              style={`--reveal-delay: ${index * 60}ms`}
-            >
-              <dt class="font-mono text-[0.66rem] tracking-[0.2em] text-ink-3 uppercase">
-                {item.label}
-              </dt>
-              <dd class="mt-2 font-display text-lg leading-snug font-semibold text-ink">
-                {item.value}
-              </dd>
-            </div>
-          ))
-        }
+        {openTo.map((item, index) => (
+          <div
+            class="border-l-2 border-brand/40 pl-4"
+            data-reveal
+            style={`--reveal-delay: ${index * 60}ms`}
+          >
+            <dt class="font-mono text-[0.66rem] tracking-[0.2em] text-ink-3 uppercase">
+              {item.label}
+            </dt>
+            <dd class="mt-2 font-display text-lg leading-snug font-semibold text-ink">
+              {item.value}
+            </dd>
+          </div>
+        ))}
       </dl>
 
       <div class="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
@@ -227,18 +222,27 @@ const specialties = [
     />
 
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5" data-reveal>
-      {
-        mainStack.map((tech) => (
-          <div class="card card--hover flex flex-col items-center gap-3 p-6 text-center">
-            <div class:list={["rounded-2xl border border-line bg-surface-2 p-4 transition-all duration-300", tech.ring]}>
-              <Image src={tech.src} alt={tech.name} width={48} height={48} class="h-12 w-12 object-contain" />
-            </div>
-            <h3 class="font-mono text-[0.7rem] tracking-[0.14em] text-ink-2 uppercase">
-              {tech.name}
-            </h3>
+      {mainStack.map((tech) => (
+        <div class="card card--hover flex flex-col items-center gap-3 p-6 text-center">
+          <div
+            class:list={[
+              "rounded-2xl border border-line bg-surface-2 p-4 transition-all duration-300",
+              tech.ring,
+            ]}
+          >
+            <Image
+              src={tech.src}
+              alt={tech.name}
+              width={48}
+              height={48}
+              class="h-12 w-12 object-contain"
+            />
           </div>
-        ))
-      }
+          <h3 class="font-mono text-[0.7rem] tracking-[0.14em] text-ink-2 uppercase">
+            {tech.name}
+          </h3>
+        </div>
+      ))}
     </div>
 
     <div class="mx-auto mt-10 max-w-3xl text-center" data-reveal>
@@ -259,29 +263,27 @@ const specialties = [
     />
 
     <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-      {
-        specialties.map((item, index) => (
-          <a
-            href={link(`/technologies${item.href}`)}
-            class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
-            data-reveal
-            style={`--reveal-delay: ${(index % 5) * 60}ms`}
-          >
-            <div class="rounded-xl border border-line bg-surface-2 p-3 transition-transform duration-300 group-hover:-translate-y-1">
-              <Image
-                src={`/technologies/${item.icon}`}
-                alt={techName(item.href.replace("/", ""), item.name, locale)}
-                width={40}
-                height={40}
-                class="h-10 w-10 object-contain"
-              />
-            </div>
-            <h3 class="font-mono text-[0.7rem] tracking-[0.14em] text-ink-2 uppercase transition-colors group-hover:text-white">
-              {techName(item.href.replace("/", ""), item.name, locale)}
-            </h3>
-          </a>
-        ))
-      }
+      {specialties.map((item, index) => (
+        <a
+          href={link(`/technologies${item.href}`)}
+          class="card card--hover group flex flex-col items-center gap-3 p-6 text-center"
+          data-reveal
+          style={`--reveal-delay: ${(index % 5) * 60}ms`}
+        >
+          <div class="rounded-xl border border-line bg-surface-2 p-3 transition-transform duration-300 group-hover:-translate-y-1">
+            <Image
+              src={`/technologies/${item.icon}`}
+              alt={techName(item.href.replace("/", ""), item.name, locale)}
+              width={40}
+              height={40}
+              class="h-10 w-10 object-contain"
+            />
+          </div>
+          <h3 class="font-mono text-[0.7rem] tracking-[0.14em] text-ink-2 uppercase transition-colors group-hover:text-white">
+            {techName(item.href.replace("/", ""), item.name, locale)}
+          </h3>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -295,53 +297,45 @@ const specialties = [
     />
 
     <ul class="grid gap-4">
-      {
-        works.map((work, index) => (
-          <li
-            class="card p-6"
-            data-reveal
-            style={`--reveal-delay: ${index * 80}ms`}
-          >
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div class="flex items-center gap-4">
-                {work.data.logo && (
-                  <img
-                    src={work.data.logo}
-                    alt={L.companyLogo(work.data.company)}
-                    width="44"
-                    height="44"
-                    loading="lazy"
-                    class="h-11 w-11 shrink-0 rounded-xl border border-line bg-surface-2 object-contain p-1.5"
-                  />
-                )}
-                <div>
-                  <span class="block font-semibold">{work.data.role}</span>
-                  <span class="block text-sm text-ink-2">{work.data.company}</span>
-                </div>
+      {works.map((work, index) => (
+        <li class="card p-6" data-reveal style={`--reveal-delay: ${index * 80}ms`}>
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-center gap-4">
+              {work.data.logo && (
+                <img
+                  src={work.data.logo}
+                  alt={L.companyLogo(work.data.company)}
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                  class="h-11 w-11 shrink-0 rounded-xl border border-line bg-surface-2 object-contain p-1.5"
+                />
+              )}
+              <div>
+                <span class="block font-semibold">{work.data.role}</span>
+                <span class="block text-sm text-ink-2">{work.data.company}</span>
               </div>
-              <span class:list={["chip self-start sm:self-auto", index === 0 && "chip--brand"]}>
-                {work.data.period}
-              </span>
             </div>
+            <span class:list={["chip self-start sm:self-auto", index === 0 && "chip--brand"]}>
+              {work.data.period}
+            </span>
+          </div>
 
-            {
-              work.data.achievements && work.data.achievements.length > 0 && (
-                <ul class="mt-5 grid gap-2 border-t border-line pt-4">
-                  {work.data.achievements.map((achievement) => (
-                    <li class="flex gap-3 text-sm leading-relaxed text-ink-2">
-                      <span
-                        class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
-                        aria-hidden="true"
-                      />
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-              )
-            }
-          </li>
-        ))
-      }
+          {work.data.achievements && work.data.achievements.length > 0 && (
+            <ul class="mt-5 grid gap-2 border-t border-line pt-4">
+              {work.data.achievements.map((achievement) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-ink-2">
+                  <span
+                    class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
+                    aria-hidden="true"
+                  />
+                  <span>{achievement}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
     </ul>
   </section>
 </Layout>

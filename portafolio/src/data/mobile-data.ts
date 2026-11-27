@@ -10,8 +10,7 @@ export const mobileData = {
       name: "Kotlin",
       img: "kotlin.webp",
       type: "Nativo (Android)",
-      description:
-        "El lenguaje moderno y preferido para el desarrollo robusto en Android.",
+      description: "El lenguaje moderno y preferido para el desarrollo robusto en Android.",
     },
     {
       name: "Jetpack Compose",
@@ -31,15 +30,13 @@ export const mobileData = {
       name: "Dart",
       img: "dart.webp",
       type: "Lenguaje UI",
-      description:
-        "Lenguaje optimizado para interfaces de usuario rápidas y reactivas.",
+      description: "Lenguaje optimizado para interfaces de usuario rápidas y reactivas.",
     },
     {
       name: "Flutter",
       img: "flutter.webp",
       type: "Multiplataforma",
-      description:
-        "Framework de Google para crear apps nativas con una sola base de código.",
+      description: "Framework de Google para crear apps nativas con una sola base de código.",
     },
     // {
     //   name: "Power Apps",
@@ -52,8 +49,7 @@ export const mobileData = {
       name: "Firebase",
       img: "firebase.webp",
       type: "BaaS / Cloud",
-      description:
-        "Autenticación, base de datos en tiempo real y notificaciones push.",
+      description: "Autenticación, base de datos en tiempo real y notificaciones push.",
     },
     {
       name: "Android Studio",

@@ -47,12 +47,13 @@ const socialLinks = [
   <div class="shell grid gap-12 py-14 md:grid-cols-12">
     {/* Marca */}
     <div class="md:col-span-5">
-      <a href={locale === "en" ? "/en" : "/"} class="font-display text-2xl font-bold tracking-tight">
+      <a
+        href={locale === "en" ? "/en" : "/"}
+        class="font-display text-2xl font-bold tracking-tight"
+      >
         Javier<span class="text-grad">SG</span>
       </a>
-      <p class="mt-4 max-w-sm text-sm leading-relaxed text-ink-2">
-        {strings.tagline}
-      </p>
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-ink-2">{strings.tagline}</p>
 
       <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-2">
         <span class="relative flex h-2 w-2">
@@ -71,18 +72,13 @@ const socialLinks = [
         {strings.navigation}
       </h3>
       <ul class="mt-5 grid gap-3 text-sm">
-        {
-          navLinks.map((link) => (
-            <li>
-              <a
-                href={link.path}
-                class="link-animated text-ink-2 transition-colors hover:text-white"
-              >
-                {link.name}
-              </a>
-            </li>
-          ))
-        }
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.path} class="link-animated text-ink-2 transition-colors hover:text-white">
+              {link.name}
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
 
@@ -96,45 +92,47 @@ const socialLinks = [
           <a
             href="mailto:jsdash10000@gmail.com"
             class="link-animated break-all text-ink-2 transition-colors hover:text-white"
-          >jsdash10000@gmail.com</a
           >
+            jsdash10000@gmail.com
+          </a>
         </li>
         <li>
-          <a href="tel:+526622037327" class="link-animated text-ink-2 transition-colors hover:text-white"
-            >+52 662 203 7327</a
+          <a
+            href="tel:+526622037327"
+            class="link-animated text-ink-2 transition-colors hover:text-white"
           >
+            +52 662 203 7327
+          </a>
         </li>
         <li class="text-ink-3">{strings.location}</li>
       </ul>
 
       <div class="mt-6 flex flex-wrap gap-2.5">
-        {
-          socialLinks.map((social) => (
-            <a
-              href={social.href}
-              target={social.href.startsWith("mailto:") ? undefined : "_blank"}
-              rel="noopener noreferrer"
-              aria-label={social.name}
-              class="flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface text-ink-2 transition-all hover:-translate-y-0.5 hover:border-brand/50 hover:text-white"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" class="h-4.5 w-4.5" aria-hidden="true">
-                <path d={social.icon} />
-              </svg>
-            </a>
-          ))
-        }
+        {socialLinks.map((social) => (
+          <a
+            href={social.href}
+            target={social.href.startsWith("mailto:") ? undefined : "_blank"}
+            rel="noopener noreferrer"
+            aria-label={social.name}
+            class="flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface text-ink-2 transition-all hover:-translate-y-0.5 hover:border-brand/50 hover:text-white"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-4.5 w-4.5" aria-hidden="true">
+              <path d={social.icon} />
+            </svg>
+          </a>
+        ))}
       </div>
     </div>
   </div>
 
   <div class="border-t border-line">
-    <div
-      class="shell flex flex-col items-center justify-between gap-3 py-6 font-mono text-[0.68rem] tracking-[0.16em] text-ink-3 uppercase sm:flex-row"
-    >
+    <div class="shell flex flex-col items-center justify-between gap-3 py-6 font-mono text-[0.68rem] tracking-[0.16em] text-ink-3 uppercase sm:flex-row">
       <span>{strings.rights.replace("{year}", String(currentYear))}</span>
       <div class="flex items-center gap-5">
         <span>{strings.made}</span>
-        <a href="#top" class="transition-colors hover:text-brand">{strings.top}</a>
+        <a href="#top" class="transition-colors hover:text-brand">
+          {strings.top}
+        </a>
       </div>
     </div>
   </div>

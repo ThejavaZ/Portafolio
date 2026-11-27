@@ -28,29 +28,25 @@ export const backendData = {
       name: "C#",
       img: "csharp.webp",
       type: "Lenguaje de Programación",
-      description:
-        "Desarrollo de aplicaciones empresariales de alto rendimiento.",
+      description: "Desarrollo de aplicaciones empresariales de alto rendimiento.",
     },
     {
       name: ".NET Core",
       img: "net.webp",
       type: "Framework Enterprise",
-      description:
-        "Desarrollo de aplicaciones empresariales de alto rendimiento.",
+      description: "Desarrollo de aplicaciones empresariales de alto rendimiento.",
     },
     {
       name: "ASP.NET Core",
       img: "asp.webp",
       type: "Framework Enterprise",
-      description:
-        "Desarrollo de aplicaciones empresariales de alto rendimiento.",
+      description: "Desarrollo de aplicaciones empresariales de alto rendimiento.",
     },
     {
       name: "Go",
       img: "go.webp",
       type: "Lenguaje de Programación",
-      description:
-        "Desarrollo de herramientas y microservicios eficientes para DevOps.",
+      description: "Desarrollo de herramientas y microservicios eficientes para DevOps.",
     },
     {
       name: "PHP",

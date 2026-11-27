@@ -34,8 +34,7 @@ export const devopsData = {
       name: "Go",
       img: "go.webp",
       type: "Lenguaje de Programación",
-      description:
-        "Desarrollo de herramientas y microservicios eficientes para DevOps.",
+      description: "Desarrollo de herramientas y microservicios eficientes para DevOps.",
     },
     {
       name: "Jenkins",

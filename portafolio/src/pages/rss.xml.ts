@@ -12,8 +12,7 @@ const XML_ESCAPES: Record<string, string> = {
   "'": `${A}apos;`,
 };
 
-const escapeXml = (value: string) =>
-  value.replace(/[&<>"']/g, (char) => XML_ESCAPES[char] ?? char);
+const escapeXml = (value: string) => value.replace(/[&<>"']/g, (char) => XML_ESCAPES[char] ?? char);
 
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site?.toString().replace(/\/$/, "") ?? "";

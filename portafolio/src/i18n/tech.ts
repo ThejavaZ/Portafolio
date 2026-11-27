@@ -28,9 +28,11 @@ export const techDescriptionsEn: Record<string, string> = {
   iot: "Embedded systems and connectivity solutions that integrate hardware with cloud services and real-time data analysis.",
   mobile:
     "Native and cross-platform mobile application design and development focused on performance, smoothness and efficient cloud usage.",
-  python: "Versatile language I use for robust web development, data analysis and artificial intelligence solutions.",
+  python:
+    "Versatile language I use for robust web development, data analysis and artificial intelligence solutions.",
   sql: "Design and administration of relational and non-relational database management systems to guarantee data integrity and availability.",
-  tools: "Software and development environments I use daily to keep my workflow efficient, organized and professional.",
+  tools:
+    "Software and development environments I use daily to keep my workflow efficient, organized and professional.",
 };
 
 /** Las 72 etiquetas cortas de "type" del stack, en inglés. */

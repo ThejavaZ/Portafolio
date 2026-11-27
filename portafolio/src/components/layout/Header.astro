@@ -11,8 +11,7 @@ const { locale = "es", alternate = false } = Astro.props as Props;
 const strings = t(locale);
 
 // Ruta localizada para la navegación
-const link = (path: string) =>
-  locale === "en" ? (path === "/" ? "/en" : `/en${path}`) : path;
+const link = (path: string) => (locale === "en" ? (path === "/" ? "/en" : `/en${path}`) : path);
 
 const menuItems = [
   { name: strings.nav.home, base: "/", href: link("/") },
@@ -25,9 +24,7 @@ const menuItems = [
 ];
 
 // Sin prefijo de idioma para que el resaltado activo funcione en /en/...
-const pathname = (
-  Astro.url.pathname.replace(/^\/en(?=\/|$)/, "").replace(/\/+$/, "") || "/"
-);
+const pathname = Astro.url.pathname.replace(/^\/en(?=\/|$)/, "").replace(/\/+$/, "") || "/";
 
 const isActive = (path: string) =>
   path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`);
@@ -39,7 +36,11 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
   <div class="border-b border-line bg-bg/70 backdrop-blur-xl supports-[backdrop-filter]:bg-bg/60">
     <div class="shell flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
       {/* Marca */}
-      <a href={locale === "en" ? "/en" : "/"} class="group flex items-center gap-3" aria-label={strings.brand.home}>
+      <a
+        href={locale === "en" ? "/en" : "/"}
+        class="group flex items-center gap-3"
+        aria-label={strings.brand.home}
+      >
         <span class="relative block">
           <img
             src="/logo.webp"
@@ -48,10 +49,7 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
             height="48"
             class="h-9 w-9 rounded-lg object-contain transition-transform duration-300 group-hover:scale-105"
           />
-          <span
-            class="absolute -inset-1 -z-10 rounded-xl bg-brand/25 opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100"
-          >
-          </span>
+          <span class="absolute -inset-1 -z-10 rounded-xl bg-brand/25 opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100"></span>
         </span>
         <span class="hidden border-l border-line pl-3 sm:block">
           <span class="block font-display text-lg leading-none font-bold tracking-tight">
@@ -65,28 +63,24 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
 
       {/* Nav desktop (lg+) */}
       <nav class="hidden items-center gap-1 lg:flex" aria-label={strings.navLabel.main}>
-        {
-          menuItems.map((item) => (
-            <a
-              href={item.href}
-              aria-current={isActive(item.base) ? "page" : undefined}
+        {menuItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.base) ? "page" : undefined}
+            class:list={[
+              "relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200",
+              isActive(item.base) ? "text-white" : "text-ink-2 hover:text-white",
+            ]}
+          >
+            {item.name}
+            <span
               class:list={[
-                "relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200",
-                isActive(item.base)
-                  ? "text-white"
-                  : "text-ink-2 hover:text-white",
+                "absolute inset-x-4 -bottom-0.5 h-px bg-gradient-to-r from-brand to-accent transition-transform duration-300",
+                isActive(item.base) ? "scale-x-100" : "scale-x-0",
               ]}
-            >
-              {item.name}
-              <span
-                class:list={[
-                  "absolute inset-x-4 -bottom-0.5 h-px bg-gradient-to-r from-brand to-accent transition-transform duration-300",
-                  isActive(item.base) ? "scale-x-100" : "scale-x-0",
-                ]}
-              />
-            </a>
-          ))
-        }
+            />
+          </a>
+        ))}
       </nav>
 
       {/* Acciones */}
@@ -99,9 +93,7 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
           class="hidden h-10 w-10 items-center justify-center rounded-xl border border-line text-ink-2 transition-all hover:border-brand/50 hover:text-white sm:flex"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
-            <path
-              d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"
-            ></path>
+            <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"></path>
           </svg>
         </a>
 
@@ -111,11 +103,16 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
           data-umami-event="cv-download"
           class="btn btn--primary btn--sm hidden sm:inline-flex"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="h-4 w-4"
+            aria-hidden="true"
+          >
             <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-            <path
-              d="M17 21h-10a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2"
-            />
+            <path d="M17 21h-10a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2" />
             <path d="M12 11v6m0 0l-3-3m3 3l3-3" />
           </svg>
           {strings.actions.cv}
@@ -141,8 +138,19 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
-          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h10" />
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8"
+              d="M4 7h16M4 12h16M4 17h10"
+            />
           </svg>
         </button>
       </div>
@@ -153,8 +161,7 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
       <div
         id="scroll-progress"
         class="h-full w-0 bg-gradient-to-r from-brand via-brand-2 to-accent shadow-[0_0_10px_rgba(79,125,255,0.8)]"
-      >
-      </div>
+      ></div>
     </div>
   </div>
 </header>
@@ -174,28 +181,34 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
       aria-label={strings.actions.closeMenu}
     >
       <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12" />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          d="M6 18L18 6M6 6l12 12"
+        />
       </svg>
     </button>
   </div>
 
-  <nav class="flex flex-1 flex-col items-center justify-center gap-7 px-6" aria-label={strings.navLabel.mobile}>
-    {
-      menuItems.map((item, index) => (
-        <a
-          href={item.href}
-          data-mobile-link
-          aria-current={isActive(item.base) ? "page" : undefined}
-          class:list={[
-            "font-display text-4xl font-bold tracking-tight transition-all duration-300 sm:text-5xl",
-            isActive(item.base) ? "text-grad" : "text-ink-2 hover:text-white",
-          ]}
-          style={`transition-delay: ${index * 45}ms`}
-        >
-          {item.name}
-        </a>
-      ))
-    }
+  <nav
+    class="flex flex-1 flex-col items-center justify-center gap-7 px-6"
+    aria-label={strings.navLabel.mobile}
+  >
+    {menuItems.map((item, index) => (
+      <a
+        href={item.href}
+        data-mobile-link
+        aria-current={isActive(item.base) ? "page" : undefined}
+        class:list={[
+          "font-display text-4xl font-bold tracking-tight transition-all duration-300 sm:text-5xl",
+          isActive(item.base) ? "text-grad" : "text-ink-2 hover:text-white",
+        ]}
+        style={`transition-delay: ${index * 45}ms`}
+      >
+        {item.name}
+      </a>
+    ))}
     <a
       href="/cv.pdf"
       download
@@ -216,15 +229,22 @@ const switchHref = alternatePath(Astro.url.pathname, locale, alternate);
     >
       {strings.langSwitch.text}
     </a>
-    <a href="https://github.com/ThejavaZ" target="_blank" rel="noopener noreferrer" data-mobile-link
-      >GitHub</a
+    <a
+      href="https://github.com/ThejavaZ"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-mobile-link
     >
+      GitHub
+    </a>
     <a
       href="https://www.linkedin.com/in/javier-armando-sarmiento-gil-aa10b0249/"
       target="_blank"
       rel="noopener noreferrer"
-      data-mobile-link>LinkedIn</a
+      data-mobile-link
     >
+      LinkedIn
+    </a>
   </div>
 </div>
 

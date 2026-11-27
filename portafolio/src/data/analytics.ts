@@ -17,4 +17,4 @@ export const analytics = {
 };
 
 /** Marca los elementos que Umami debe registrar como evento. */
-export const analyticsEvent = (analytics.websiteId ? { "data-umami-event": true } : {});
+export const analyticsEvent = analytics.websiteId ? { "data-umami-event": true } : {};

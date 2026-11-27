@@ -3,7 +3,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import astro from "eslint-plugin-astro";
 
-export default tseslint.config(
+export default [
   {
     ignores: [
       "dist/**",
@@ -33,5 +33,5 @@ export default tseslint.config(
       ],
       "@typescript-eslint/no-explicit-any": "error",
     },
-  }
-);
+  },
+];

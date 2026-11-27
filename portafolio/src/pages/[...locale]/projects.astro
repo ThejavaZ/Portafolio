@@ -28,7 +28,8 @@ const L = isEn
       empty: "No projects matched that search.",
       proEyebrow: "Professional experience",
       proTitle: "Projects at work",
-      proDesc: "Work delivered in a professional environment; each card shows the company. General description only: no code, screenshots or internal information.",
+      proDesc:
+        "Work delivered in a professional environment; each card shows the company. General description only: no code, screenshots or internal information.",
       professional: "Professional",
       mine: "My contribution",
       learned: "What I learned from it",
@@ -51,7 +52,8 @@ const L = isEn
       empty: "No se encontraron proyectos con esa búsqueda.",
       proEyebrow: "Experiencia profesional",
       proTitle: "Proyectos en empresa",
-      proDesc: "Desarrollos realizados en un entorno profesional, sin código ni información interna.",
+      proDesc:
+        "Desarrollos realizados en un entorno profesional, sin código ni información interna.",
       professional: "Profesional",
       mine: "Mi participación",
       learned: "Qué me dejó",
@@ -71,21 +73,11 @@ const cubits = (await getCollection(isEn ? "cubitsEn" : "cubits")).sort(
 );
 ---
 
-<Layout
-  title={`${L.title} | JavierSG`}
-  description={L.description}
-  locale={locale}
-  alternate
->
+<Layout title={`${L.title} | JavierSG`} description={L.description} locale={locale} alternate>
   <section class="shell py-14 md:py-20">
     {/* Encabezado + buscador */}
     <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-      <SectionHeading
-        eyebrow={L.eyebrow}
-        title={L.title}
-        description={L.subtitle}
-        spacing="none"
-      />
+      <SectionHeading eyebrow={L.eyebrow} title={L.title} description={L.subtitle} spacing="none" />
 
       <div class="relative w-full lg:w-96" data-reveal style="--reveal-delay: 120ms">
         <svg
@@ -99,7 +91,8 @@ const cubits = (await getCollection(isEn ? "cubitsEn" : "cubits")).sort(
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          ></path>
         </svg>
         <input
           id="project-search"
@@ -118,75 +111,69 @@ const cubits = (await getCollection(isEn ? "cubitsEn" : "cubits")).sort(
       data-reveal
       style="--reveal-delay: 160ms"
     >
-      <span id="projects-count" class="text-brand">{projects.length}</span>
+      <span id="projects-count" class="text-brand">
+        {projects.length}
+      </span>
       {L.count}
     </p>
 
     {/* --- EXPERIENCIA PROFESIONAL --- */}
     <section class="mt-16">
-      <SectionHeading
-        eyebrow={L.proEyebrow}
-        title={L.proTitle}
-        description={L.proDesc}
-      />
+      <SectionHeading eyebrow={L.proEyebrow} title={L.proTitle} description={L.proDesc} />
 
       <div class="grid gap-6 md:grid-cols-2">
-        {
-          cubits.map((project, index) => {
-            const { name, company, subtitle, description, participation, technologies, learnings } =
-              project.data;
-            return (
-              <article
-                class="card card--hover flex h-full flex-col overflow-hidden"
-                data-reveal
-                style={`--reveal-delay: ${index * 90}ms`}
-              >
-                <div class="relative overflow-hidden border-b border-line bg-gradient-to-br from-brand-2/25 via-surface to-surface px-6 py-7">
-                  <span class="chip chip--violet absolute top-4 left-4">
-                    {L.professional}
-                  </span>
-                  <span class="chip absolute top-4 right-4">{company}</span>
-                  <p class="mt-6 font-display text-2xl leading-tight font-bold text-white sm:text-3xl">
-                    {name}
+        {cubits.map((project, index) => {
+          const { name, company, subtitle, description, participation, technologies, learnings } =
+            project.data;
+          return (
+            <article
+              class="card card--hover flex h-full flex-col overflow-hidden"
+              data-reveal
+              style={`--reveal-delay: ${index * 90}ms`}
+            >
+              <div class="relative overflow-hidden border-b border-line bg-gradient-to-br from-brand-2/25 via-surface to-surface px-6 py-7">
+                <span class="chip chip--violet absolute top-4 left-4">{L.professional}</span>
+                <span class="chip absolute top-4 right-4">{company}</span>
+                <p class="mt-6 font-display text-2xl leading-tight font-bold text-white sm:text-3xl">
+                  {name}
+                </p>
+              </div>
+
+              <div class="flex flex-1 flex-col gap-5 p-6">
+                <div>
+                  <p class="font-mono text-[0.66rem] tracking-[0.24em] text-accent uppercase">
+                    {subtitle}
                   </p>
+                  <p class="mt-2 text-sm leading-relaxed text-ink-2">{description}</p>
                 </div>
 
-                <div class="flex flex-1 flex-col gap-5 p-6">
-                  <div>
-                    <p class="font-mono text-[0.66rem] tracking-[0.24em] text-accent uppercase">
-                      {subtitle}
-                    </p>
-                    <p class="mt-2 text-sm leading-relaxed text-ink-2">{description}</p>
-                  </div>
+                <div>
+                  <p class="font-mono text-[0.66rem] tracking-[0.24em] text-ink-3 uppercase">
+                    {L.mine}
+                  </p>
+                  <p class="mt-1.5 text-sm leading-relaxed text-ink-2">{participation}</p>
+                </div>
 
-                  <div>
+                {technologies.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5">
+                    {technologies.map((tech) => (
+                      <span class="chip">{tech}</span>
+                    ))}
+                  </div>
+                )}
+
+                {learnings && (
+                  <div class="mt-auto rounded-xl border-l-2 border-brand/60 bg-white/[0.03] px-4 py-3">
                     <p class="font-mono text-[0.66rem] tracking-[0.24em] text-ink-3 uppercase">
-                      {L.mine}
+                      {L.learned}
                     </p>
-                    <p class="mt-1.5 text-sm leading-relaxed text-ink-2">{participation}</p>
+                    <p class="mt-1 text-sm leading-relaxed text-ink-2 italic">{learnings}</p>
                   </div>
-
-                  {technologies.length > 0 && (
-                    <div class="flex flex-wrap gap-1.5">
-                      {technologies.map((tech) => (
-                        <span class="chip">{tech}</span>
-                      ))}
-                    </div>
-                  )}
-
-                  {learnings && (
-                    <div class="mt-auto rounded-xl border-l-2 border-brand/60 bg-white/[0.03] px-4 py-3">
-                      <p class="font-mono text-[0.66rem] tracking-[0.24em] text-ink-3 uppercase">
-                        {L.learned}
-                      </p>
-                      <p class="mt-1 text-sm leading-relaxed text-ink-2 italic">{learnings}</p>
-                    </div>
-                  )}
-                </div>
-              </article>
-            );
-          })
-        }
+                )}
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
 
@@ -199,76 +186,70 @@ const cubits = (await getCollection(isEn ? "cubitsEn" : "cubits")).sort(
       />
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {
-          projects.map((project, index) => {
-            const { id, data } = project;
-            const { title, image, description, frameworks, type, status } = data;
-            const isPortrait = image.width < image.height;
-            const statusInfo = status ? projectStatus[status] : undefined;
+        {projects.map((project, index) => {
+          const { id, data } = project;
+          const { title, image, description, frameworks, type, status } = data;
+          const isPortrait = image.width < image.height;
+          const statusInfo = status ? projectStatus[status] : undefined;
 
-            return (
-              <article
-                data-search={`${title ?? ""} ${description ?? ""} ${type ?? ""} ${(frameworks ?? []).join(" ")}`.toLowerCase()}
-                class="card card--hover group flex h-full flex-col overflow-hidden"
-                data-reveal
-                style={`--reveal-delay: ${(index % 3) * 80}ms`}
-              >
-                <a href={link(`/projects/${id}`)} class="flex h-full flex-col">
-                  <div class="relative aspect-video overflow-hidden">
-                    <Image
-                      transition:name={`img-${id}`}
-                      src={image}
-                      alt={title ?? L.projectImage}
-                      class:list={[
-                        "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105",
-                        isPortrait && "object-top",
-                      ]}
-                    />
-                    <div
-                      class="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent"
-                    ></div>
+          return (
+            <article
+              data-search={`${title ?? ""} ${description ?? ""} ${type ?? ""} ${(frameworks ?? []).join(" ")}`.toLowerCase()}
+              class="card card--hover group flex h-full flex-col overflow-hidden"
+              data-reveal
+              style={`--reveal-delay: ${(index % 3) * 80}ms`}
+            >
+              <a href={link(`/projects/${id}`)} class="flex h-full flex-col">
+                <div class="relative aspect-video overflow-hidden">
+                  <Image
+                    transition:name={`img-${id}`}
+                    src={image}
+                    alt={title ?? L.projectImage}
+                    class:list={[
+                      "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105",
+                      isPortrait && "object-top",
+                    ]}
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent"></div>
 
-                    <span class="chip absolute top-3 right-3">{type || L.system}</span>
-                    {statusInfo && (
-                      <span class:list={["chip absolute top-3 left-3", statusInfo.cls]}>
-                        {isEn ? statusInfo.labelEn : statusInfo.label}
-                      </span>
-                    )}
-                  </div>
-
-                  <div class="flex flex-1 flex-col gap-3 p-6">
-                    <h3 class="text-xl leading-snug font-semibold transition-colors group-hover:text-brand">
-                      {title}
-                    </h3>
-
-                    <p class="line-clamp-3 text-sm leading-relaxed text-ink-2">{description}</p>
-
-                    <div class="flex flex-wrap gap-1.5 pt-1">
-                      {(frameworks ?? []).slice(0, 4).map((tech) => (
-                        <span class="chip">{tech}</span>
-                      ))}
-                    </div>
-
-                    <span
-                      class="mt-auto inline-flex items-center gap-2 pt-4 font-mono text-[0.68rem] tracking-[0.2em] text-ink-2 uppercase transition-all group-hover:gap-3.5 group-hover:text-brand"
-                    >
-                      {L.details}
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="3"
-                        class="h-3.5 w-3.5"
-                      >
-                        <path d="M5 12h14m-7-7l7 7-7 7" />
-                      </svg>
+                  <span class="chip absolute top-3 right-3">{type || L.system}</span>
+                  {statusInfo && (
+                    <span class:list={["chip absolute top-3 left-3", statusInfo.cls]}>
+                      {isEn ? statusInfo.labelEn : statusInfo.label}
                     </span>
+                  )}
+                </div>
+
+                <div class="flex flex-1 flex-col gap-3 p-6">
+                  <h3 class="text-xl leading-snug font-semibold transition-colors group-hover:text-brand">
+                    {title}
+                  </h3>
+
+                  <p class="line-clamp-3 text-sm leading-relaxed text-ink-2">{description}</p>
+
+                  <div class="flex flex-wrap gap-1.5 pt-1">
+                    {(frameworks ?? []).slice(0, 4).map((tech) => (
+                      <span class="chip">{tech}</span>
+                    ))}
                   </div>
-                </a>
-              </article>
-            );
-          })
-        }
+
+                  <span class="mt-auto inline-flex items-center gap-2 pt-4 font-mono text-[0.68rem] tracking-[0.2em] text-ink-2 uppercase transition-all group-hover:gap-3.5 group-hover:text-brand">
+                    {L.details}
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      class="h-3.5 w-3.5"
+                    >
+                      <path d="M5 12h14m-7-7l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </article>
+          );
+        })}
       </div>
     </section>
 

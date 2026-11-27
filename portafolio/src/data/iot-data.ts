@@ -16,8 +16,7 @@ export const iotData = {
       name: "Raspberry Pi",
       img: "raspberry.webp",
       type: "SBC (Hardware)",
-      description:
-        "Computadora de placa única para servidores edge y gateways.",
+      description: "Computadora de placa única para servidores edge y gateways.",
     },
     {
       name: "Bash / Shell",
@@ -35,8 +34,7 @@ export const iotData = {
       name: "Node-RED",
       img: "nodered.webp",
       type: "Low-code Programming",
-      description:
-        "Programación visual para conectar flujos de datos de hardware.",
+      description: "Programación visual para conectar flujos de datos de hardware.",
     },
     {
       name: "ESP32 / ESP8266",

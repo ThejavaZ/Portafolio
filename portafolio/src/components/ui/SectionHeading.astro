@@ -32,33 +32,31 @@ const {
     className,
   ]}
 >
-  {
-    eyebrow && (
-      <p class="eyebrow mb-4" data-reveal>
-        {eyebrow}
-      </p>
-    )
-  }
+  {eyebrow && (
+    <p class="eyebrow mb-4" data-reveal>
+      {eyebrow}
+    </p>
+  )}
 
   <h2
     class="text-3xl leading-[1.05] font-bold sm:text-4xl md:text-[2.75rem]"
     data-reveal
     style="--reveal-delay: 60ms"
-    >{title}<span class="text-grad">{suffix}</span></h2
   >
+    {title}
+    <span class="text-grad">{suffix}</span>
+  </h2>
 
-  {
-    description && (
-      <p
-        class:list={[
-          "mt-4 text-base leading-relaxed text-ink-2 sm:text-lg",
-          align === "center" ? "mx-auto max-w-2xl" : "max-w-2xl",
-        ]}
-        data-reveal
-        style="--reveal-delay: 120ms"
-      >
-        {description}
-      </p>
-    )
-  }
+  {description && (
+    <p
+      class:list={[
+        "mt-4 text-base leading-relaxed text-ink-2 sm:text-lg",
+        align === "center" ? "mx-auto max-w-2xl" : "max-w-2xl",
+      ]}
+      data-reveal
+      style="--reveal-delay: 120ms"
+    >
+      {description}
+    </p>
+  )}
 </div>

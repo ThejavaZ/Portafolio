@@ -10,15 +10,13 @@ export const toolsData = {
       name: "Visual Studio Code",
       img: "vscode.webp",
       type: "Editor de Código",
-      description:
-        "Mi entorno principal con extensiones personalizadas para Backend.",
+      description: "Mi entorno principal con extensiones personalizadas para Backend.",
     },
     {
       name: "DBeaver",
       img: "dbeaver.webp",
       type: "Gestor de DB",
-      description:
-        "Herramienta universal para administrar múltiples tipos de bases de datos.",
+      description: "Herramienta universal para administrar múltiples tipos de bases de datos.",
     },
     // {
     //   name: "IntelliJ IDEA",
@@ -30,8 +28,7 @@ export const toolsData = {
       name: "Postman",
       img: "postman.webp",
       type: "Testing de APIs",
-      description:
-        "Pruebas de endpoints, documentación y automatización de requests.",
+      description: "Pruebas de endpoints, documentación y automatización de requests.",
     },
     // {
     //   name: "VirtualBox",

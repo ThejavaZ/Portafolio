@@ -1,6 +1,6 @@
 onlyBuiltDependencies:
-  - '@parcel/watcher'
+  - "@parcel/watcher"
   - esbuild
   - sharp
 patchedDependencies:
-  '@netlify/edge-functions-dev@1.0.16': patches/@netlify__edge-functions-dev@1.0.16.patch
+  "@netlify/edge-functions-dev@1.0.16": patches/@netlify__edge-functions-dev@1.0.16.patch

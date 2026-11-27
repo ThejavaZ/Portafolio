@@ -35,22 +35,19 @@ export const desktopData = {
       name: "Python",
       img: "python.webp",
       type: "Lenguaje de programacion",
-      description:
-        "Creación de interfaces gráficas sencillas y ligeras con Python.",
+      description: "Creación de interfaces gráficas sencillas y ligeras con Python.",
     },
     {
       name: "Tkinter",
       img: "python.webp",
       type: "UI Library (Python)",
-      description:
-        "Creación de interfaces gráficas sencillas y ligeras con Python.",
+      description: "Creación de interfaces gráficas sencillas y ligeras con Python.",
     },
     {
       name: "Custom Tkinter",
       img: "customtkinter.webp",
       type: "UI Library (Python)",
-      description:
-        "Creación de interfaces gráficas sencillas y ligeras con Python.",
+      description: "Creación de interfaces gráficas sencillas y ligeras con Python.",
     },
     // {
     //   name: "Java",
@@ -68,22 +65,19 @@ export const desktopData = {
       name: "Dart",
       img: "dart.webp",
       type: "Lenguaje de Programación",
-      description:
-        "Lenguaje de programación moderno para desarrollo de aplicaciones.",
+      description: "Lenguaje de programación moderno para desarrollo de aplicaciones.",
     },
     {
       name: "Flutter",
       img: "flutter.webp",
       type: "Framework UI",
-      description:
-        "Framework de UI para crear aplicaciones nativas multiplataforma.",
+      description: "Framework de UI para crear aplicaciones nativas multiplataforma.",
     },
     {
       name: "SQLite",
       img: "sqlite.webp",
       type: "Almacenamiento Local",
-      description:
-        "Bases de datos embebidas para persistencia de datos offline.",
+      description: "Bases de datos embebidas para persistencia de datos offline.",
     },
   ],
 };

@@ -12,11 +12,13 @@
 
     <p class="min-w-52 flex-1 text-sm leading-relaxed text-ink-2">
       <strong class="font-semibold text-ink">This section is only available in Spanish.</strong>
-      The blog and certificates aren't translated yet — you can keep reading, or head back to
-      the English site.
+      The blog and certificates aren't translated yet — you can keep reading, or head back to the
+      English site.
     </p>
 
-    <a href="/en" class="btn btn--soft btn--sm">Back to the English site →</a>
+    <a href="/en" class="btn btn--soft btn--sm">
+      Back to the English site →
+    </a>
 
     <button
       type="button"
@@ -43,16 +45,14 @@
 
     notice.classList.toggle("hidden", preference !== "en");
 
-    document
-      .getElementById("lang-notice-close")
-      ?.addEventListener("click", () => {
-        notice.classList.add("hidden");
-        try {
-          localStorage.setItem("javiersg-lang", "dismissed");
-        } catch {
-          // noop
-        }
-      });
+    document.getElementById("lang-notice-close")?.addEventListener("click", () => {
+      notice.classList.add("hidden");
+      try {
+        localStorage.setItem("javiersg-lang", "dismissed");
+      } catch {
+        // noop
+      }
+    });
   }
 
   document.addEventListener("astro:page-load", initLanguageNotice);
