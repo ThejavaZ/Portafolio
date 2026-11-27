@@ -313,6 +313,12 @@ const socials = [
         }
 
         showSuccess();
+
+        // Evento de analítica (inofensivo si no hay script cargado)
+        const umami = (
+          window as typeof window & { umami?: { track: (event: string) => void } }
+        ).umami;
+        umami?.track("contact-submit");
       } catch {
         // Si falla la petición, dejamos que el navegador haga el POST nativo
         restoreButton();
