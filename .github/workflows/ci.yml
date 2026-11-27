@@ -28,6 +28,9 @@ jobs:
       - name: Instalar dependencias
         run: pnpm install --frozen-lockfile
 
+      - name: Formato (Prettier)
+        run: pnpm format:check
+
       - name: Type-check (astro check)
         run: pnpm check
 

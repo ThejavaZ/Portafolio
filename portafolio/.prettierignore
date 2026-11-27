@@ -1,0 +1,15 @@
+# Dependencias y outputs
+node_modules
+dist
+.astro
+.netlify
+
+# Generado por pnpm
+pnpm-lock.yaml
+
+# Contenido en Markdown: se escribe a mano y Prettier lo reflowaría
+src/content
+
+# Assets estáticos y parches de pnpm
+public
+patches

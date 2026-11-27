@@ -8,6 +8,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "astro": "astro"
   },
   "dependencies": {
@@ -22,6 +26,8 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@lhci/cli": "^0.16.1",
+    "prettier": "^3.10.1",
+    "prettier-plugin-astro": "^1.1.2",
     "typescript": "^5.9.3"
   }
 }
