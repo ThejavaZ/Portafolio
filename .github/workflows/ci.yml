@@ -33,3 +33,7 @@ jobs:
 
       - name: Build de produccion
         run: pnpm build
+
+      # Auditoría visual: accesibilidad y SEO bloquean; performance avisa
+      - name: Lighthouse CI
+        run: pnpm lhci autorun
