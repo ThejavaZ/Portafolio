@@ -19,7 +19,8 @@
   /* Texto */
   --color-ink: #eaeef8;
   --color-ink-2: #a4acbf;
-  --color-ink-3: #6d768c;
+  /* 6.5:1 sobre --color-bg: cumple WCAG AA también en texto pequeño */
+  --color-ink-3: #8b93a7;
 
   /* Marca y acentos */
   --color-brand: #4f7dff;
