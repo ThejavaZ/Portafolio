@@ -32,6 +32,8 @@ const worksSchema = z.object({
   period: z.string(),
   startDate: z.string(), // "YYYY-MM" para ordenar (más reciente primero)
   logo: z.string().optional(),
+  // Logros concretos que se muestran bajo el puesto
+  achievements: z.array(z.string()).optional(),
 });
 
 const cubitsSchema = z.object({
